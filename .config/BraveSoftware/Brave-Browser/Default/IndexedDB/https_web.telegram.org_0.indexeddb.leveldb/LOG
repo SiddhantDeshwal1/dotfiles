@@ -1,0 +1,6 @@
+2024/10/15-13:45:22.361 485 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb since it was missing.
+2024/10/15-13:45:22.371 485 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_web.telegram.org_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/15-14:36:51.149 486 Level-0 table #5: started
+2024/10/15-14:36:51.153 486 Level-0 table #5: 9477 bytes OK
+2024/10/15-14:36:51.155 486 Delete type=0 #3
+2024/10/15-14:36:51.155 486 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

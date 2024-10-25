@@ -1,0 +1,17 @@
+2024/09/17-01:55:02.339 973 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb since it was missing.
+2024/09/17-01:55:02.341 973 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_drive.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/17-02:18:52.506 974 Level-0 table #5: started
+2024/09/17-02:18:52.524 974 Level-0 table #5: 4019818 bytes OK
+2024/09/17-02:18:52.527 974 Delete type=0 #3
+2024/09/17-12:04:52.918 974 Level-0 table #7: started
+2024/09/17-12:04:52.934 974 Level-0 table #7: 1219295 bytes OK
+2024/09/17-12:04:52.937 974 Delete type=0 #4
+2024/09/17-12:04:52.938 974 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/09/17-12:04:52.939 974 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x03\x03\x01'\x002\x00a\x003\x00d\x001\x008\x005\x00d\x00a\x00c\x00f\x005\x005\x00e\x005\x003\x00f\x00b\x003\x00b\x004\x003\x005\x000\x008\x008\x004\x00f\x00c\x002\x007\x005\x00_\x003\x00_\x002\x00:\x000\x000' @ 4676 : 0
+2024/09/17-12:04:52.939 974 Compacting 1@1 + 1@2 files
+2024/09/17-12:04:52.949 974 Generated table #8@1: 95 keys, 68448 bytes
+2024/09/17-12:04:52.949 974 Compacted 1@1 + 1@2 files => 68448 bytes
+2024/09/17-12:04:52.951 974 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/09/17-12:04:52.951 974 Delete type=2 #5
+2024/09/17-12:04:52.951 974 Delete type=2 #7
+2024/09/17-12:04:52.954 974 Manual compaction at level-1 from '\x00\x01\x03\x03\x01'\x002\x00a\x003\x00d\x001\x008\x005\x00d\x00a\x00c\x00f\x005\x005\x00e\x005\x003\x00f\x00b\x003\x00b\x004\x003\x005\x000\x008\x008\x004\x00f\x00c\x002\x007\x005\x00_\x003\x00_\x002\x00:\x000\x000' @ 4676 : 0 .. (end); will stop at (end)

@@ -1,0 +1,12 @@
+2024/10/19-22:12:36.211 4a7 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_mail.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/19-22:12:36.211 4a7 Recovering log #14
+2024/10/19-22:12:36.215 4a7 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_mail.google.com_0.indexeddb.leveldb/000014.log 
+2024/10/19-22:12:42.234 4a7 Compacting 1@1 + 1@2 files
+2024/10/19-22:12:42.258 4a7 Generated table #17@1: 63 keys, 28083 bytes
+2024/10/19-22:12:42.258 4a7 Compacted 1@1 + 1@2 files => 28083 bytes
+2024/10/19-22:12:42.259 4a7 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/19-22:12:42.260 4a7 Delete type=2 #15
+2024/10/19-22:12:42.260 4a7 Delete type=2 #12
+2024/10/20-11:54:42.784 4a9 Level-0 table #19: started
+2024/10/20-11:54:42.834 4a9 Level-0 table #19: 3007303 bytes OK
+2024/10/20-11:54:42.838 4a9 Delete type=0 #14

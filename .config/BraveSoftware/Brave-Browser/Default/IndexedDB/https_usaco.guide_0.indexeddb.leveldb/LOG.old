@@ -1,0 +1,35 @@
+2024/10/14-23:51:01.858 485 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/14-23:51:01.858 485 Recovering log #25
+2024/10/14-23:51:01.860 485 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/000025.log 
+2024/10/14-23:51:01.880 486 Level-0 table #30: started
+2024/10/14-23:51:01.884 486 Level-0 table #30: 61053 bytes OK
+2024/10/14-23:51:01.886 486 Delete type=0 #25
+2024/10/14-23:51:01.887 486 Manual compaction at level-0 from '\x00\x08\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x09\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/10/14-23:51:40.047 486 Compacting 1@1 + 1@2 files
+2024/10/14-23:51:40.059 486 Generated table #31@1: 42 keys, 3625 bytes
+2024/10/14-23:51:40.059 486 Compacted 1@1 + 1@2 files => 3625 bytes
+2024/10/14-23:51:40.061 486 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/14-23:51:40.061 486 Delete type=2 #27
+2024/10/14-23:51:40.062 486 Delete type=2 #30
+2024/10/15-14:01:05.850 486 Level-0 table #33: started
+2024/10/15-14:01:05.852 486 Level-0 table #33: 24525 bytes OK
+2024/10/15-14:01:05.854 486 Delete type=0 #29
+2024/10/15-14:01:05.855 486 Manual compaction at level-0 from '\x00\x09\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0a\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/10/15-14:01:40.313 486 Compacting 1@1 + 1@2 files
+2024/10/15-14:01:40.324 486 Generated table #34@1: 42 keys, 3629 bytes
+2024/10/15-14:01:40.324 486 Compacted 1@1 + 1@2 files => 3629 bytes
+2024/10/15-14:01:40.326 486 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/15-14:01:40.326 486 Delete type=2 #31
+2024/10/15-14:01:40.326 486 Delete type=2 #33
+2024/10/15-23:01:06.504 486 Level-0 table #36: started
+2024/10/15-23:01:06.507 486 Level-0 table #36: 27098 bytes OK
+2024/10/15-23:01:06.510 486 Delete type=0 #32
+2024/10/15-23:01:06.510 486 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/10/15-23:01:06.510 486 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x03\x01\x02\x013\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]\x00!\x001\x00:\x008\x006\x002\x001\x005\x002\x003\x003\x001\x004\x005\x004\x00:\x00w\x00e\x00b\x00:\x008\x00b\x00a\x008\x005\x00f\x00d\x00a\x004\x007\x003\x006\x000\x00e\x00f\x009\x00f\x00e\x008\x00e\x00e\x00f' @ 853 : 1
+2024/10/15-23:01:06.510 486 Compacting 1@1 + 1@2 files
+2024/10/15-23:01:06.512 486 Generated table #37@1: 36 keys, 3490 bytes
+2024/10/15-23:01:06.512 486 Compacted 1@1 + 1@2 files => 3490 bytes
+2024/10/15-23:01:06.514 486 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/15-23:01:06.514 486 Delete type=2 #34
+2024/10/15-23:01:06.514 486 Delete type=2 #36
+2024/10/15-23:01:06.515 486 Manual compaction at level-1 from '\x00\x03\x01\x02\x013\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]\x00!\x001\x00:\x008\x006\x002\x001\x005\x002\x003\x003\x001\x004\x005\x004\x00:\x00w\x00e\x00b\x00:\x008\x00b\x00a\x008\x005\x00f\x00d\x00a\x004\x007\x003\x006\x000\x00e\x00f\x009\x00f\x00e\x008\x00e\x00e\x00f' @ 853 : 1 .. (end); will stop at (end)

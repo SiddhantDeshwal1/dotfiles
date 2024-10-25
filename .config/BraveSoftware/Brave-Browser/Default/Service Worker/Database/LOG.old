@@ -1,0 +1,12 @@
+2024/10/20-23:41:32.306 517 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/MANIFEST-000001
+2024/10/20-23:41:32.307 517 Recovering log #7
+2024/10/20-23:41:32.310 517 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/000007.log 
+2024/10/23-13:55:12.858 502 Level-0 table #12: started
+2024/10/23-13:55:12.872 502 Level-0 table #12: 81614 bytes OK
+2024/10/23-13:55:12.875 502 Delete type=0 #7
+2024/10/23-14:00:04.620 501 Compacting 1@1 + 1@2 files
+2024/10/23-14:00:04.635 501 Generated table #13@1: 144 keys, 12297 bytes
+2024/10/23-14:00:04.635 501 Compacted 1@1 + 1@2 files => 12297 bytes
+2024/10/23-14:00:04.639 501 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/23-14:00:04.640 501 Delete type=2 #9
+2024/10/23-14:00:04.640 501 Delete type=2 #12

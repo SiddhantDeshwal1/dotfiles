@@ -1,0 +1,17 @@
+2024/10/22-15:41:04.827 501 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_monkeytype.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/22-15:41:04.827 501 Recovering log #9
+2024/10/22-15:41:04.827 501 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_monkeytype.com_0.indexeddb.leveldb/000009.log 
+2024/10/22-15:41:04.872 503 Level-0 table #15: started
+2024/10/22-15:41:04.873 503 Level-0 table #15: 808 bytes OK
+2024/10/22-15:41:04.875 503 Delete type=0 #9
+2024/10/22-15:41:04.875 501 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/10/22-15:41:19.004 501 Level-0 table #17: started
+2024/10/22-15:41:19.006 501 Level-0 table #17: 1473 bytes OK
+2024/10/22-15:41:19.008 501 Delete type=0 #14
+2024/10/22-15:41:19.008 501 Manual compaction at level-0 from '\x00\x06\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at '\x00\x06\x00\x00\x05' @ 212 : 1
+2024/10/22-15:41:19.008 501 Compacting 1@0 + 1@1 files
+2024/10/22-15:41:19.009 501 Generated table #18@0: 29 keys, 1158 bytes
+2024/10/22-15:41:19.010 501 Compacted 1@0 + 1@1 files => 1158 bytes
+2024/10/22-15:41:19.011 501 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/22-15:41:19.011 501 Delete type=2 #17
+2024/10/22-15:41:19.011 501 Manual compaction at level-0 from '\x00\x06\x00\x00\x05' @ 212 : 1 .. '\x00\x07\x00\x00\x00' @ 0 : 0; will stop at (end)

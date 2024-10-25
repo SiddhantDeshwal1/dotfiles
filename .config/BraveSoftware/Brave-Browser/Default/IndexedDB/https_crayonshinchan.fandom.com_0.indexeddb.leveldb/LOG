@@ -1,0 +1,6 @@
+2024/10/05-23:09:14.384 7a4 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_crayonshinchan.fandom.com_0.indexeddb.leveldb since it was missing.
+2024/10/05-23:09:14.387 7a4 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_crayonshinchan.fandom.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/05-23:14:05.287 7a5 Level-0 table #5: started
+2024/10/05-23:14:05.289 7a5 Level-0 table #5: 2929 bytes OK
+2024/10/05-23:14:05.291 7a5 Delete type=0 #3
+2024/10/05-23:14:05.292 7a5 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

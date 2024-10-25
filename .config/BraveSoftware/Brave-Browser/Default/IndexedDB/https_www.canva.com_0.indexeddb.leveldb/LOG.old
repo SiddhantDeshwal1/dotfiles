@@ -1,0 +1,4 @@
+2024/10/24-23:47:46.462 502 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.canva.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/24-23:47:46.462 502 Recovering log #36
+2024/10/24-23:47:46.463 502 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.canva.com_0.indexeddb.leveldb/000036.log 
+2024/10/24-23:47:52.226 503 Manual compaction at level-0 from '\x00\x1b\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x1c\x00\x00\x00' @ 0 : 0; will stop at (end)

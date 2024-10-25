@@ -1,0 +1,428 @@
+{
+   "checksum": "db7aabee2df829388330946fecc1ab4f",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "children": [ {
+               "date_added": "13349973754000000",
+               "date_last_used": "0",
+               "guid": "7134970a-f161-4303-b2d8-73bba91bc631",
+               "id": "6",
+               "name": "WhatsApp",
+               "type": "url",
+               "url": "https://web.whatsapp.com/"
+            }, {
+               "date_added": "13349988266000000",
+               "date_last_used": "0",
+               "guid": "9f0111c7-01e2-4a30-9982-5c9089960ea4",
+               "id": "7",
+               "name": "ChatGPT",
+               "type": "url",
+               "url": "https://chat.openai.com/"
+            }, {
+               "date_added": "13350235957000000",
+               "date_last_used": "0",
+               "guid": "ccb688f1-7057-4048-9d9b-5e174f0141c9",
+               "id": "8",
+               "name": "GitHub",
+               "type": "url",
+               "url": "https://github.com/"
+            }, {
+               "date_added": "13350310722000000",
+               "date_last_used": "0",
+               "guid": "43e9648f-0968-4d73-b8d9-ad56a5dbda9b",
+               "id": "9",
+               "name": "Feed | LinkedIn",
+               "type": "url",
+               "url": "https://www.linkedin.com/feed/"
+            }, {
+               "date_added": "13350323992000000",
+               "date_last_used": "0",
+               "guid": "fab17877-4647-428d-a467-ed31029cd6a5",
+               "id": "10",
+               "name": "Codeforces",
+               "type": "url",
+               "url": "https://codeforces.com/"
+            }, {
+               "date_added": "13350559930000000",
+               "date_last_used": "0",
+               "guid": "a2bb735f-066a-4f9d-98ae-fb3b22aa8f73",
+               "id": "11",
+               "name": "Dashboard | HackerRank",
+               "type": "url",
+               "url": "https://www.hackerrank.com/dashboard"
+            } ],
+            "date_added": "13363373130303526",
+            "date_last_used": "0",
+            "date_modified": "0",
+            "guid": "00645deb-739a-4ed5-b82b-61a8eceeb5f8",
+            "id": "5",
+            "name": "Other bookmarks",
+            "type": "folder"
+         }, {
+            "children": [ {
+               "date_added": "13351166850000000",
+               "date_last_used": "0",
+               "guid": "5b7d6c1b-e578-4e4b-9350-66d8f1dd1749",
+               "id": "13",
+               "name": "Problems - LeetCode",
+               "type": "url",
+               "url": "https://leetcode.com/problemset/"
+            }, {
+               "date_added": "13351536102000000",
+               "date_last_used": "0",
+               "guid": "609c58f3-11ed-4a3d-a486-822ac813c918",
+               "id": "14",
+               "name": "Strivers A2Z DSA Course/Sheet - Crack Any FAANG or PBCs",
+               "type": "url",
+               "url": "https://takeuforward.org/strivers-a2z-dsa-course/strivers-a2z-dsa-course-sheet-2/"
+            } ],
+            "date_added": "13363373130304008",
+            "date_last_used": "0",
+            "date_modified": "0",
+            "guid": "beb5ece7-57d7-479f-9277-5dd76a78c6da",
+            "id": "12",
+            "name": "Imported",
+            "type": "folder"
+         }, {
+            "date_added": "13349973736000000",
+            "date_last_used": "0",
+            "guid": "ee22935a-eb56-4ceb-85a7-008419229246",
+            "id": "15",
+            "name": "Dashboard",
+            "type": "url",
+            "url": "https://www.codechef.com/dashboard"
+         }, {
+            "date_added": "13349975174000000",
+            "date_last_used": "0",
+            "guid": "7a05a51d-72f8-4b69-a791-bb1fcebc4c13",
+            "id": "16",
+            "name": "Indef'27 sheet - Google Sheets",
+            "type": "url",
+            "url": "https://docs.google.com/spreadsheets/d/1jAb-dPBZs178iD5DE-2th1JC4yh11KMCxo-95Xbmhyg/edit?pli=1#gid=0"
+         }, {
+            "date_added": "13350027945000000",
+            "date_last_used": "0",
+            "guid": "40b143f3-e496-4f54-85fe-e4add8b568df",
+            "id": "17",
+            "name": "Problems - LeetCode",
+            "type": "url",
+            "url": "https://leetcode.com/problemset/"
+         }, {
+            "children": [ {
+               "date_added": "13357328157000000",
+               "date_last_used": "0",
+               "guid": "5bcbc0c2-14f5-4026-9f3c-e18f84dddf27",
+               "id": "19",
+               "name": "YouTube",
+               "type": "url",
+               "url": "https://www.youtube.com/"
+            }, {
+               "date_added": "13357464438000000",
+               "date_last_used": "0",
+               "guid": "475eff9b-aacc-47a5-8b42-fbe46e797317",
+               "id": "20",
+               "name": "Excalidraw | Hand-drawn look & feel • Collaborative • Secure",
+               "type": "url",
+               "url": "https://excalidraw.com/"
+            } ],
+            "date_added": "13363373130304362",
+            "date_last_used": "0",
+            "date_modified": "0",
+            "guid": "1f3ce75e-dea9-4aff-8082-3d1887851e1d",
+            "id": "18",
+            "name": "Imported (1)",
+            "type": "folder"
+         }, {
+            "date_added": "13366665920285349",
+            "date_last_used": "0",
+            "guid": "5ecaf254-c082-4ad8-bee9-ff18f8f6eed4",
+            "id": "43",
+            "name": "Kick Ass",
+            "type": "url",
+            "url": "javascript:var%20KICKASSVERSION='2.0';var%20s%20=%20document.createElement('script');s.type='text/javascript';document.body.appendChild(s);s.src='//hi.kickassapp.com/kickass.js';void(0);"
+         }, {
+            "date_added": "13367173526466504",
+            "date_last_used": "13373747926852567",
+            "guid": "b9aa6d30-6af0-404e-be71-ba5fa639b7c8",
+            "id": "46",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Minimum Number of Flips to Make Binary Grid Palindromic II - LeetCode",
+            "type": "url",
+            "url": "https://leetcode.com/contest/biweekly-contest-136/problems/minimum-number-of-flips-to-make-binary-grid-palindromic-ii/"
+         }, {
+            "date_added": "13367615150056486",
+            "date_last_used": "0",
+            "guid": "c543bbd4-5e5a-4912-8b74-ac44873ecbf1",
+            "id": "48",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Developer Roadmaps - roadmap.sh",
+            "type": "url",
+            "url": "https://roadmap.sh/"
+         }, {
+            "date_added": "13367896255140655",
+            "date_last_used": "0",
+            "guid": "4fdd5bfd-d1f1-403a-bb42-e57b57b1b9b8",
+            "id": "50",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Resources: Learning to Code · USACO Guide",
+            "type": "url",
+            "url": "https://usaco.guide/general/resources-learning-to-code"
+         }, {
+            "date_added": "13368222561033092",
+            "date_last_used": "0",
+            "guid": "f845554c-bb94-44dc-ab9f-f491a718de33",
+            "id": "52",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "CLIST",
+            "type": "url",
+            "url": "https://clist.by/"
+         }, {
+            "date_added": "13368381887394481",
+            "date_last_used": "0",
+            "guid": "a40f5974-ecd3-4495-aba3-080970f44f71",
+            "id": "53",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "#Define Internal Contest #6 - Virtual Judge",
+            "type": "url",
+            "url": "https://vjudge.net/contest/649376#overview"
+         }, {
+            "date_added": "13368460483472975",
+            "date_last_used": "0",
+            "guid": "4c402b12-275f-41a4-9d9d-66fd039308b3",
+            "id": "54",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "• Discord | #general | CF Practice",
+            "type": "url",
+            "url": "https://discord.com/channels/1248725251840278649/1248725253245501443"
+         }, {
+            "date_added": "13368907025187718",
+            "date_last_used": "0",
+            "guid": "7bb59df7-5fad-4178-a70e-f4b8a7052f06",
+            "id": "56",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Waybar Cava Monitor Issue",
+            "type": "url",
+            "url": "https://chatgpt.com/c/5e97177e-e280-45a8-a7d7-04e0083281bb"
+         }, {
+            "date_added": "13369476343977423",
+            "date_last_used": "0",
+            "guid": "e3a018a2-a61b-4372-8275-9dd7ae01809a",
+            "id": "59",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Mercedes-Benz Research & Development India Trainee Salaries in India 2024 | AmbitionBox",
+            "type": "url",
+            "url": "https://www.ambitionbox.com/salaries/mercedes-benz-research-and-development-indi-mbrdi-dot-co-dot-in-salaries/trainee?experience=0"
+         }, {
+            "date_added": "13370188536834316",
+            "date_last_used": "0",
+            "guid": "ab5a6b58-4487-4a8b-acb9-88de4f1473dd",
+            "id": "61",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Multiline Editing in Neovim - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=p4D8-brdrZo"
+         }, {
+            "date_added": "13370552447904745",
+            "date_last_used": "0",
+            "guid": "e8fa5a32-79fa-43c6-8f01-a751da570db4",
+            "id": "63",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Minimum Bit Flips to Convert Number - LeetCode",
+            "type": "url",
+            "url": "https://leetcode.com/problems/minimum-bit-flips-to-convert-number/submissions/1386878563/?envType=daily-question&envId=2024-09-11"
+         }, {
+            "date_added": "13372008577999141",
+            "date_last_used": "0",
+            "guid": "ed8a1945-21da-4c33-8dce-1a44f578ea96",
+            "id": "65",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "leetcode live contest solution - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/results?search_query=leetcode+live+contest+solution"
+         }, {
+            "date_added": "13372340092868195",
+            "date_last_used": "0",
+            "guid": "b0f0f351-21b1-4dc8-a33a-cb2bcba3dc93",
+            "id": "67",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "(35) Discord | Friends",
+            "type": "url",
+            "url": "https://discord.com/channels/@me"
+         } ],
+         "date_added": "13363372989260795",
+         "date_last_used": "0",
+         "date_modified": "13372340092868195",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks",
+         "type": "folder"
+      },
+      "other": {
+         "children": [ {
+            "date_added": "13363377970544486",
+            "date_last_used": "0",
+            "guid": "dd368fe0-e048-4ca7-a8ad-398dc6f2bfe0",
+            "id": "23",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "JaKooLit/Arch-Hyprland: For automated installation of Hyprland on Arch on any arch based distros",
+            "type": "url",
+            "url": "https://github.com/jakoolit/arch-hyprland"
+         }, {
+            "date_added": "13363542107941922",
+            "date_last_used": "0",
+            "guid": "c9229354-fab6-436e-9c46-7701b41098fb",
+            "id": "25",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Contest - LeetCode",
+            "type": "url",
+            "url": "https://leetcode.com/contest/biweekly-contest-133/ranking/3/"
+         }, {
+            "date_added": "13363990981133569",
+            "date_last_used": "0",
+            "guid": "b5328f11-40df-4598-8982-3f745e76afaa",
+            "id": "27",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Expression Add Operators - LeetCode",
+            "type": "url",
+            "url": "https://leetcode.com/problems/expression-add-operators/"
+         }, {
+            "date_added": "13364428312732290",
+            "date_last_used": "0",
+            "guid": "c787c2ef-5df8-400e-96e6-7629574abc26",
+            "id": "29",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Leetcode-roaster",
+            "type": "url",
+            "url": "https://leetcode-roaster.netlify.app/"
+         }, {
+            "date_added": "13365024374174485",
+            "date_last_used": "0",
+            "guid": "3ca2003b-9eac-428b-ab2b-c8d2c6be1eac",
+            "id": "31",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "The four things you must be able to do in Vim | Enable Sysadmin",
+            "type": "url",
+            "url": "https://www.redhat.com/sysadmin/four-things-vim"
+         }, {
+            "date_added": "13365140679060236",
+            "date_last_used": "0",
+            "guid": "010889d8-a881-443c-8aa8-92131977c221",
+            "id": "33",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "ACDLadders",
+            "type": "url",
+            "url": "https://acodedaily.com/"
+         }, {
+            "date_added": "13365677548762056",
+            "date_last_used": "0",
+            "guid": "753fd413-89da-4088-840f-54973fff1961",
+            "id": "35",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Loading...",
+            "type": "url",
+            "url": "https://leetcode.com/discuss/general-discussion/1000929/solved-all-dynamic-programming-dp-problems-in-7-months"
+         }, {
+            "date_added": "13365744707657350",
+            "date_last_used": "0",
+            "guid": "55d41b1e-ead3-4126-9d1f-ebf4a18c50ce",
+            "id": "37",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "ChatGPT",
+            "type": "url",
+            "url": "https://chatgpt.com/"
+         }, {
+            "date_added": "13366065739562696",
+            "date_last_used": "0",
+            "guid": "2516b4a3-4b6e-47c7-80ec-1c16161b75aa",
+            "id": "39",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Meet – gnf-pdgn-jog",
+            "type": "url",
+            "url": "https://meet.google.com/gnf-pdgn-jog"
+         }, {
+            "date_added": "13366273778986652",
+            "date_last_used": "0",
+            "guid": "e8b9499b-c1ab-41fe-a60a-ceec1d369da3",
+            "id": "41",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Grand Theft Auto V / GTA 5 - v1.0.3095/1.68 + NVE Platinum Modpack + Bonus OSTs - FitGirl Repacks",
+            "type": "url",
+            "url": "https://fitgirl-repacks.site/grand-theft-auto-v/"
+         }, {
+            "date_added": "13373746115598015",
+            "date_last_used": "0",
+            "guid": "ff3a381b-f4ee-4480-afdd-662b9073161d",
+            "id": "69",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "SB_sheet",
+            "type": "url",
+            "url": "https://docs.google.com/spreadsheets/d/1CEJHpdmnfKy9AfSMsdy2J2kg9lxyApuiqNoalTE1ZPc/edit?usp=sharing"
+         } ],
+         "date_added": "13363372989260797",
+         "date_last_used": "0",
+         "date_modified": "13373746115598015",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13363372989260801",
+         "date_last_used": "0",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

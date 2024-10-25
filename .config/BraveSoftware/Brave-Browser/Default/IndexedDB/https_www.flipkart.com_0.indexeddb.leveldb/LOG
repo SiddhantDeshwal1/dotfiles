@@ -1,0 +1,6 @@
+2024/10/04-09:07:09.987 57b Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.flipkart.com_0.indexeddb.leveldb since it was missing.
+2024/10/04-09:07:09.992 57b Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.flipkart.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/04-09:10:21.617 57c Level-0 table #5: started
+2024/10/04-09:10:21.619 57c Level-0 table #5: 4767 bytes OK
+2024/10/04-09:10:21.621 57c Delete type=0 #3
+2024/10/04-09:10:21.621 57c Manual compaction at level-0 from (begin) .. (end); will stop at (end)

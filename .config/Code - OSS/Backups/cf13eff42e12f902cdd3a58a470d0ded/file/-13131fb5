@@ -1,0 +1,30 @@
+file:///home/siddhantdeshwal/competitiveProgramming/editor/workspace.cpp {"mtime":1729369499870,"ctime":1729369499870,"size":3147,"etag":"3d7aiamr038g","orphaned":false,"typeId":""}
+#include <iostream>
+#include <cmath>
+#define f(x) (1 / (1 + pow(x, 2)))
+
+using namespace std;
+
+int main() {
+    cout << "Name : Siddhant Deshwal\nRoll No. : 44 \nExp. Topic : Simpson-three-eight Rule\n";
+    
+    float lower, upper, integration = 0.0, stepSize;
+    int subInterval;
+
+    cout << "Enter lower limit: "; cin >> lower;
+    cout << "Enter upper limit: "; cin >> upper;
+    cout << "Enter number of sub intervals (multiple of 3): "; cin >> subInterval;
+
+    stepSize = (upper - lower) / subInterval;
+    integration = f(lower) + f(upper);
+
+    for (int i = 1; i <= subInterval - 1; i++) {
+        float k = lower + i * stepSize;
+        integration += (i % 3 == 0) ? 2 * f(k) : 3 * f(k);
+    }
+
+    integration *= stepSize * 3.0 / 8.0;
+    cout << "Required value of integration is: " << integration << endl;
+
+    return 0;
+}

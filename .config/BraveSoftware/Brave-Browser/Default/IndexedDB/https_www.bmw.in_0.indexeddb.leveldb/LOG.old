@@ -1,0 +1,6 @@
+2024/10/01-08:25:59.370 581 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.bmw.in_0.indexeddb.leveldb since it was missing.
+2024/10/01-08:25:59.374 581 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.bmw.in_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/01-08:26:55.420 582 Level-0 table #5: started
+2024/10/01-08:26:55.422 582 Level-0 table #5: 21556 bytes OK
+2024/10/01-08:26:55.423 582 Delete type=0 #3
+2024/10/01-08:26:55.423 582 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

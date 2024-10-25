@@ -1,0 +1,15 @@
+2024/10/25-17:03:44.080 503 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.reddit.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/25-17:03:44.080 503 Recovering log #15
+2024/10/25-17:03:44.086 503 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.reddit.com_0.indexeddb.leveldb/000015.log 
+2024/10/25-17:04:30.749 502 Level-0 table #20: started
+2024/10/25-17:04:30.752 502 Level-0 table #20: 185835 bytes OK
+2024/10/25-17:04:30.754 502 Delete type=0 #15
+2024/10/25-17:04:30.754 502 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/10/25-17:04:30.754 502 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x02\x06\x02\x04\x01\x01\x01\x00-' @ 1084 : 1
+2024/10/25-17:04:30.754 502 Compacting 1@1 + 1@2 files
+2024/10/25-17:04:30.756 502 Generated table #21@1: 106 keys, 4638 bytes
+2024/10/25-17:04:30.757 502 Compacted 1@1 + 1@2 files => 4638 bytes
+2024/10/25-17:04:30.757 502 compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/25-17:04:30.758 502 Delete type=2 #20
+2024/10/25-17:04:30.758 502 Delete type=2 #17
+2024/10/25-17:04:30.758 502 Manual compaction at level-1 from '\x00\x02\x06\x02\x04\x01\x01\x01\x00-' @ 1084 : 1 .. (end); will stop at (end)

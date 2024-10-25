@@ -1,0 +1,7 @@
+2024/10/09-08:59:43.709 487 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.office.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/09-08:59:43.710 487 Recovering log #3
+2024/10/09-08:59:43.712 487 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.office.com_0.indexeddb.leveldb/000003.log 
+2024/10/09-09:04:58.010 488 Level-0 table #5: started
+2024/10/09-09:04:58.016 488 Level-0 table #5: 107318 bytes OK
+2024/10/09-09:04:58.019 488 Delete type=0 #3
+2024/10/09-09:04:58.019 488 Manual compaction at level-0 from (begin) .. (end); will stop at (end)

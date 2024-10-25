@@ -1,0 +1,7 @@
+2024/09/24-00:38:25.153 648 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.myntra.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/09/24-00:38:25.153 648 Recovering log #6
+2024/09/24-00:38:25.153 648 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.myntra.com_0.indexeddb.leveldb/000006.log 
+2024/09/24-00:38:25.686 648 Level-0 table #11: started
+2024/09/24-00:38:25.688 648 Level-0 table #11: 1836 bytes OK
+2024/09/24-00:38:25.690 648 Delete type=0 #6
+2024/09/24-00:38:25.690 648 Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)

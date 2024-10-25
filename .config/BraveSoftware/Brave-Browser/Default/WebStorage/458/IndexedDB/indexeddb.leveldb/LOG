@@ -1,0 +1,7 @@
+2024/10/26-01:27:49.965 4a4 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/WebStorage/458/IndexedDB/indexeddb.leveldb/MANIFEST-000001
+2024/10/26-01:27:49.965 4a4 Recovering log #4
+2024/10/26-01:27:49.966 4a4 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/WebStorage/458/IndexedDB/indexeddb.leveldb/000004.log 
+2024/10/26-01:27:50.003 4a6 Level-0 table #8: started
+2024/10/26-01:27:50.007 4a6 Level-0 table #8: 51454 bytes OK
+2024/10/26-01:27:50.009 4a6 Delete type=0 #4
+2024/10/26-01:27:50.010 4a4 Manual compaction at level-0 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
