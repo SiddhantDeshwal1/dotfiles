@@ -5,6 +5,9 @@ vim.opt.termguicolors = true
 
 vim.g.mapleader = " "
 
+-- alias of :W to work like :w
+vim.cmd("command! W w")
+
 -- Move current line up
 vim.api.nvim_set_keymap('n', '<A-j>', ':m .+1<CR>==', { noremap = true, silent = true })
 -- Move current line down
@@ -220,10 +223,7 @@ vim.api.nvim_set_keymap('n', '<leader>js', ':!node %<CR>', { noremap = true, sil
 	vim.api.nvim_command("startinsert!")
 end, {})
 
--- vim.keymap.set("i", "<C-H>", "<C-w>", { noremap = true, silent = true })
-
 vim.keymap.set("i", "<C-BS>", "<C-w>", { noremap = true, silent = true })
-
 
 vim.api.nvim_create_user_command("Html", function()
         local html = {

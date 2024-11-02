@@ -1,5 +1,5 @@
 {
-   "checksum": "7da36e86c2cd53ad45166dd26e8801a3",
+   "checksum": "0ee8b792822ab73eda20416541d2a775",
    "roots": {
       "bookmark_bar": {
          "children": [ {
@@ -426,10 +426,21 @@
             "name": "Scaler Academy: Accelerate your tech career",
             "type": "url",
             "url": "https://www.scaler.com/academy/ta-dashboard/teaching_assistant_help_requests/"
+         }, {
+            "date_added": "13374510001898620",
+            "date_last_used": "0",
+            "guid": "deb48ecf-8abf-41f9-ab09-dc2a3767fe64",
+            "id": "74",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Roadmap to Awesome Projects in your RESUME | Know What gets you selected - YouTube",
+            "type": "url",
+            "url": "https://www.youtube.com/watch?v=XDHokOLOeHI"
          } ],
          "date_added": "13363372989260797",
          "date_last_used": "0",
-         "date_modified": "13374063085113270",
+         "date_modified": "13374510001898620",
          "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
          "id": "2",
          "name": "Other bookmarks",

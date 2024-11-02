@@ -1,4 +1,5 @@
 {
 	"mechvibes-pack": "default-cherrymx-black-pbt",
-	"mechvibes-volume": "100"
+	"mechvibes-volume": "100",
+	"mechvibes-muted": true
 }

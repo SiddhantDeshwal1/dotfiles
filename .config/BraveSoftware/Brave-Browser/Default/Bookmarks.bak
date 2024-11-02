@@ -1,5 +1,5 @@
 {
-   "checksum": "db7aabee2df829388330946fecc1ab4f",
+   "checksum": "7da36e86c2cd53ad45166dd26e8801a3",
    "roots": {
       "bookmark_bar": {
          "children": [ {
@@ -102,7 +102,7 @@
             "url": "https://docs.google.com/spreadsheets/d/1jAb-dPBZs178iD5DE-2th1JC4yh11KMCxo-95Xbmhyg/edit?pli=1#gid=0"
          }, {
             "date_added": "13350027945000000",
-            "date_last_used": "0",
+            "date_last_used": "13373932813302725",
             "guid": "40b143f3-e496-4f54-85fe-e4add8b568df",
             "id": "17",
             "name": "Problems - LeetCode",
@@ -404,10 +404,32 @@
             "name": "SB_sheet",
             "type": "url",
             "url": "https://docs.google.com/spreadsheets/d/1CEJHpdmnfKy9AfSMsdy2J2kg9lxyApuiqNoalTE1ZPc/edit?usp=sharing"
+         }, {
+            "date_added": "13373928705742549",
+            "date_last_used": "0",
+            "guid": "dff81aa4-6dba-426b-8456-39ebbcb0781d",
+            "id": "71",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Courses | AlgoZenith",
+            "type": "url",
+            "url": "https://maang.in/learn"
+         }, {
+            "date_added": "13374063085113270",
+            "date_last_used": "0",
+            "guid": "722c7651-b8eb-4634-9f43-72d56a0219c6",
+            "id": "72",
+            "meta_info": {
+               "power_bookmark_meta": ""
+            },
+            "name": "Scaler Academy: Accelerate your tech career",
+            "type": "url",
+            "url": "https://www.scaler.com/academy/ta-dashboard/teaching_assistant_help_requests/"
          } ],
          "date_added": "13363372989260797",
          "date_last_used": "0",
-         "date_modified": "13373746115598015",
+         "date_modified": "13374063085113270",
          "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
          "id": "2",
          "name": "Other bookmarks",

@@ -1,0 +1,21 @@
+[package]
+authors.workspace = true
+categories.workspace = true
+description = "Traits and derive macros for accessing your type's documentation at runtime"
+edition.workspace = true
+keywords.workspace = true
+license.workspace = true
+name = "documented"
+readme.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+documented-derive = { path = "../documented-derive", version = "0.5.0" }
+phf = { version = "0.11", default-features = false, features = ["macros"] }
+thiserror = "1.0.58"
+
+[features]
+customise = ["documented-derive/customise"]
+default = ["customise"]

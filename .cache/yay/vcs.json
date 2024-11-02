@@ -1,0 +1,29 @@
+{
+	"libva-nvidia-driver-git": {
+		"github.com/elFarto/nvidia-vaapi-driver.git": {
+			"protocols": [
+				"https"
+			],
+			"branch": "HEAD",
+			"sha": "68efa33131745f1b2d530c64f6692f3993f3d53c"
+		}
+	},
+	"pokemon-colorscripts-git": {
+		"gitlab.com/phoneybadger/pokemon-colorscripts.git": {
+			"protocols": [
+				"https"
+			],
+			"branch": "HEAD",
+			"sha": "0483c85b93362637bdd0632056ff986c07f30868"
+		}
+	},
+	"zsh-theme-powerlevel10k-git": {
+		"github.com/romkatv/powerlevel10k.git": {
+			"protocols": [
+				"https"
+			],
+			"branch": "HEAD",
+			"sha": "67a365b9dbf2c784ca8e655d681df10ef2d4a1a4"
+		}
+	}
+}

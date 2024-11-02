@@ -31,6 +31,17 @@
 	"tooltip-format": "Launch Terminal",
 },
 
+
+"custom/mic": {
+    "exec": "$HOME/custom_scripts/mic_status.sh",
+    "interval": 1,
+    "return-type": "json",
+    "format": "{text}",
+    "tooltip": "{tooltip}",
+    "class": "mic",
+    // "on-click": "your_click_command_here"  // Optional: add a command for clicks
+},
+
 "custom/browser": {
 	"format": " ",
 	"on-click": "firefox",

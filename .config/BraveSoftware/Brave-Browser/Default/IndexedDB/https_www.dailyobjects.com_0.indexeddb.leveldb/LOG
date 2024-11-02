@@ -1,0 +1,6 @@
+2024/10/30-15:21:44.591 4e0 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.dailyobjects.com_0.indexeddb.leveldb since it was missing.
+2024/10/30-15:21:44.593 4e0 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.dailyobjects.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/30-15:21:44.877 4e0 Level-0 table #5: started
+2024/10/30-15:21:44.878 4e0 Level-0 table #5: 678 bytes OK
+2024/10/30-15:21:44.880 4e0 Delete type=0 #3
+2024/10/30-15:21:44.880 4de Manual compaction at level-0 from '\x00\x01\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x02\x00\x00\x00' @ 0 : 0; will stop at (end)

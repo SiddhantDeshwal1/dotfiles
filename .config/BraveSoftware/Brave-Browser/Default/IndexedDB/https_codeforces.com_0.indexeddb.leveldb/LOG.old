@@ -1,15 +1,15 @@
-2024/10/21-22:59:10.847 501 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_codeforces.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/10/21-22:59:10.848 501 Recovering log #7
-2024/10/21-22:59:10.848 501 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_codeforces.com_0.indexeddb.leveldb/000007.log 
-2024/10/21-22:59:12.907 501 Level-0 table #12: started
-2024/10/21-22:59:12.909 501 Level-0 table #12: 1427 bytes OK
-2024/10/21-22:59:12.910 501 Delete type=0 #7
-2024/10/21-22:59:12.910 501 Manual compaction at level-0 from (begin) .. (end); will stop at (end)
-2024/10/21-22:59:12.910 501 Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x01\x02\x01\x0b\x007\x000\x00a\x007\x00c\x002\x008\x00f\x003\x00d\x00e' @ 113 : 1
-2024/10/21-22:59:12.910 501 Compacting 1@1 + 1@2 files
-2024/10/21-22:59:12.911 501 Generated table #13@1: 21 keys, 628 bytes
-2024/10/21-22:59:12.912 501 Compacted 1@1 + 1@2 files => 628 bytes
-2024/10/21-22:59:12.913 501 compacted to: files[ 0 0 1 0 0 0 0 ]
-2024/10/21-22:59:12.913 501 Delete type=2 #9
-2024/10/21-22:59:12.913 501 Delete type=2 #12
-2024/10/21-22:59:12.913 501 Manual compaction at level-1 from '\x00\x01\x01\x02\x01\x0b\x007\x000\x00a\x007\x00c\x002\x008\x00f\x003\x00d\x00e' @ 113 : 1 .. (end); will stop at (end)
+2024/10/31-19:23:51.415 4de Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_codeforces.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/31-19:23:51.415 4de Recovering log #15
+2024/10/31-19:23:51.416 4de Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_codeforces.com_0.indexeddb.leveldb/000015.log 
+2024/10/31-19:23:53.715 4df Level-0 table #20: started
+2024/10/31-19:23:53.716 4df Level-0 table #20: 799 bytes OK
+2024/10/31-19:23:53.718 4df Delete type=0 #15
+2024/10/31-19:23:53.718 4df Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/10/31-19:23:53.718 4df Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x01\x02\x01\x0b\x007\x000\x00a\x007\x00c\x002\x008\x00f\x003\x00d\x00e' @ 225 : 1
+2024/10/31-19:23:53.719 4df Compacting 1@1 + 1@2 files
+2024/10/31-19:23:53.720 4df Generated table #21@1: 21 keys, 627 bytes
+2024/10/31-19:23:53.720 4df Compacted 1@1 + 1@2 files => 627 bytes
+2024/10/31-19:23:53.722 4df compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/31-19:23:53.722 4df Delete type=2 #20
+2024/10/31-19:23:53.722 4df Delete type=2 #17
+2024/10/31-19:23:53.723 4df Manual compaction at level-1 from '\x00\x01\x01\x02\x01\x0b\x007\x000\x00a\x007\x00c\x002\x008\x00f\x003\x00d\x00e' @ 225 : 1 .. (end); will stop at (end)

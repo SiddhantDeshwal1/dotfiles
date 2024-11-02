@@ -1,3 +1,12 @@
-2024/10/26-01:27:36.249 4b7 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/MANIFEST-000001
-2024/10/26-01:27:36.250 4b7 Recovering log #11
-2024/10/26-01:27:36.251 4b7 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/000011.log 
+2024/10/28-00:08:46.355 4f1 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/MANIFEST-000001
+2024/10/28-00:08:46.355 4f1 Recovering log #11
+2024/10/28-00:08:46.357 4f1 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Service Worker/Database/000011.log 
+2024/11/02-00:17:04.186 4df Level-0 table #16: started
+2024/11/02-00:17:04.201 4df Level-0 table #16: 78229 bytes OK
+2024/11/02-00:17:04.203 4df Delete type=0 #11
+2024/11/02-00:54:20.243 4df Compacting 1@1 + 1@2 files
+2024/11/02-00:54:20.257 4df Generated table #17@1: 160 keys, 13724 bytes
+2024/11/02-00:54:20.257 4df Compacted 1@1 + 1@2 files => 13724 bytes
+2024/11/02-00:54:20.259 4df compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/11/02-00:54:20.259 4df Delete type=2 #16
+2024/11/02-00:54:20.259 4df Delete type=2 #13

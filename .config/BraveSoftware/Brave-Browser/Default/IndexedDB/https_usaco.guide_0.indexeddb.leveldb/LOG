@@ -1,13 +1,36 @@
-2024/10/16-00:27:10.796 485 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/MANIFEST-000001
-2024/10/16-00:27:10.797 485 Recovering log #35
-2024/10/16-00:27:10.797 485 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/000035.log 
-2024/10/16-00:27:10.817 487 Level-0 table #40: started
-2024/10/16-00:27:10.819 487 Level-0 table #40: 793 bytes OK
-2024/10/16-00:27:10.821 487 Delete type=0 #35
-2024/10/16-00:27:10.821 487 Manual compaction at level-0 from '\x00\x0a\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0b\x00\x00\x00' @ 0 : 0; will stop at (end)
-2024/10/16-00:27:51.621 486 Compacting 1@1 + 1@2 files
-2024/10/16-00:27:51.624 486 Generated table #41@1: 42 keys, 3633 bytes
-2024/10/16-00:27:51.624 486 Compacted 1@1 + 1@2 files => 3633 bytes
-2024/10/16-00:27:51.626 486 compacted to: files[ 0 0 1 0 0 0 0 ]
-2024/10/16-00:27:51.627 486 Delete type=2 #37
-2024/10/16-00:27:51.627 486 Delete type=2 #40
+2024/10/31-02:22:31.275 4de Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/31-02:22:31.276 4de Recovering log #50
+2024/10/31-02:22:31.276 4de Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_usaco.guide_0.indexeddb.leveldb/000050.log 
+2024/10/31-02:22:31.319 4e0 Level-0 table #55: started
+2024/10/31-02:22:31.321 4e0 Level-0 table #55: 794 bytes OK
+2024/10/31-02:22:31.322 4e0 Delete type=0 #50
+2024/10/31-02:22:31.323 4de Manual compaction at level-0 from '\x00\x0d\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0e\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/10/31-02:22:33.102 4f1 Level-0 table #57: started
+2024/10/31-02:22:33.103 4f1 Level-0 table #57: 1586 bytes OK
+2024/10/31-02:22:33.105 4f1 Delete type=0 #54
+2024/10/31-02:22:33.105 4de Manual compaction at level-0 from '\x00\x0e\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at '\x00\x0e\x00\x00\x05' @ 1442 : 1
+2024/10/31-02:22:33.105 4de Compacting 1@0 + 1@1 files
+2024/10/31-02:22:33.107 4de Generated table #58@0: 32 keys, 1072 bytes
+2024/10/31-02:22:33.107 4de Compacted 1@0 + 1@1 files => 1072 bytes
+2024/10/31-02:22:33.108 4de compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/31-02:22:33.108 4de Delete type=2 #57
+2024/10/31-02:22:33.109 4de Manual compaction at level-0 from '\x00\x0e\x00\x00\x05' @ 1442 : 1 .. '\x00\x0f\x00\x00\x00' @ 0 : 0; will stop at (end)
+2024/10/31-02:22:55.760 4df Compacting 1@1 + 1@2 files
+2024/10/31-02:22:55.771 4df Generated table #59@1: 42 keys, 3622 bytes
+2024/10/31-02:22:55.771 4df Compacted 1@1 + 1@2 files => 3622 bytes
+2024/10/31-02:22:55.773 4df compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/31-02:22:55.774 4df Delete type=2 #52
+2024/10/31-02:22:55.774 4df Delete type=2 #55
+2024/10/31-02:22:55.774 4df Delete type=2 #58
+2024/11/01-13:59:00.539 4df Level-0 table #61: started
+2024/11/01-13:59:00.541 4df Level-0 table #61: 43075 bytes OK
+2024/11/01-13:59:00.543 4df Delete type=0 #56
+2024/11/01-13:59:00.544 4df Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/11/01-13:59:00.545 4df Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00A\x00v\x00m\x00-\x00c\x00v\x00P\x00g\x00E\x00F\x00e\x00r\x003\x00M\x00V\x00Q\x00t\x00C\x00i\x00K\x00e\x00g\x00F\x00T\x00c\x001\x00E\x009\x00R\x00H\x00G\x00G\x004\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 1477 : 1
+2024/11/01-13:59:00.545 4df Compacting 1@1 + 1@2 files
+2024/11/01-13:59:00.546 4df Generated table #62@1: 36 keys, 3502 bytes
+2024/11/01-13:59:00.546 4df Compacted 1@1 + 1@2 files => 3502 bytes
+2024/11/01-13:59:00.548 4df compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/11/01-13:59:00.548 4df Delete type=2 #61
+2024/11/01-13:59:00.548 4df Delete type=2 #59
+2024/11/01-13:59:00.549 4df Manual compaction at level-1 from '\x00\x02\x01\x02\x01C\x00f\x00i\x00r\x00e\x00b\x00a\x00s\x00e\x00:\x00a\x00u\x00t\x00h\x00U\x00s\x00e\x00r\x00:\x00A\x00I\x00z\x00a\x00S\x00y\x00A\x00v\x00m\x00-\x00c\x00v\x00P\x00g\x00E\x00F\x00e\x00r\x003\x00M\x00V\x00Q\x00t\x00C\x00i\x00K\x00e\x00g\x00F\x00T\x00c\x001\x00E\x009\x00R\x00H\x00G\x00G\x004\x00:\x00[\x00D\x00E\x00F\x00A\x00U\x00L\x00T\x00]' @ 1477 : 1 .. (end); will stop at (end)

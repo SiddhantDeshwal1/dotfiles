@@ -1,6 +1,15 @@
-2024/09/13-12:30:23.348 2eb7c Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.lenovo.com_0.indexeddb.leveldb since it was missing.
-2024/09/13-12:30:23.361 2eb7c Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.lenovo.com_0.indexeddb.leveldb/MANIFEST-000001
-2024/09/13-12:33:05.151 2eb7a Level-0 table #5: started
-2024/09/13-12:33:05.154 2eb7a Level-0 table #5: 5512 bytes OK
-2024/09/13-12:33:05.156 2eb7a Delete type=0 #3
-2024/09/13-12:33:05.157 2eb7a Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/10/31-02:27:53.066 4de Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.lenovo.com_0.indexeddb.leveldb/MANIFEST-000001
+2024/10/31-02:27:53.066 4de Recovering log #4
+2024/10/31-02:27:53.067 4de Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/IndexedDB/https_www.lenovo.com_0.indexeddb.leveldb/000004.log 
+2024/10/31-02:29:07.583 4df Level-0 table #8: started
+2024/10/31-02:29:07.584 4df Level-0 table #8: 1398 bytes OK
+2024/10/31-02:29:07.585 4df Delete type=0 #4
+2024/10/31-02:29:07.586 4df Manual compaction at level-0 from (begin) .. (end); will stop at (end)
+2024/10/31-02:29:07.586 4df Manual compaction at level-1 from (begin) .. (end); will stop at '\x00\x01\x02\x1f\x01\x07\x00v\x00e\x00r\x00s\x00i\x00o\x00n\x00\x01\x07\x00v\x00e\x00r\x00s\x00i\x00o\x00n' @ 430 : 1
+2024/10/31-02:29:07.586 4df Compacting 1@1 + 1@2 files
+2024/10/31-02:29:07.587 4df Generated table #9@1: 103 keys, 2094 bytes
+2024/10/31-02:29:07.587 4df Compacted 1@1 + 1@2 files => 2094 bytes
+2024/10/31-02:29:07.588 4df compacted to: files[ 0 0 1 0 0 0 0 ]
+2024/10/31-02:29:07.588 4df Delete type=2 #8
+2024/10/31-02:29:07.588 4df Delete type=2 #5
+2024/10/31-02:29:07.588 4df Manual compaction at level-1 from '\x00\x01\x02\x1f\x01\x07\x00v\x00e\x00r\x00s\x00i\x00o\x00n\x00\x01\x07\x00v\x00e\x00r\x00s\x00i\x00o\x00n' @ 430 : 1 .. (end); will stop at (end)

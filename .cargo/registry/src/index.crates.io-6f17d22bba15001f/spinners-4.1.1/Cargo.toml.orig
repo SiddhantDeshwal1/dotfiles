@@ -1,0 +1,19 @@
+[package]
+name = "spinners"
+version = "4.1.1"
+edition = "2021"
+authors = ["François-Guillaume RIBREAU <github@fgribreau.com>", "jewlexx"]
+homepage = "https://github.com/fgribreau/spinners"
+repository = "https://github.com/fgribreau/spinners"
+readme = "README.md"
+documentation = "https://docs.rs/spinners"
+description = "🛎 60+ Elegant terminal spinners for Rust"
+keywords = ["spinner", "spin", "loader", "term", "terminal"]
+categories = ["command-line-interface"]
+license = "MIT"
+include = ["src/**/*", "README.md"]
+
+[dependencies]
+lazy_static = { version = "1.4.0" }
+maplit = { version = "1.0.2" }
+strum = { version = "0.24.0", features = ["derive"] }

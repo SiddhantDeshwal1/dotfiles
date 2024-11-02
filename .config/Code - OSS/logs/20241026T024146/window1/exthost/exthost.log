@@ -1,0 +1,10 @@
+2024-10-26 02:41:50.430 [info] Extension host with pid 16093 started
+2024-10-26 02:41:50.430 [info] Skipping acquiring lock for /home/siddhantdeshwal/.config/Code - OSS/User/workspaceStorage/4cc6757d0d9ed9c01635b6f10235e1aa.
+2024-10-26 02:41:50.790 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-10-26 02:41:51.691 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*'
+2024-10-26 02:41:51.738 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-10-26 02:41:51.812 [info] Eager extensions activated
+2024-10-26 02:41:51.822 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-10-26 02:41:51.826 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-10-26 02:42:09.322 [info] Extension host terminating: renderer closed the MessagePort
+2024-10-26 02:42:09.328 [info] Extension host with pid 16093 exiting with code 0

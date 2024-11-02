@@ -1,0 +1,22 @@
+[package]
+name = "wallust_themes" #prefer _ over -
+version = "1.0.0"
+edition = "2021"
+license = "MIT"
+authors = [ "explosion-mental" ]
+keywords = [ "colorscheme", "theme" ]
+categories = [ ]
+description = "Embeded colorschemes in an array of u32s."
+repository = "https://codeberg.org/explosion-mental/wallust-themes"
+homepage = "https://codeberg.org/explosion-mental/wallust-themes"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[build-dependencies]
+serde_json = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+
+[lib]
+path = "lib.rs"

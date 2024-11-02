@@ -1,90 +1,29 @@
-2024/10/20-23:41:32.608 4 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Session Storage/MANIFEST-000001
-2024/10/20-23:41:32.609 4 Recovering log #463
-2024/10/20-23:41:32.610 4 Reusing old log /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Session Storage/000463.log 
-2024/10/20-23:41:34.213 4 Level-0 table #467: started
-2024/10/20-23:41:34.218 4 Level-0 table #467: 27096 bytes OK
-2024/10/20-23:41:34.223 4 Delete type=0 #463
-2024/10/21-01:43:33.493 4 Level-0 table #469: started
-2024/10/21-01:43:33.532 4 Level-0 table #469: 23528 bytes OK
-2024/10/21-01:43:33.534 4 Delete type=0 #466
-2024/10/21-02:45:42.406 5 Level-0 table #471: started
-2024/10/21-02:45:42.419 5 Level-0 table #471: 19684 bytes OK
-2024/10/21-02:45:42.421 5 Delete type=0 #468
-2024/10/21-02:45:42.421 5 Compacting 4@0 + 1@1 files
-2024/10/21-02:45:42.426 5 Generated table #472@0: 218 keys, 20379 bytes
-2024/10/21-02:45:42.426 5 Compacted 4@0 + 1@1 files => 20379 bytes
-2024/10/21-02:45:42.428 5 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/10/21-02:45:42.429 5 Delete type=2 #467
-2024/10/21-02:45:42.429 5 Delete type=2 #471
-2024/10/21-02:45:42.429 5 Delete type=2 #464
-2024/10/21-02:45:42.429 5 Delete type=2 #469
-2024/10/21-02:45:42.429 5 Delete type=2 #462
-2024/10/21-04:48:24.307 5 Level-0 table #474: started
-2024/10/21-04:48:24.320 5 Level-0 table #474: 36166 bytes OK
-2024/10/21-04:48:24.322 5 Delete type=0 #470
-2024/10/21-23:02:26.369 5 Level-0 table #476: started
-2024/10/21-23:02:26.384 5 Level-0 table #476: 90819 bytes OK
-2024/10/21-23:02:26.387 5 Delete type=0 #473
-2024/10/22-15:40:40.884 4 Level-0 table #478: started
-2024/10/22-15:40:40.899 4 Level-0 table #478: 26994 bytes OK
-2024/10/22-15:40:40.907 4 Delete type=0 #475
-2024/10/22-19:27:29.139 5 Level-0 table #480: started
-2024/10/22-19:27:29.152 5 Level-0 table #480: 36998 bytes OK
-2024/10/22-19:27:29.154 5 Delete type=0 #477
-2024/10/22-19:27:29.155 5 Compacting 4@0 + 1@1 files
-2024/10/22-19:27:29.159 5 Generated table #481@0: 291 keys, 26924 bytes
-2024/10/22-19:27:29.160 5 Compacted 4@0 + 1@1 files => 26924 bytes
-2024/10/22-19:27:29.161 5 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/10/22-19:27:29.162 5 Delete type=2 #472
-2024/10/22-19:27:29.162 5 Delete type=2 #474
-2024/10/22-19:27:29.162 5 Delete type=2 #480
-2024/10/22-19:27:29.162 5 Delete type=2 #476
-2024/10/22-19:27:29.162 5 Delete type=2 #478
-2024/10/22-23:56:18.585 5 Level-0 table #483: started
-2024/10/22-23:56:18.600 5 Level-0 table #483: 27688 bytes OK
-2024/10/22-23:56:18.605 5 Delete type=0 #479
-2024/10/23-02:26:54.569 5 Level-0 table #485: started
-2024/10/23-02:26:54.608 5 Level-0 table #485: 27633 bytes OK
-2024/10/23-02:26:54.610 5 Delete type=0 #482
-2024/10/23-19:01:15.014 5 Level-0 table #487: started
-2024/10/23-19:01:15.053 5 Level-0 table #487: 32362 bytes OK
-2024/10/23-19:01:15.055 5 Delete type=0 #484
-2024/10/24-00:18:23.523 5 Level-0 table #489: started
-2024/10/24-00:18:23.538 5 Level-0 table #489: 27476 bytes OK
-2024/10/24-00:18:23.540 5 Delete type=0 #486
-2024/10/24-00:18:23.541 5 Compacting 4@0 + 1@1 files
-2024/10/24-00:18:23.547 5 Generated table #490@0: 216 keys, 17162 bytes
-2024/10/24-00:18:23.547 5 Compacted 4@0 + 1@1 files => 17162 bytes
-2024/10/24-00:18:23.550 5 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/10/24-00:18:23.552 5 Delete type=2 #483
-2024/10/24-00:18:23.553 5 Delete type=2 #481
-2024/10/24-00:18:23.553 5 Delete type=2 #489
-2024/10/24-00:18:23.553 5 Delete type=2 #487
-2024/10/24-00:18:23.553 5 Delete type=2 #485
-2024/10/24-23:47:30.651 5 Level-0 table #492: started
-2024/10/24-23:47:30.663 5 Level-0 table #492: 20069 bytes OK
-2024/10/24-23:47:30.666 5 Delete type=0 #488
-2024/10/24-23:48:44.444 5 Level-0 table #494: started
-2024/10/24-23:48:44.461 5 Level-0 table #494: 309375 bytes OK
-2024/10/24-23:48:44.463 5 Delete type=0 #491
-2024/10/25-17:02:01.289 5 Level-0 table #496: started
-2024/10/25-17:02:01.302 5 Level-0 table #496: 26814 bytes OK
-2024/10/25-17:02:01.304 5 Delete type=0 #493
-2024/10/25-21:57:08.681 5 Level-0 table #498: started
-2024/10/25-21:57:08.693 5 Level-0 table #498: 28717 bytes OK
-2024/10/25-21:57:08.695 5 Delete type=0 #495
-2024/10/25-21:57:08.696 5 Compacting 4@0 + 1@1 files
-2024/10/25-21:57:08.706 5 Generated table #499@0: 436 keys, 346765 bytes
-2024/10/25-21:57:08.706 5 Compacted 4@0 + 1@1 files => 346765 bytes
-2024/10/25-21:57:08.708 5 compacted to: files[ 0 1 0 0 0 0 0 ]
-2024/10/25-21:57:08.708 5 Delete type=2 #490
-2024/10/25-21:57:08.708 5 Delete type=2 #498
-2024/10/25-21:57:08.708 5 Delete type=2 #492
-2024/10/25-21:57:08.708 5 Delete type=2 #496
-2024/10/25-21:57:08.708 5 Delete type=2 #494
-2024/10/25-23:17:53.789 5 Level-0 table #501: started
-2024/10/25-23:17:53.801 5 Level-0 table #501: 24918 bytes OK
-2024/10/25-23:17:53.803 5 Delete type=0 #497
-2024/10/26-01:13:54.431 5 Level-0 table #503: started
-2024/10/26-01:13:54.470 5 Level-0 table #503: 33609 bytes OK
-2024/10/26-01:13:54.473 5 Delete type=0 #500
+2024/10/27-18:06:55.817 4 Creating DB /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Session Storage since it was missing.
+2024/10/27-18:06:55.825 4 Reusing MANIFEST /home/siddhantdeshwal/.config/BraveSoftware/Brave-Browser/Default/Session Storage/MANIFEST-000001
+2024/10/27-18:22:47.162 5 Level-0 table #5: started
+2024/10/27-18:22:47.202 5 Level-0 table #5: 69691 bytes OK
+2024/10/27-18:22:47.204 5 Delete type=0 #3
+2024/10/27-20:18:27.381 5 Level-0 table #7: started
+2024/10/27-20:18:27.394 5 Level-0 table #7: 34084 bytes OK
+2024/10/27-20:18:27.396 5 Delete type=0 #4
+2024/10/27-22:37:48.895 5 Level-0 table #9: started
+2024/10/27-22:37:48.907 5 Level-0 table #9: 30552 bytes OK
+2024/10/27-22:37:48.910 5 Delete type=0 #6
+2024/10/27-22:37:55.928 5 Level-0 table #11: started
+2024/10/27-22:37:55.942 5 Level-0 table #11: 74604 bytes OK
+2024/10/27-22:37:55.945 5 Delete type=0 #8
+2024/10/27-22:46:12.171 5 Level-0 table #13: started
+2024/10/27-22:46:12.187 5 Level-0 table #13: 193183 bytes OK
+2024/10/27-22:46:12.190 5 Delete type=0 #10
+2024/10/27-23:25:28.668 5 Level-0 table #15: started
+2024/10/27-23:25:28.696 5 Level-0 table #15: 74761 bytes OK
+2024/10/27-23:25:28.698 5 Delete type=0 #12
+2024/10/27-23:25:28.699 5 Compacting 4@0 + 1@1 files
+2024/10/27-23:25:28.711 5 Generated table #16@0: 428 keys, 292596 bytes
+2024/10/27-23:25:28.711 5 Compacted 4@0 + 1@1 files => 292596 bytes
+2024/10/27-23:25:28.712 5 compacted to: files[ 0 1 1 0 0 0 0 ]
+2024/10/27-23:25:28.714 5 Delete type=2 #15
+2024/10/27-23:25:28.714 5 Delete type=2 #7
+2024/10/27-23:25:28.714 5 Delete type=2 #13
+2024/10/27-23:25:28.714 5 Delete type=2 #9
+2024/10/27-23:25:28.714 5 Delete type=2 #11

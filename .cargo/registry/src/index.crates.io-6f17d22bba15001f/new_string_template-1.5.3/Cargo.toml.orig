@@ -1,0 +1,29 @@
+[package]
+name = "new_string_template"
+version = "1.5.3"
+authors = ["hasezoey <hasezoey@gmail.com>"]
+edition = "2018"
+license = "MIT"
+description = "Simple Customizable String-Templating Library for Rust."
+categories = ["template-engine", "text-processing"]
+keywords = ["runtime", "string", "template"]
+homepage = "https://github.com/hasezoey/new_string_template"
+repository = "https://github.com/hasezoey/new_string_template"
+readme = "README.md"
+rust-version = "1.40"
+include = ["**/*.rs", "Cargo.toml"]
+
+[dependencies]
+# This is to have the default Regex only compiled once
+lazy_static = "1.4.0"
+# This library uses regex's to find matches
+regex = "1.5.5"
+
+[lints.clippy]
+correctness = { level = "deny", priority = -1 }
+style = { level = "warn", priority = -1 }
+complexity = { level = "warn", priority = -1 }
+perf = { level = "warn", priority = -1 }
+needless_return = "allow"
+implicit_return = "deny"
+needless_doctest_main = "allow"
