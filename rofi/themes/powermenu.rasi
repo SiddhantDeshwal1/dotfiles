@@ -1,0 +1,66 @@
+* {
+    /* Colors */
+    bg: #191724;
+    bg-alt: #1f1d2e;
+    fg: #e0def4;
+    fg-alt: #908caa;
+    
+    accent: #c4a7e7;
+    urgent: #eb6f92;
+    
+    border: #31748f;
+    selected: #6e6a86;
+    
+    background-color: transparent;
+    text-color: @fg;
+}
+window {
+    background-color: @bg;
+    border: 2px solid;
+    border-color: @accent;
+    border-radius: 2px;
+    width: 400px;
+    location: north west;
+    y-offset: 46;
+    x-offset: 10;
+}
+
+mainbox {
+    padding: 20px;
+    spacing: 15px;
+}
+
+inputbar {
+    // children: [prompt];
+    spacing: 0;
+    background-color: @accent;
+    text-color: @bg;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+prompt {
+    font: "Maple Mono NF 14";
+    text-color: @bg;
+}
+
+listview {
+    lines: 5;
+    columns: 1;
+    spacing: 10px;
+}
+
+element {
+    padding: 15px;
+    background-color: transparent;
+    text-color: @fg;
+    border-radius: 5px;
+    font: "Maple Mono NF 12";
+}
+
+element selected {
+    background-color: @selected;
+    text-color: @bg;
+    border: 2px;
+    border-color: @accent;
+}

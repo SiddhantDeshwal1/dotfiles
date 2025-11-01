@@ -1,0 +1,5 @@
+# format 
+format = '''
+$directory$git_branch$git_status$git_commit$git_state
+$character
+'''

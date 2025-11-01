@@ -1,0 +1,109 @@
+/* Global defaults */
+* {
+  background-color: #000000; /* black bg */
+  color: #ffffff; /* white text */
+  font-family: "Monaspace Radon Frozen";
+  font-size: 17px;
+}
+
+window {
+  background-color: #000000;
+  border: 0;
+  border-radius: 0;
+  padding: 17px;
+  width: 450px;
+  height: 500px;
+}
+
+mainbox {
+  padding: 0;
+  spacing: 0;
+}
+
+message {
+  background-color: #0a0a0a; /* slightly lighter for messages */
+  padding: 0;
+}
+
+inputbar {
+  background-color: #000000;
+  padding: 5px;
+  spacing: 10px;
+  border-radius: 0;
+}
+
+prompt {
+  color: #3a84ff; /* blue prompt */
+}
+
+textbox-prompt-colon {
+  color: #3a84ff;
+}
+
+entry {
+  color: #ffffff;
+  placeholder-color: #b0b0b0;
+}
+
+case-indicator {
+  color: #b0b0b0;
+}
+
+listview {
+  padding: 10px 0;
+  columns: 1;
+  lines: 8;
+  spacing: 5px;
+}
+
+element {
+  padding: 0px;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+element-icon {
+  size: 24px;
+  margin-right: 10px;
+}
+
+element-text {
+  vertical-align: 0.5;
+}
+
+element.selected.normal {
+  background-color: #1a1a1a; /* dark grey selection */
+  color: #3a84ff; /* blue text */
+}
+
+element.selected.active {
+  background-color: #3a84ff; /* blue when pressed */
+  color: #000000; /* black text on blue */
+}
+
+element.selected.urgent {
+  background-color: #ff4c4c; /* red urgent */
+  color: #000000;
+}
+
+mode-switcher {
+  background-color: #0a0a0a;
+  padding: 10px;
+  spacing: 10px;
+}
+
+button {
+  background-color: transparent;
+  color: #b0b0b0;
+}
+
+button:selected {
+  background-color: #3a84ff;
+  color: #000000;
+}
+
+error-message {
+  border: 2px solid #ff4c4c;
+  padding: 20px;
+  background-color: #000000;
+}

@@ -1,0 +1,162 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "Monaspace Radon Frozen", "otf-font-awesome";
+  font-size: 20px;
+  min-height: 10px;
+}
+
+window#waybar {
+  background: #000000; /* full bar background black */
+  color: #f8f8f2; /* default font color (soft white) */
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+/* Workspaces */
+#workspaces {
+  margin: 0 8px;
+  padding: 4px 8px;
+}
+#workspaces button {
+  color: #8be9fd; /* blue */
+  background: transparent;
+  padding: 4px 8px;
+}
+
+#workspaces button.active {
+  color: #f2fa8c; /* text visible on green */
+  background-color: #008000; /* green rectangle */
+  border-radius: 4px; /* optional */
+}
+
+#workspaces button:hover {
+  color: #f1fa8c; /* yellow-green */
+}
+
+/* Tags */
+#tags {
+  margin: 0 12px;
+  font-size: 16px;
+  background: transparent;
+}
+#tags button {
+  color: #f8f8f2; /* default white */
+  background: transparent;
+}
+#tags button.occupied {
+  color: #ff79c6; /* pinkish purple */
+}
+#tags button.focused {
+  color: #f1fa8c; /* yellow-green */
+  border-top: 2px solid #f1fa8c;
+  border-bottom: 2px solid #f1fa8c;
+}
+#tags button:hover {
+  color: #bd93f9; /* violet */
+}
+
+/* Network */
+#network {
+  color: #bd93f9; /* violet */
+  background: transparent;
+}
+
+/* Pomodoro */
+#custom-pomodoro {
+  color: #50fa7b; /* soft green */
+  background: transparent;
+}
+
+/* Audio */
+#pulseaudio {
+  color: #4db6ac; /* teal */
+  background: transparent;
+}
+#pulseaudio.output.muted,
+#pulseaudio.mic.source-muted {
+  color: #ff5555; /* red for muted */
+}
+
+/* Battery */
+#battery {
+  color: #50fa7b; /* light green */
+  background: transparent;
+}
+#battery.charging,
+#battery.plugged {
+  color: #8be9fd; /* cyan */
+}
+#battery.critical:not(.charging) {
+  color: #ff5555; /* red */
+}
+
+/* Backlight */
+#backlight {
+  color: #f1fa8c; /* orange-yellow */
+  background: transparent;
+}
+
+/* Clock */
+#clock,
+#custom-clock,
+#custom-clock_utc {
+  color: #f8f8f2; /* soft white */
+  background: transparent;
+}
+
+/* Memory & CPU */
+#custom-memory {
+  color: #ff79c6; /* pinkish purple */
+  background: transparent;
+}
+#custom-cpu {
+  color: #ffb86c; /* orange */
+  background: transparent;
+}
+
+/* Tray */
+#tray {
+  color: #bbbbbb; /* light gray */
+  background: transparent;
+}
+
+/* Launcher */
+#custom-launcher {
+  font-size: 24px;
+  color: #4fdfff; /* soft cyan */
+  background: transparent;
+}
+
+/* Power */
+#custom-power {
+  font-size: 20px;
+  color: #ff6e6e; /* red-orange */
+  background: transparent;
+}
+
+/* Wallpaper */
+#custom-wallpaper {
+  color: #82aaff; /* soft blue */
+  background: transparent;
+}
+
+/* Updates */
+#custom-updates {
+  color: #ff79c6; /* coral/pink */
+  background: transparent;
+}
+
+/* Media */
+#custom-media {
+  color: #ff92df; /* light pink */
+  background: transparent;
+}
+
+/* Separator (custom/separator) */
+#custom-separator {
+  color: #888888; /* gray separator */
+  margin: 0 6px; /* space around separator */
+}

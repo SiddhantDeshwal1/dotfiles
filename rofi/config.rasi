@@ -1,0 +1,40 @@
+
+configuration {
+    /* General */
+    modi: "drun,run,window,ssh";
+    show-icons: false;
+    icon-theme: "oomox-rose-pine";
+    display-drun: "  Apps";
+    display-run: "  Run";
+    display-window: " 﩯 Windows";
+    display-ssh: "  SSH";
+    drun-display-format: "{name}";
+    
+    /* Window */
+    width: 50;
+    lines: 10;
+    columns: 1;
+    
+    /* Behavior */
+    matching: "fuzzy";
+    scroll-method: 0;
+    disable-history: false;
+    show-match: true;
+    sort: true;
+    sorting-method: "fzf";
+    case-sensitive: false;
+    
+    /* Misc */
+    terminal: "kitty";
+    ssh-client: "ssh";
+    ssh-command: "{terminal} -e {ssh-client} {host}";
+    run-shell-command: "{terminal} -e {cmd}";
+    drun-match-fields: "name,generic,exec,categories,keywords";
+    window-match-fields: "title,class,role,name,desktop";
+    
+    /* Performance */
+    lazy-grab: false;
+    max-history-size: 25;
+}
+
+@theme "~/.config/rofi/themes/custom.rasi"

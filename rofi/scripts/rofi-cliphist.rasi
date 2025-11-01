@@ -1,0 +1,30 @@
+* {
+    font: "Monospace 12";
+    border: 0;
+    border-radius: 0;
+}
+
+window {
+    background: #000000 ;
+    foreground: #000000 ;
+    width: 600px;
+    padding: 10px;
+}
+
+listview {
+    lines: 10;
+    fixed-height: false;
+    spacing: 5px;
+    scrollbar: true;
+}
+
+element normal {
+    background: #000000;
+    text-color: #ffffff;
+    padding: 3px 5px;
+}
+
+element selected {
+    background: #1a1a1a;
+    text-color: #3a84ff;
+}

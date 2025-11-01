@@ -1,0 +1,184 @@
+* {
+    /* Colors */
+    bg: #000000;           /* pure black */
+    bg-alt: #0a0a0a;       /* slightly lighter for panels */
+    fg: #ffffff;           /* white text */
+    fg-alt: #b0b0b0;       /* subtle secondary text */
+    
+    accent: #3a84ff;       /* bright blue for highlights */
+    urgent: #ff4c4c;       /* red for errors */
+    
+    border: #3a84ff;       /* blue borders if used */
+    selected: #3a84ff;     /* blue for selected items */
+    comment: #808080;      /* grey comments/disabled */
+    
+    background-color: transparent;
+    text-color: @fg;
+
+    font: "Monaspace Radon Frozen 17";   /* apply to all text by default */
+}
+
+window {
+    background-color: @bg;
+    border: 0;
+    border-radius: 0;
+    location: center;
+    padding: 17px;
+    width: 450px;
+    height: 500px;
+    font: "Monaspace Radon Frozen 17";
+}
+
+mainbox {
+    border: 0;
+    padding: 0;
+    spacing: 0px;
+    font: "Monaspace Radon Frozen 17";
+}
+
+message {
+    border: 0;
+    background-color: @bg-alt;
+    padding: 0px;
+    border-radius: 0;
+    font: "Monaspace Radon Frozen 17";
+}
+
+textbox {
+    text-color: @fg;
+    font: "Monaspace Radon Frozen 17";
+}
+
+inputbar {
+    children: [prompt, textbox-prompt-colon, entry, case-indicator];
+    spacing: 10px;
+    background-color: @bg;
+    border-radius: 0;
+    padding: 5px;
+    font: "Monaspace Radon Frozen 17";
+}
+
+prompt {
+    text-color: @accent;
+    font: "Monaspace Radon Frozen 17";
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+    text-color: @accent;
+    font: "Monaspace Radon Frozen 17";
+}
+
+entry {
+    placeholder: "Search...";
+    placeholder-color: @fg-alt;
+    text-color: @fg;
+    font: "Monaspace Radon Frozen 17";
+}
+
+case-indicator {
+    text-color: @fg-alt;
+    font: "Monaspace Radon Frozen 17";
+}
+
+listview {
+    border: 0;
+    padding: 10px 0;
+    columns: 1;
+    lines: 8;
+    spacing: 5px;
+    scrollbar: true;
+    fixed-height: false;
+    font: "Monaspace Radon Frozen 17";
+}
+
+scrollbar {
+    width: 0px;
+    border: 0;
+    handle-color: transparent;
+    handle-width: 0px;
+    padding: 0;
+    background-color: transparent;
+}
+
+element {
+    border: 0;
+    padding: 0px;
+    border-radius: 0;
+    background-color: transparent;
+    text-color: @fg;
+    font: "Monaspace Radon Frozen 17";
+}
+
+element normal.normal,
+element normal.urgent,
+element normal.active,
+element selected.normal,
+element selected.urgent,
+element selected.active,
+element alternate.normal {
+    font: "Monaspace Radon Frozen 17";
+}
+
+element-icon {
+    size: 24px;
+    margin: 0 10px 0 0;
+}
+
+element-text {
+    vertical-align: 0.5;
+    text-color: inherit;
+    font: "Monaspace Radon Frozen 17";
+}
+
+mode-switcher {
+    spacing: 10px;
+    background-color: @bg-alt;
+    border-radius: 0;
+    padding: 10px;
+    font: "Monaspace Radon Frozen 17";
+}
+
+button {
+    padding: 0px;
+    background-color: transparent;
+    text-color: @fg-alt;
+    border-radius: 0;
+    font: "Monaspace Radon Frozen 17";
+}
+
+button selected {
+    background-color: @accent;
+    text-color: @bg;
+    font: "Monaspace Radon Frozen 17";
+}
+
+error-message {
+    padding: 20px;
+    border: 2px solid;
+    border-color: @urgent;
+    border-radius: 0;
+    background-color: @bg;
+    font: "Monaspace Radon Frozen 17";
+}
+
+/* Highlight selected element */
+element selected.normal {
+    background-color: #1a1a1a;  /* dark grey for selection bar */
+    text-color: @accent;        /* keep text blue */
+    border: 0;
+    border-radius: 0;
+}
+
+element selected.active {
+    background-color: #3a84ff;  /* blue when active (enter pressed) */
+    text-color: @bg;            /* white text on blue */
+    border: 0;
+    border-radius: 0;
+}
+
+element selected.urgent {
+    background-color: @urgent;  /* red for urgent items */
+    text-color: @bg;
+}
