@@ -26,7 +26,7 @@ return {
     end
 
     ---------------------------------------------------------------------------
-    -- 🧠 Base Capabilities + Diagnostics
+    -- 🧠 Capabilities + Diagnostics
     ---------------------------------------------------------------------------
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -35,32 +35,24 @@ return {
       signs = true,
       underline = true,
       update_in_insert = true,
+      severity_sort = true,
     })
 
     ---------------------------------------------------------------------------
-    -- ⚡ on_attach (keymaps for every LSP)
+    -- ⚡ on_attach: LSP-specific keymaps
     ---------------------------------------------------------------------------
     local on_attach = function(_, bufnr)
       local keymap = vim.keymap
       local opts = { buffer = bufnr, silent = true }
 
-      -- Hover docs
       keymap.set("n", "K", vim.lsp.buf.hover, opts)
-
-      -- Rename & Code actions
       keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
       keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-
-      -- Diagnostics
       keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
       keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-
-      -- Declaration
       keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
-      ----------------------------------------------------------------------
-      -- 🚀 Go to Definition (open in new tab if different file)
-      ----------------------------------------------------------------------
+      -- 🚀 Go to definition (opens in new tab if file differs)
       keymap.set("n", "gd", function()
         local params = vim.lsp.util.make_position_params()
         vim.lsp.buf_request(0, "textDocument/definition", params, function(err, result)
@@ -68,15 +60,12 @@ return {
             vim.notify("No definition found", vim.log.levels.WARN)
             return
           end
-
           local target = result[1]
           local target_path = vim.uri_to_fname(target.uri)
           local current_path = vim.api.nvim_buf_get_name(0)
-
           if target_path ~= current_path then
             vim.cmd("tabnew " .. vim.fn.fnameescape(target_path))
           end
-
           vim.schedule(function()
             vim.lsp.util.jump_to_location(target, "utf-8")
           end)
@@ -85,11 +74,11 @@ return {
     end
 
     ---------------------------------------------------------------------------
-    -- 🧩 Mason setup for all installed LSP servers
+    -- 🧩 Mason + LSPConfig Setup
     ---------------------------------------------------------------------------
     mason_lspconfig.setup()
-
     local lspconfig = require("lspconfig")
+
     for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
       lspconfig[server].setup({
         capabilities = capabilities,

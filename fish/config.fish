@@ -175,3 +175,5 @@ set -g tide_pwd_bg_color 444444
 # sset -x STARSHIP_CONFIG ~/.config/starship.toml
 # starship init fish | source
 
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore-vcs'

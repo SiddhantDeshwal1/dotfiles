@@ -33,3 +33,7 @@ opt.clipboard:append("unnamedplus") -- uses system clipboard as default register
 -- split windows
 opt.splitright = true -- split vertical window to right
 opt.splitbelow = true -- split horizontal window to bottom
+
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0

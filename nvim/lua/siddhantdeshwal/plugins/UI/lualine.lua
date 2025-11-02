@@ -5,19 +5,23 @@ return {
     local lualine = require("lualine")
     local lazy_status = require("lazy.status")
 
+    -------------------------------------------------------------------------
     -- 🎨 Colors
+    -------------------------------------------------------------------------
     local colors = {
-      blue = "#3B82F6", -- vivid azure blue
-      green = "#22C55E", -- bright emerald
-      violet = "#A855F7", -- vivid violet-purple
-      yellow = "#FACC15", -- bright sunflower yellow
-      red = "#EF4444", -- bright scarlet red
-      fg = "#E5E5E5", -- soft white text
-      bg = "#000000", -- pure black background
+      blue = "#3B82F6",
+      green = "#22C55E",
+      violet = "#A855F7",
+      yellow = "#FACC15",
+      red = "#EF4444",
+      fg = "#E5E5E5",
+      bg = "#000000",
       inactive_bg = "#000000",
     }
 
-    -- 🧠 Theme setup
+    -------------------------------------------------------------------------
+    -- 🧠 Theme
+    -------------------------------------------------------------------------
     local my_lualine_theme = {
       normal = {
         a = { bg = colors.blue, fg = colors.bg, gui = "bold" },
@@ -54,10 +58,8 @@ return {
     -------------------------------------------------------------------------
     -- ⚙️ Custom Components
     -------------------------------------------------------------------------
-
-    -- 🧩 LSP status (active client names)
     local function lsp_status()
-      local clients = vim.lsp.get_active_clients({ bufnr = 0 })
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
       if #clients == 0 then
         return ""
       end
@@ -68,13 +70,11 @@ return {
       return "  " .. table.concat(names, ", ")
     end
 
-    -- 🔍 LSP references count (optional)
     local function lsp_references()
       local ref_count = vim.b.lsp_references_count or 0
       return ref_count > 0 and (" " .. ref_count .. " refs") or ""
     end
 
-    -- ⏰ Clock (only when fullscreen)
     local function clock()
       if vim.o.columns > 120 then
         return " " .. os.date("%H:%M")
@@ -83,7 +83,7 @@ return {
     end
 
     -------------------------------------------------------------------------
-    -- 🚀 Setup Lualine
+    -- 🚀 Setup
     -------------------------------------------------------------------------
     lualine.setup({
       options = {
@@ -134,7 +134,7 @@ return {
             color = { fg = "#ff9e64" },
           },
           { "encoding" },
-          { "fileformat", symbols = { unix = "" } }, -- Arch Linux logo
+          { "fileformat", symbols = { unix = "" } },
           { "filetype" },
           { clock, color = { fg = colors.green } },
         },
