@@ -97,7 +97,7 @@ return {
           {
             function()
               local icons = {
-                n = " NORMAL",
+                n = " NORMAL",
                 i = " INSERT",
                 v = " VISUAL",
                 V = " V-LINE",

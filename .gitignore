@@ -1,0 +1,22 @@
+# Ignore everything by default
+*
+
+# Allow these key folders and files
+!/.gitignore
+!README.md
+
+# Config folders you want to track
+!fish/
+!gtk-2.0/
+!gtk-3.0/
+!gtk-4.0/
+!hypr/
+!kitty/
+!neofetch/
+!nvim/
+!rofi/
+!starship.toml
+!swaync/
+!tmux/
+!waybar/
+!wofi/
