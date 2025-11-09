@@ -1,3 +1,4 @@
+/* ===== GLOBAL ===== */
 * {
   border: none;
   border-radius: 0;
@@ -9,36 +10,36 @@
 /* ===== WINDOW ===== */
 window#waybar {
   background: #000000; /* pure black bar */
-  color: #ffffff; /* crisp white text */
+  color: #ffffff; /* clean white text */
 }
 
 window#waybar.hidden {
   opacity: 0.2;
 }
 
-/* ===== WORKSPACES (White Rectangle Minimal) ===== */
+/* ===== WORKSPACES ===== */
 #workspaces {
   margin: 0 8px;
   padding: 4px 8px;
 }
 
 #workspaces button {
-  color: #aaaaaa; /* soft gray text for inactive */
+  color: #bfbfbf; /* soft grey inactive */
   background: transparent;
   border: none;
   transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active {
-  color: #000000; /* black text on white rectangle */
-  background-color: #ffffff; /* solid white rectangle */
+  color: #000000;
+  background-color: #e0e0e0; /* gentle light grey rectangle */
   border-radius: 4px;
   padding: 2px 10px;
 }
 
 #workspaces button:hover {
-  color: #ffffff; /* white text on black when hovered */
-  background-color: rgba(255, 255, 255, 0.2); /* faint white hover effect */
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.15); /* soft white hover */
 }
 
 /* ===== TAGS ===== */
@@ -47,121 +48,60 @@ window#waybar.hidden {
   font-size: 16px;
   background: transparent;
 }
+
 #tags button {
-  color: #f8f8f2;
+  color: #d0d0d0; /* neutral grey */
   background: transparent;
 }
+
 #tags button.occupied {
-  color: #ff33aa; /* brighter magenta */
+  color: #ffffff;
 }
+
 #tags button.focused {
-  color: #ffcc00; /* vivid yellow */
-  border-top: 2px solid #ffcc00;
-  border-bottom: 2px solid #ffcc00;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
+
 #tags button:hover {
-  color: #ff6600; /* orange hover */
+  color: #f0f0f0;
 }
 
-/* ===== NETWORK ===== */
-#network {
-  color: #7b5cff; /* bold violet */
+/* ===== MODULES: Neutral greyscale look ===== */
+#network,
+#custom-pomodoro,
+#pulseaudio,
+#battery,
+#backlight,
+#clock,
+#custom-memory,
+#custom-cpu,
+#tray,
+#custom-launcher,
+#custom-power,
+#custom-wallpaper,
+#custom-updates,
+#custom-media {
+  color: #d9d9d9; /* balanced light grey */
   background: transparent;
 }
 
-/* ===== POMODORO ===== */
-#custom-pomodoro {
-  color: #00ff66; /* vivid green */
-  background: transparent;
-}
-
-/* ===== AUDIO ===== */
-#pulseaudio {
-  color: #00d0d0; /* bright teal */
-  background: transparent;
-}
+/* Dim when muted or critical */
 #pulseaudio.output.muted,
-#pulseaudio.mic.source-muted {
-  color: #ff3333; /* vivid red for muted */
+#pulseaudio.mic.source-muted,
+#battery.critical:not(.charging) {
+  color: #777777;
 }
 
-/* ===== BATTERY ===== */
-#battery {
-  color: #00ff55; /* neon green */
-  background: transparent;
-}
+/* Subtle variation for charging or active modules */
 #battery.charging,
 #battery.plugged {
-  color: #00bfff; /* electric blue */
-}
-#battery.critical:not(.charging) {
-  color: #ff2e2e; /* bright red */
-}
-
-/* ===== BACKLIGHT ===== */
-#backlight {
-  color: #ffaa00; /* strong orange-yellow */
-  background: transparent;
-}
-
-/* ===== CLOCK ===== */
-#clock,
-#custom-clock,
-#custom-clock_utc {
-  color: #ffffff;
-  background: transparent;
-}
-
-/* ===== MEMORY & CPU ===== */
-#custom-memory {
-  color: #ff33aa; /* hot pink */
-  background: transparent;
-}
-#custom-cpu {
-  color: #ff8800; /* orange */
-  background: transparent;
-}
-
-/* ===== TRAY ===== */
-#tray {
-  color: #cccccc;
-  background: transparent;
-}
-
-/* ===== LAUNCHER ===== */
-#custom-launcher {
-  font-size: 24px;
-  color: #00caff; /* bright cyan */
-  background: transparent;
-}
-
-/* ===== POWER ===== */
-#custom-power {
-  font-size: 20px;
-  color: #ff3333; /* pure red */
-  background: transparent;
-}
-
-/* ===== WALLPAPER ===== */
-#custom-wallpaper {
-  color: #3399ff; /* bright blue */
-  background: transparent;
-}
-
-/* ===== UPDATES ===== */
-#custom-updates {
-  color: #ff66cc; /* rich pink */
-  background: transparent;
-}
-
-/* ===== MEDIA ===== */
-#custom-media {
-  color: #ff6699; /* vivid rose */
-  background: transparent;
+  color: #bfbfbf;
 }
 
 /* ===== SEPARATOR ===== */
 #custom-separator {
-  color: #999999;
+  color: #888888;
   margin: 0 6px;
+  background: transparent;
 }

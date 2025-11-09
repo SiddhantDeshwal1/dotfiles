@@ -25,6 +25,12 @@ vim.cmd([[
 
 vim.keymap.set("n", "<leader>r", ":Runcpp<CR>", { noremap = true, silent = true })
 
+-- Map Ctrl + Backspace to delete the previous word in insert mode
+-- Detect what Ctrl+Backspace sends and handle it in insert mode
+vim.api.nvim_set_keymap("i", "<C-h>", "<C-w>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-BS>", "<C-w>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("i", "<C-?>", "<C-w>", { noremap = true, silent = true })
+
 -- Move selected lines up in visual mode
 vim.api.nvim_set_keymap("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 
@@ -200,6 +206,46 @@ vim.api.nvim_create_user_command("Html", function()
   vim.api.nvim_command("normal! 4l")
   vim.api.nvim_command("startinsert!")
 end, {})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+  pattern = "*/src/test/java/**/*.java",
+  callback = function()
+    -- Only insert if file is empty (avoid overwriting)
+    if vim.fn.line("$") > 1 or vim.fn.getline(1) ~= "" then
+      return
+    end
+
+    local filename = vim.fn.expand("%:t:r")
+    local path = vim.fn.expand("%:p:h")
+    local pkg = path:match("src/test/java/(.+)")
+    if pkg then
+      pkg = pkg:gsub("/", ".")
+    else
+      pkg = "com.example"
+    end
+
+    local boilerplate = string.format(
+      [[
+package %s;
+
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
+public class %s {
+    @Test
+    void testSomething() {
+        // TODO: implement test
+    }
+}
+]],
+      pkg,
+      filename
+    )
+
+    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(boilerplate, "\n"))
+    vim.cmd("normal! G")
+  end,
+})
 
 -- require('lualine').setup {
 --   options = {

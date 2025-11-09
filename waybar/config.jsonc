@@ -2,8 +2,6 @@
   "layer": "top",
 
   "modules-left": [
-    "custom/launcher",
-    "custom/separator1",
     "hyprland/workspaces",
     "custom/separator1",
     "tray"
@@ -22,9 +20,7 @@
     "custom/separator",
     "custom/clock",
     "custom/separator",
-    "battery",
-    "custom/separator",
-    "custom/power"
+    "battery"
   ],
 
   // Separators
@@ -136,11 +132,11 @@
       "warning": 30,
       "critical": 20
     },
-    "format": "{icon}{capacity}%",
-    "format-charging": " {capacity}%",
-    "format-plugged": "󱘖 {capacity}%",
-    "format-alt": "{icon} {time}",
-    "format-full": "{icon} Full",
+    "format": "{icon}{capacity}%  ",
+    "format-charging": " {capacity}%  ",
+    "format-plugged": "󱘖 {capacity}%  ",
+    "format-alt": "{icon} {time}  ",
+    "format-full": "{icon} Full  ",
     "format-icons": [" ", " ", " ", " ", " "]
   },
 

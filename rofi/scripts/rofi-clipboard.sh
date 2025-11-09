@@ -1,14 +1,16 @@
 #!/bin/bash
-# Clipboard menu using cliphist and rofi
+# Clipboard menu with multiline preview
 
-# Get clipboard history
-CLIP_ITEMS=$(cliphist)  # or cliphist -l to list
+# List history (strip ID, keep readable formatting)
+CLIP_ITEMS=$(cliphist list | awk '{$1=""; print substr($0,2)}' \
+    | sed 's/\\n/  ⏎  /g' | fold -s -w 80)
 
 # Show Rofi menu
-SELECTED=$(echo "$CLIP_ITEMS" | rofi -dmenu -i -p "Clipboard:")
+SELECTED=$(echo "$CLIP_ITEMS" | rofi -dmenu -i -p "Clipboard:" \
+    -theme ~/.config/rofi/themes/rofi-cliphist.rasi)
 
-# Copy selection back to clipboard
+# Copy full original entry if selected
 if [ -n "$SELECTED" ]; then
-    echo "$SELECTED" | wl-copy  # Wayland
-    # echo "$SELECTED" | xclip -selection clipboard  # X11 alternative
+    ID=$(cliphist list | grep -F "$SELECTED" | head -n 1 | awk '{print $1}')
+    cliphist decode "$ID" | wl-copy
 fi
