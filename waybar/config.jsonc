@@ -4,6 +4,8 @@
   "modules-left": [
     "hyprland/workspaces",
     "custom/separator1",
+    "custom/timer",
+    "custom/separator",
     "tray"
   ],
 
@@ -32,7 +34,7 @@
   },
 
   "custom/separator1": {
-    "exec": "echo '  |'",
+    "exec": "echo '|'",
     "interval": 0,
     "format": "{}",
     "tooltip": false
@@ -153,6 +155,14 @@
     "format": "{}",
     "tooltip": false
   },
+
+"custom/timer": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/timer.sh output",
+    "interval": 1,
+    "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
+"on-click": "~/.config/waybar/scripts/timer.sh menu"
+},
 
 "cava": {
        "cava_config": "/home/man37/.config/cava/config",
