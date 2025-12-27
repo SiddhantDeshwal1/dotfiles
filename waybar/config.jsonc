@@ -1,188 +1,287 @@
 {
-  "layer": "top",
-
-  "modules-left": [
-    "hyprland/workspaces",
-    "custom/separator1",
-    "custom/timer",
-    "custom/separator",
-    "tray"
-  ],
-
-  "modules-center": [],
-
-  "modules-right": [
-    "custom/cpu",
-    "custom/separator",
-    "custom/memory",
-    "custom/separator",
-    "pulseaudio#output",
-    "custom/separator",
-    "pulseaudio#mic",
-    "custom/separator",
-    "custom/clock",
-    "custom/separator",
-    "battery"
-  ],
-
-  // Separators
-  "custom/separator": {
-    "exec": "echo ' | '",
-    "interval": 0,
-    "format": "{}",
-    "tooltip": false
-  },
-
-  "custom/separator1": {
-    "exec": "echo '|'",
-    "interval": 0,
-    "format": "{}",
-    "tooltip": false
-  },
-
-  "custom/separator2": {
-    "exec": "echo '| '",
-    "interval": 0,
-    "format": "{}",
-    "tooltip": false
-  },
-
-  // 🎵 Audio Output
-  "pulseaudio#output": {
-    "format": "{icon}",
-    "format-bluetooth": "{icon}  {volume}%",
-    "format-bluetooth-muted": " {icon} ",
-    "format-muted": " ",
-    "format-icons": {
-      "headphone": [ " ▯▯▯▯▯▯▯▯▯▯", " ▮▯▯▯▯▯▯▯▯▯", " ▮▮▯▯▯▯▯▯▯▯", " ▮▮▮▯▯▯▯▯▯▯", " ▮▮▮▮▯▯▯▯▯▯", " ▮▮▮▮▮▯▯▯▯▯", " ▮▮▮▮▮▮▯▯▯▯", " ▮▮▮▮▮▮▮▯▯▯", " ▮▮▮▮▮▮▮▮▯▯", " ▮▮▮▮▮▮▮▮▮▯", " ▮▮▮▮▮▮▮▮▮▮" ],
-      "hands-free": [ " ▯▯▯▯▯▯▯▯▯▯", " ▮▯▯▯▯▯▯▯▯▯", " ▮▮▯▯▯▯▯▯▯▯", " ▮▮▮▯▯▯▯▯▯▯", " ▮▮▮▮▯▯▯▯▯▯", " ▮▮▮▮▮▯▯▯▯▯", " ▮▮▮▮▮▮▯▯▯▯", " ▮▮▮▮▮▮▮▯▯▯", " ▮▮▮▮▮▮▮▮▯▯", " ▮▮▮▮▮▮▮▮▮▯", " ▮▮▮▮▮▮▮▮▮▮" ],
-      "headset": [ "🎧 ▯▯▯▯▯▯▯▯▯▯", "🎧 ▮▯▯▯▯▯▯▯▯▯", "🎧 ▮▮▯▯▯▯▯▯▯▯", "🎧 ▮▮▮▯▯▯▯▯▯▯", "🎧 ▮▮▮▮▯▯▯▯▯▯", "🎧 ▮▮▮▮▮▯▯▯▯▯", "🎧 ▮▮▮▮▮▮▯▯▯▯", "🎧 ▮▮▮▮▮▮▮▯▯▯", "🎧 ▮▮▮▮▮▮▮▮▯▯", "🎧 ▮▮▮▮▮▮▮▮▮▯", "🎧 ▮▮▮▮▮▮▮▮▮▮" ],
-      "phone": [ " ▯▯▯▯▯▯▯▯▯▯", " ▮▯▯▯▯▯▯▯▯▯", " ▮▮▯▯▯▯▯▯▯▯", " ▮▮▮▯▯▯▯▯▯▯", " ▮▮▮▮▯▯▯▯▯▯", " ▮▮▮▮▮▯▯▯▯▯", " ▮▮▮▮▮▮▯▯▯▯", " ▮▮▮▮▮▮▮▯▯▯", " ▮▮▮▮▮▮▮▮▯▯", " ▮▮▮▮▮▮▮▮▮▯", " ▮▮▮▮▮▮▮▮▮▮" ],
-      "portable": [ " ▯▯▯▯▯▯▯▯▯▯", " ▮▯▯▯▯▯▯▯▯▯", " ▮▮▯▯▯▯▯▯▯▯", " ▮▮▮▯▯▯▯▯▯▯", " ▮▮▮▮▯▯▯▯▯▯", " ▮▮▮▮▮▯▯▯▯▯", " ▮▮▮▮▮▮▯▯▯▯", " ▮▮▮▮▮▮▮▯▯▯", " ▮▮▮▮▮▮▮▮▯▯", " ▮▮▮▮▮▮▮▮▮▯", " ▮▮▮▮▮▮▮▮▮▮" ],
-      "car": [ " ▯▯▯▯▯▯▯▯▯▯", " ▮▯▯▯▯▯▯▯▯▯", " ▮▮▯▯▯▯▯▯▯▯", " ▮▮▮▯▯▯▯▯▯▯", " ▮▮▮▮▯▯▯▯▯▯", " ▮▮▮▮▮▯▯▯▯▯", " ▮▮▮▮▮▮▯▯▯▯", " ▮▮▮▮▮▮▮▯▯▯", " ▮▮▮▮▮▮▮▮▯▯", " ▮▮▮▮▮▮▮▮▮▯", " ▮▮▮▮▮▮▮▮▮▮" ],
-      "default": [ "  ▯▯▯▯▯▯▯▯▯▯", "  ▮▯▯▯▯▯▯▯▯▯", "  ▮▮▯▯▯▯▯▯▯▯", "  ▮▮▮▯▯▯▯▯▯▯", "  ▮▮▮▮▯▯▯▯▯▯", "  ▮▮▮▮▮▯▯▯▯▯", "  ▮▮▮▮▮▮▯▯▯▯", "  ▮▮▮▮▮▮▮▯▯▯", "  ▮▮▮▮▮▮▮▮▯▯", "  ▮▮▮▮▮▮▮▮▮▯", "  ▮▮▮▮▮▮▮▮▮▮" ]
+    "layer": "top",
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/separator1",
+        "custom/timer",
+        "custom/separator",
+        "tray",
+        "custom/separator",
+        "custom/rule"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/cpu",
+        "custom/separator",
+        "custom/gpu",
+        "custom/separator",
+        "custom/memory",
+        "custom/separator",
+        "pulseaudio#output",
+        "custom/separator",
+        "pulseaudio#mic",
+        "custom/separator",
+        "custom/clock",
+        "custom/separator",
+        "battery"
+    ],
+    // Separators
+    "custom/rule": {
+        "exec": "echo 'WPAS_PCSR'",
     },
-    "on-click": "pamixer --toggle-mute",
-    "on-click-right": "pavucontrol -t 3",
-    "tooltip": true,
-    "tooltip-format": "{icon} {desc} | {volume}%"
-  },
-
-  // 🎙️ Microphone
-  "pulseaudio#mic": {
-    "format": "{format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": " ",
-    "on-click": "pamixer --default-source --toggle-mute",
-    "on-click-right": "pavucontrol -t 4",
-    "on-scroll-up": "pamixer --default-source -i 5",
-    "on-scroll-down": "pamixer --default-source -d 5",
-    "scroll-step": 5,
-    "tooltip-format": "{source_desc} | {source_volume}%"
-  },
-
-  //  CPU
-  "custom/cpu": {
-    "format": " {}%",
-    "exec": "top -bn1 | grep 'Cpu(s)' | awk '{print 100 - $8}'",
-    "interval": 1
-  },
-
-  //  Memory
-  "custom/memory": {
-    "format": "󰫗 {} MB",
-    "exec": "free -m | awk '/Mem:/ {print $3}'",
-    "interval": 1
-  },
-
-  //  Launcher
-  "custom/launcher": {
-    "format": " ",
-    "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-3/style-3.rasi",
-    "on-click-right": "killall rofi"
-  },
-
-  // ⏻ Power
-  "custom/power": {
-    "format": "⏻   ",
-    "on-click": "wlogout"
-  },
-
-  // 🌐 Network
-  "network": {
-    "tooltip": false,
-    "format-wifi": " {essid}",
-    "format-ethernet": ""
-  },
-
-  // 🔆 Backlight
-  "backlight": {
-    "tooltip": false,
-    "format": " {}%",
-    "interval": 1,
-    "on-scroll-up": "light -A 5",
-    "on-scroll-down": "light -U 5"
-  },
-
-  // 🔋 Battery
-  "battery": {
-    "interval": 5,
-    "full-at": 100,
-    "design-capacity": false,
-    "states": {
-      "good": 95,
-      "warning": 30,
-      "critical": 20
+    "custom/separator": {
+        "exec": "echo ' '",
+        "interval": 0,
+        "format": "{}",
+        "tooltip": false
     },
-    "format": "{icon}{capacity}%  ",
-    "format-charging": " {capacity}%  ",
-    "format-plugged": "󱘖 {capacity}%  ",
-    "format-alt": "{icon} {time}  ",
-    "format-full": "{icon} Full  ",
-    "format-icons": [" ", " ", " ", " ", " "]
-  },
-
-  // 🧰 Tray
-  "tray": {
-    "icon-size": 18,
-    "spacing": 10
-  },
-
-  // ⏰ Clock (local + UTC)
-  "custom/clock": {
-    "exec": "echo \"$(date '+%a %d/%m/%Y  %H:%M:%S') $(date -u '+ %H:%M:%S')\"",
-    "interval": 1,
-    "format": "{}",
-    "tooltip": false
-  },
-
-"custom/timer": {
-    "format": "{}",
-    "exec": "~/.config/waybar/scripts/timer.sh output",
-    "interval": 1,
-    "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
-"on-click": "~/.config/waybar/scripts/timer.sh menu"
-},
-
-"cava": {
-       "cava_config": "/home/man37/.config/cava/config",
-      "framerate": 60,
-      "autosens": 1,
-      "bars": 14,
-      "lower_cutoff_freq": 50,
-      "higher_cutoff_freq": 10000,
-      "method": "pulse",
-      "source": "auto",
-      "stereo": true,
-      "reverse": false,
-      "bar_delimiter": 0,
-      "monstercat": false,
-      "waves": false,
-      "noise_reduction": 0.77,
-      "input_delay": 2,
-      "format-icons" : ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-      "actions": {
-                 "on-click-right": "mode"
-                 }
+    "custom/separator1": {
+        "exec": "echo ' '",
+        "interval": 0,
+        "format": "{}",
+        "tooltip": false
+    },
+    "custom/separator2": {
+        "exec": "echo '  '",
+        "interval": 0,
+        "format": "{}",
+        "tooltip": false
+    },
+    // 🎵 Audio Output
+    "pulseaudio#output": {
+        "format": "V:{volume}%",
+        "format-bluetooth": "{icon}  {volume}%",
+        "format-bluetooth-muted": " {icon} ",
+        "format-muted": "M",
+        "format-icons": {
+            "headphone": [
+                " ▯▯▯▯▯▯▯▯▯▯",
+                " ▮▯▯▯▯▯▯▯▯▯",
+                " ▮▮▯▯▯▯▯▯▯▯",
+                " ▮▮▮▯▯▯▯▯▯▯",
+                " ▮▮▮▮▯▯▯▯▯▯",
+                " ▮▮▮▮▮▯▯▯▯▯",
+                " ▮▮▮▮▮▮▯▯▯▯",
+                " ▮▮▮▮▮▮▮▯▯▯",
+                " ▮▮▮▮▮▮▮▮▯▯",
+                " ▮▮▮▮▮▮▮▮▮▯",
+                " ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "hands-free": [
+                "  ▯▯▯▯▯▯▯▯▯▯",
+                " ▮▯▯▯▯▯▯▯▯▯",
+                " ▮▮▯▯▯▯▯▯▯▯",
+                " ▮▮▮▯▯▯▯▯▯▯",
+                " ▮▮▮▮▯▯▯▯▯▯",
+                " ▮▮▮▮▮▯▯▯▯▯",
+                " ▮▮▮▮▮▮▯▯▯▯",
+                "  ▮▮▮▮▮▮▮▯▯▯",
+                " ▮▮▮▮▮▮▮▮▯▯",
+                " ▮▮▮▮▮▮▮▮▮▯",
+                " ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "headset": [
+                "🎧 ▯▯▯▯▯▯▯▯▯▯",
+                "🎧 ▮▯▯▯▯▯▯▯▯▯",
+                "🎧 ▮▮▯▯▯▯▯▯▯▯",
+                "🎧 ▮▮▮▯▯▯▯▯▯▯",
+                "🎧 ▮▮▮▮▯▯▯▯▯▯",
+                "🎧 ▮▮▮▮▮▯▯▯▯▯",
+                "🎧 ▮▮▮▮▮▮▯▯▯▯",
+                "🎧 ▮▮▮▮▮▮▮▯▯▯",
+                "🎧 ▮▮▮▮▮▮▮▮▯▯",
+                "🎧 ▮▮▮▮▮▮▮▮▮▯",
+                "🎧 ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "phone": [
+                " ▯▯▯▯▯▯▯▯▯▯",
+                " ▮▯▯▯▯▯▯▯▯▯",
+                " ▮▮▯▯▯▯▯▯▯▯",
+                " ▮▮▮▯▯▯▯▯▯▯",
+                " ▮▮▮▮▯▯▯▯▯▯",
+                " ▮▮▮▮▮▯▯▯▯▯",
+                " ▮▮▮▮▮▮▯▯▯▯",
+                " ▮▮▮▮▮▮▮▯▯▯",
+                " ▮▮▮▮▮▮▮▮▯▯",
+                " ▮▮▮▮▮▮▮▮▮▯",
+                " ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "portable": [
+                " ▯▯▯▯▯▯▯▯▯▯",
+                " ▮▯▯▯▯▯▯▯▯▯",
+                " ▮▮▯▯▯▯▯▯▯▯",
+                " ▮▮▮▯▯▯▯▯▯▯",
+                " ▮▮▮▮▯▯▯▯▯▯",
+                " ▮▮▮▮▮▯▯▯▯▯",
+                " ▮▮▮▮▮▮▯▯▯▯",
+                " ▮▮▮▮▮▮▮▯▯▯",
+                " ▮▮▮▮▮▮▮▮▯▯",
+                " ▮▮▮▮▮▮▮▮▮▯",
+                " ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "car": [
+                " ▯▯▯▯▯▯▯▯▯▯",
+                " ▮▯▯▯▯▯▯▯▯▯",
+                " ▮▮▯▯▯▯▯▯▯▯",
+                " ▮▮▮▯▯▯▯▯▯▯",
+                " ▮▮▮▮▯▯▯▯▯▯",
+                " ▮▮▮▮▮▯▯▯▯▯",
+                " ▮▮▮▮▮▮▯▯▯▯",
+                " ▮▮▮▮▮▮▮▯▯▯",
+                " ▮▮▮▮▮▮▮▮▯▯",
+                " ▮▮▮▮▮▮▮▮▮▯",
+                " ▮▮▮▮▮▮▮▮▮▮"
+            ],
+            "default": [
+                "  ▯▯▯▯▯▯▯▯▯▯",
+                "  ▮▯▯▯▯▯▯▯▯▯",
+                "  ▮▮▯▯▯▯▯▯▯▯",
+                "  ▮▮▮▯▯▯▯▯▯▯",
+                "  ▮▮▮▮▯▯▯▯▯▯",
+                "  ▮▮▮▮▮▯▯▯▯▯",
+                "  ▮▮▮▮▮▮▯▯▯▯",
+                "  ▮▮▮▮▮▮▮▯▯▯",
+                "  ▮▮▮▮▮▮▮▮▯▯",
+                "  ▮▮▮▮▮▮▮▮▮▯",
+                "  ▮▮▮▮▮▮▮▮▮▮"
+            ]
+        },
+        "on-click": "pamixer --toggle-mute",
+        "on-click-right": "pavucontrol -t 3",
+        "tooltip": true,
+        "tooltip-format": "{icon} {desc} | {volume}%"
+    },
+    // 🎙️ Microphone
+    "pulseaudio#mic": {
+        "format": "{format_source}",
+        "format-source": "M:{volume}%",
+        "format-source-muted": "M",
+        "on-click": "pamixer --default-source --toggle-mute",
+        "on-click-right": "pavucontrol -t 4",
+        "on-scroll-up": "pamixer --default-source -i 5",
+        "on-scroll-down": "pamixer --default-source -d 5",
+        "scroll-step": 5,
+        "tooltip-format": "{source_desc} | {source_volume}%"
+    },
+    "custom/spotify": {
+        "format": "| {} |",
+        "interval": 5,
+        "on-click": "flatpak run com.spotify.Client",
+        "exec": "~/.config/waybar/scripts/spotify.sh"
+    },
+    //  CPU
+    "custom/cpu": {
+        "format": "C:{}%",
+        "exec": "top -bn1 | awk '/Cpu/ {printf \"%d\", 100-$8}'",
+        "interval": 1
+    },
+    //  Memory
+    "custom/memory": {
+        "format": "M:{}G",
+        "exec": "free -m | awk '/Mem:/ {printf \"%.1f\", $3/1024}'",
+        "interval": 1
+    },
+    //  Launcher
+    "custom/launcher": {
+        "format": " ",
+        "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-3/style-3.rasi",
+        "on-click-right": "killall rofi"
+    },
+    // ⏻ Power
+    "custom/power": {
+        "format": "⏻   ",
+        "on-click": "wlogout"
+    },
+    // 🌐 Network
+    "network": {
+        "tooltip": false,
+        "format-wifi": " {essid}",
+        "format-ethernet": ""
+    },
+    // 🔆 Backlight
+    "backlight": {
+        "tooltip": false,
+        "format": " {}%",
+        "interval": 1,
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5"
+    },
+    // 🔋 Battery
+    "battery": {
+        "interval": 5,
+        "full-at": 100,
+        "design-capacity": false,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 20
+        },
+        "format": "B:{capacity}%  ",
+        "format-charging": "C:{capacity}%  ",
+        "format-plugged": "PNC{capacity}%  ",
+        "format-alt": "TOE:{time}  ",
+        "format-full": "Full  ",
+        "format-icons": [
+            " ",
+            " ",
+            " ",
+            " ",
+            " "
+        ]
+    },
+    // 🧰 Tray
+    "tray": {
+        "icon-size": 20,
+        "spacing": 10
+    },
+    // ⏰ Clock (local + UTC)
+    "custom/clock": {
+        "exec": "echo \"$(date '+%a, %B %d %H:%M:%S')\"",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": false
+    },
+    "custom/timer": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/timer.sh output",
+        "interval": 1,
+        "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
+        "on-click": "~/.config/waybar/scripts/timer.sh menu"
+    },
+    "cava": {
+        "cava_config": "/home/man37/.config/cava/config",
+        "framerate": 60,
+        "autosens": 1,
+        "bars": 14,
+        "lower_cutoff_freq": 50,
+        "higher_cutoff_freq": 10000,
+        "method": "pulse",
+        "source": "auto",
+        "stereo": true,
+        "reverse": false,
+        "bar_delimiter": 0,
+        "monstercat": false,
+        "waves": false,
+        "noise_reduction": 0.77,
+        "input_delay": 2,
+        "format-icons": [
+            "▁",
+            "▂",
+            "▃",
+            "▄",
+            "▅",
+            "▆",
+            "▇",
+            "█"
+        ],
+        "actions": {
+            "on-click-right": "mode"
+        }
+    },
+    "custom/gpu": {
+        "format": "G:{}%",
+        "exec": "radeontop -l 1 -d - 2>/dev/null | sed -n 's/.*gpu \\([0-9]*\\)\\..*/\\1/p'",
+        "interval": 2,
+        "tooltip": false
     }
 }

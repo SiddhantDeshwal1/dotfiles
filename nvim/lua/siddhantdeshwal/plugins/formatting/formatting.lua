@@ -21,7 +21,7 @@ return {
         xml = { "xmllint" },
         graphql = { "prettier" },
         liquid = { "prettier" },
-        lua = { "stylua" },
+        -- lua = { "stylua" },
         python = { "ruff_format", "isort", "black" },
       },
       format_on_save = {

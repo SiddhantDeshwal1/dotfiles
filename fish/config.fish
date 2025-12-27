@@ -172,8 +172,8 @@ end
 
 
 # ---------- (Optional) Starship Prompt ----------
-set -x STARSHIP_CONFIG ~/.config/starship.toml
-starship init fish | source
+# set -x STARSHIP_CONFIG ~/.config/starship.toml
+# starship init fish | source
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore-vcs'

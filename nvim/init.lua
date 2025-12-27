@@ -12,7 +12,7 @@ vim.g.mapleader = " "
 -- alias of :W to work like :w
 vim.cmd("command! W w")
 -- alias of :Qa to work like q
-vim.cmd("command! Qa q")
+vim.cmd("command! Qa qa")
 -- Move current line up
 vim.api.nvim_set_keymap("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true })
 -- Move current line down

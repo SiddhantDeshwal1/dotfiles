@@ -119,7 +119,7 @@ return {
       height = 12, -- height of the bottom panel
       border = "rounded", -- aesthetic border
     },
-    notifier = { enabled = true },
+    notifier = { enabled = false },
     indent = { enabled = true },
     rename = { enabled = true },
     quickfile = { enabled = true },

@@ -1,20 +1,17 @@
-/* ===== GLOBAL ===== */
 * {
   border: none;
   border-radius: 0;
-  font-family: "Monaspace Radon Frozen", "otf-font-awesome";
-  font-size: 20px;
+  font-family:
+    "JetBrainsMonoNL Nerd Font Mono", "Monaspace Radon Frozen",
+    "otf-font-awesome";
+  font-size: 22px;
   min-height: 10px;
 }
 
 /* ===== WINDOW ===== */
 window#waybar {
-  background: #000000; /* pure black bar */
-  color: #ffffff; /* clean white text */
-}
-
-window#waybar.hidden {
-  opacity: 0.2;
+  background: linear-gradient(90deg, #000000, #1a1a1a);
+  color: #e6e6e6;
 }
 
 /* ===== WORKSPACES ===== */
@@ -24,22 +21,21 @@ window#waybar.hidden {
 }
 
 #workspaces button {
-  color: #bfbfbf; /* soft grey inactive */
+  color: #b3b3b3;
   background: transparent;
-  border: none;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
 #workspaces button.active {
   color: #000000;
-  background-color: #e0e0e0; /* gentle light grey rectangle */
+  background: #d9d9d9;
   border-radius: 4px;
   padding: 2px 10px;
 }
 
 #workspaces button:hover {
   color: #ffffff;
-  background-color: rgba(255, 255, 255, 0.15); /* soft white hover */
+  background: rgba(255, 255, 255, 0.1);
 }
 
 /* ===== TAGS ===== */
@@ -50,58 +46,114 @@ window#waybar.hidden {
 }
 
 #tags button {
-  color: #d0d0d0; /* neutral grey */
+  color: #e0e0e0;
   background: transparent;
 }
 
 #tags button.occupied {
-  color: #ffffff;
+  color: #c0c0c0;
 }
 
 #tags button.focused {
   color: #ffffff;
+  border-top: 2px solid #ffffff;
   border-bottom: 2px solid #ffffff;
 }
 
 #tags button:hover {
+  color: #d0d0d0;
+}
+
+/* ===== NETWORK ===== */
+#network {
+  color: #cccccc;
+  background: none;
+}
+
+/* ===== POMODORO ===== */
+#custom-pomodoro {
+  color: #d0d0d0;
+}
+
+/* ===== AUDIO ===== */
+#pulseaudio {
+  color: #e0e0e0;
+}
+
+#pulseaudio.output.muted,
+#pulseaudio.mic.source-muted {
+  color: #888888;
+}
+
+/* ===== BATTERY ===== */
+#battery {
+  color: #dddddd;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #f2f2f2;
+}
+
+#battery.critical:not(.charging) {
+  color: #aaaaaa;
+}
+
+/* ===== BACKLIGHT ===== */
+#backlight {
+  color: #cccccc;
+}
+
+/* ===== CLOCK ===== */
+#clock,
+#custom-clock,
+#custom-clock_utc {
   color: #f0f0f0;
 }
 
-/* ===== MODULES: Neutral greyscale look ===== */
-#network,
-#custom-pomodoro,
-#pulseaudio,
-#battery,
-#backlight,
-#clock,
-#custom-memory,
-#custom-cpu,
-#tray,
-#custom-launcher,
-#custom-power,
-#custom-wallpaper,
-#custom-updates,
+/* ===== MEMORY & CPU ===== */
+#custom-memory {
+  color: #d6d6d6;
+}
+
+#custom-cpu {
+  color: #d6d6d6;
+}
+
+/* ===== TRAY ===== */
+#tray {
+  color: #cfcfcf;
+}
+
+/* ===== LAUNCHER ===== */
+#custom-launcher {
+  font-size: 24px;
+  color: #e6e6e6;
+}
+
+/* ===== POWER ===== */
+#custom-power {
+  font-size: 20px;
+  color: #e6e6e6;
+}
+
+/* ===== WALLPAPER ===== */
+#custom-wallpaper {
+  color: #dcdcdc;
+}
+
+/* ===== UPDATES ===== */
+#custom-updates {
+  color: #dcdcdc;
+}
+
+/* ===== MEDIA ===== */
 #custom-media {
-  color: #d9d9d9; /* balanced light grey */
-  background: transparent;
-}
-
-/* Dim when muted or critical */
-#pulseaudio.output.muted,
-#pulseaudio.mic.source-muted,
-#battery.critical:not(.charging) {
-  color: #777777;
-}
-
-/* Subtle variation for charging or active modules */
-#battery.charging,
-#battery.plugged {
-  color: #bfbfbf;
+  color: #dcdcdc;
 }
 
 /* ===== SEPARATOR ===== */
 #custom-separator {
-  color: #888888;
+  color: #7a7a7a;
   margin: 0 6px;
-  background: transparent;
 }

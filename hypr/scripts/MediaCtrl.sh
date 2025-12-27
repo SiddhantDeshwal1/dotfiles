@@ -1,41 +1,68 @@
 #!/bin/bash
-# Playerctl Media Control Script
+# Playerctl Media Control Script (Browser-Aware)
 
 music_icon="$HOME/.config/swaync/icons/music.png"
 
-# Play the next track
+# Select the currently active player (Playing > Paused)
+select_player() {
+    # First, try to find a player that is actively Playing
+    for p in $(playerctl -l 2>/dev/null); do
+        status=$(playerctl -p "$p" status 2>/dev/null)
+        if [ "$status" = "Playing" ]; then
+            echo "$p"
+            return
+        fi
+    done
+
+    # If none are Playing, pick one that is Paused
+    for p in $(playerctl -l 2>/dev/null); do
+        status=$(playerctl -p "$p" status 2>/dev/null)
+        if [ "$status" = "Paused" ]; then
+            echo "$p"
+            return
+        fi
+    done
+
+    # Fallback: first available player
+    playerctl -l 2>/dev/null | head -n1
+}
+
+player=$(select_player)
+
+if [ -z "$player" ]; then
+    notify-send -e -u low -i "$music_icon" "No Media Players Found"
+    exit 1
+fi
+
 play_next() {
-    playerctl next
+    playerctl -p "$player" next
     show_music_notification
 }
 
-# Play the previous track
 play_previous() {
-    playerctl previous
+    playerctl -p "$player" previous
     show_music_notification
 }
 
-# Toggle play/pause
 toggle_play_pause() {
-    playerctl play-pause
-    sleep 0.1   # allow status to update
+    playerctl -p "$player" play-pause
+    sleep 0.15
     show_music_notification
 }
 
-# Stop playback
 stop_playback() {
-    playerctl stop
+    playerctl -p "$player" stop
     notify-send -e -u low -i "$music_icon" "Playback Stopped"
 }
 
-# Display notification with song information
 show_music_notification() {
-    status=$(playerctl status 2>/dev/null)
+    status=$(playerctl -p "$player" status 2>/dev/null)
 
     case "$status" in
         "Playing")
-            song_title=$(playerctl metadata title 2>/dev/null)
-            song_artist=$(playerctl metadata artist 2>/dev/null)
+            song_title=$(playerctl -p "$player" metadata title 2>/dev/null)
+            song_artist=$(playerctl -p "$player" metadata artist 2>/dev/null)
+            [ -z "$song_artist" ] && song_artist="Unknown Artist"
             notify-send -e -u low -i "$music_icon" "Now Playing:" "$song_title\nby $song_artist"
             ;;
         "Paused")
@@ -47,7 +74,6 @@ show_music_notification() {
     esac
 }
 
-# Main
 case "$1" in
     --nxt)
         play_next

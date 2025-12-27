@@ -7,31 +7,61 @@ return {
     "nvim-tree/nvim-web-devicons",
     "folke/todo-comments.nvim",
   },
-
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
     local builtin = require("telescope.builtin")
+
+    -- Custom action: open file + reveal and expand in NvimTree
+    local function open_file_and_reveal(prompt_bufnr)
+      local selection = action_state.get_selected_entry()
+      if not selection or not selection.path then
+        actions.close(prompt_bufnr)
+        return
+      end
+
+      local file_path = selection.path
+
+      -- First: close Telescope (important order)
+      actions.close(prompt_bufnr)
+
+      -- Open the file in Neovim (using vim.cmd to avoid picker issues)
+      vim.cmd("edit " .. vim.fn.fnameescape(file_path))
+
+      -- Then reveal and expand in NvimTree
+      local ok, api = pcall(require, "nvim-tree.api")
+      if ok then
+        api.tree.find_file({ open = true, focus = false, buf = file_path })
+      end
+    end
 
     telescope.setup({
       defaults = {
-        prompt_prefix = "  ",
+        prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "smart" },
-
-        -- ✅ force fd to ignore .gitignore and include hidden files
+        mappings = {
+          i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<esc>"] = actions.close,
+            ["<CR>"] = open_file_and_reveal,
+          },
+          n = {
+            ["<CR>"] = open_file_and_reveal,
+          },
+        },
         find_command = {
           "fd",
-          "--type",
-          "f",
+          "--type", "f",
           "--hidden",
           "--follow",
           "--no-ignore",
           "--no-ignore-vcs",
           "--strip-cwd-prefix",
         },
-
-        -- ✅ force ripgrep to ignore .gitignore too
         vimgrep_arguments = {
           "rg",
           "--color=never",
@@ -45,24 +75,12 @@ return {
           "--no-ignore-global",
           "--no-ignore-vcs",
         },
-
-        mappings = {
-          i = {
-            ["<C-j>"] = actions.move_selection_next,
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<esc>"] = actions.close,
-          },
-        },
       },
-
       pickers = {
-        -- 🔍 Make sure find_files picker always ignores .gitignore
         find_files = {
           find_command = {
             "fd",
-            "--type",
-            "f",
+            "--type", "f",
             "--hidden",
             "--follow",
             "--no-ignore",
@@ -90,6 +108,7 @@ return {
 
     telescope.load_extension("fzf")
 
+    -- Keymaps
     local keymap = vim.keymap.set
     keymap("n", "<leader>ff", builtin.find_files, { desc = "Find files (ignore .gitignore)" })
     keymap("n", "<leader>fs", builtin.live_grep, { desc = "Search text (ignore .gitignore)" })
