@@ -7,151 +7,134 @@
   font-size: 22px;
   min-height: 10px;
 }
-
 /* ===== WINDOW ===== */
 window#waybar {
   background: linear-gradient(90deg, #000000, #1a1a1a);
   color: #e6e6e6;
 }
-
 /* ===== WORKSPACES ===== */
 #workspaces {
   margin: 0 8px;
   padding: 4px 8px;
 }
-
 #workspaces button {
   color: #b3b3b3;
   background: transparent;
   transition: all 0.15s ease-in-out;
 }
-
 #workspaces button.active {
   color: #000000;
   background: #d9d9d9;
   border-radius: 4px;
   padding: 2px 10px;
 }
-
 #workspaces button:hover {
   color: #ffffff;
   background: rgba(255, 255, 255, 0.1);
 }
-
 /* ===== TAGS ===== */
 #tags {
   margin: 0 12px;
   font-size: 16px;
   background: transparent;
 }
-
 #tags button {
   color: #e0e0e0;
   background: transparent;
 }
-
 #tags button.occupied {
   color: #c0c0c0;
 }
-
 #tags button.focused {
   color: #ffffff;
   border-top: 2px solid #ffffff;
   border-bottom: 2px solid #ffffff;
 }
-
 #tags button:hover {
   color: #d0d0d0;
 }
-
 /* ===== NETWORK ===== */
 #network {
   color: #cccccc;
   background: none;
 }
-
 /* ===== POMODORO ===== */
 #custom-pomodoro {
   color: #d0d0d0;
 }
-
 /* ===== AUDIO ===== */
 #pulseaudio {
   color: #e0e0e0;
 }
-
 #pulseaudio.output.muted,
 #pulseaudio.mic.source-muted {
   color: #888888;
 }
-
 /* ===== BATTERY ===== */
 #battery {
   color: #dddddd;
+  transition: color 0.4s ease;
 }
 
-#battery.charging,
-#battery.plugged {
-  color: #f2f2f2;
-}
-
+/* Low battery (not charging) - red */
 #battery.critical:not(.charging) {
-  color: #aaaaaa;
+  color: #ff5555;
+}
+
+/* Charging colors */
+#battery.charging.low {
+  color: #ff5555; /* Red: 0–39% */
+}
+#battery.charging.medium {
+  color: #ffff55; /* Yellow: 40–79% */
+}
+#battery.charging {
+  color: #55ff55; /* Green: 80–100% */
 }
 
 /* ===== BACKLIGHT ===== */
 #backlight {
   color: #cccccc;
 }
-
 /* ===== CLOCK ===== */
 #clock,
 #custom-clock,
 #custom-clock_utc {
   color: #f0f0f0;
 }
-
 /* ===== MEMORY & CPU ===== */
 #custom-memory {
   color: #d6d6d6;
 }
-
 #custom-cpu {
   color: #d6d6d6;
 }
-
 /* ===== TRAY ===== */
 #tray {
   color: #cfcfcf;
 }
-
 /* ===== LAUNCHER ===== */
 #custom-launcher {
   font-size: 24px;
   color: #e6e6e6;
 }
-
 /* ===== POWER ===== */
 #custom-power {
   font-size: 20px;
   color: #e6e6e6;
 }
-
 /* ===== WALLPAPER ===== */
 #custom-wallpaper {
   color: #dcdcdc;
 }
-
 /* ===== UPDATES ===== */
 #custom-updates {
   color: #dcdcdc;
 }
-
 /* ===== MEDIA ===== */
 #custom-media {
   color: #dcdcdc;
 }
-
 /* ===== SEPARATOR ===== */
 #custom-separator {
   color: #7a7a7a;

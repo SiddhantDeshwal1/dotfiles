@@ -212,9 +212,9 @@
         "full-at": 100,
         "design-capacity": false,
         "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
+            "critical": 20, // Red when <20% (not charging)
+            "low": 30, // For charging low (red <40%)
+            "medium": 75 // Yellow <80%, green >=80%
         },
         "format": "B:{capacity}%  ",
         "format-charging": "C:{capacity}%  ",

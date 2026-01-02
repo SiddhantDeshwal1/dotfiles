@@ -13,29 +13,52 @@ return {
     local action_state = require("telescope.actions.state")
     local builtin = require("telescope.builtin")
 
-    -- Custom action: open file + reveal and expand in NvimTree
-    local function open_file_and_reveal(prompt_bufnr)
-      local selection = action_state.get_selected_entry()
-      if not selection or not selection.path then
+    ------------------------------------------------------------------
+    -- Custom action: open file, jump to exact line, reveal in NvimTree
+    ------------------------------------------------------------------
+    local function open_file_jump_and_reveal(prompt_bufnr)
+      local entry = action_state.get_selected_entry()
+      if not entry then
         actions.close(prompt_bufnr)
         return
       end
 
-      local file_path = selection.path
+      local file_path =
+        entry.path
+        or entry.filename
+        or entry.value
 
-      -- First: close Telescope (important order)
+      local line =
+        entry.row
+        or entry.lnum
+        or 1
+
       actions.close(prompt_bufnr)
 
-      -- Open the file in Neovim (using vim.cmd to avoid picker issues)
+      -- 1. Open file normally (buffer-safe)
       vim.cmd("edit " .. vim.fn.fnameescape(file_path))
 
-      -- Then reveal and expand in NvimTree
-      local ok, api = pcall(require, "nvim-tree.api")
-      if ok then
-        api.tree.find_file({ open = true, focus = false, buf = file_path })
-      end
+      -- 2. Jump AFTER buffer is fully loaded
+      vim.schedule(function()
+        pcall(vim.api.nvim_win_set_cursor, 0, { line, 0 })
+      end)
+
+      -- 3. Reveal in NvimTree AFTER file exists
+      vim.schedule(function()
+        local ok, api = pcall(require, "nvim-tree.api")
+        if ok then
+          api.tree.find_file({
+            open = true,
+            focus = false,
+            buf = file_path,
+          })
+        end
+      end)
     end
 
+    ------------------------------------------------------------------
+    -- Telescope setup
+    ------------------------------------------------------------------
     telescope.setup({
       defaults = {
         prompt_prefix = " ",
@@ -47,71 +70,62 @@ return {
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
             ["<esc>"] = actions.close,
-            ["<CR>"] = open_file_and_reveal,
+            ["<CR>"] = open_file_jump_and_reveal,
           },
           n = {
-            ["<CR>"] = open_file_and_reveal,
+            ["<CR>"] = open_file_jump_and_reveal,
           },
-        },
-        find_command = {
-          "fd",
-          "--type", "f",
-          "--hidden",
-          "--follow",
-          "--no-ignore",
-          "--no-ignore-vcs",
-          "--strip-cwd-prefix",
-        },
-        vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "--hidden",
-          "--no-ignore",
-          "--no-ignore-global",
-          "--no-ignore-vcs",
         },
       },
+
       pickers = {
-        find_files = {
-          find_command = {
-            "fd",
-            "--type", "f",
-            "--hidden",
-            "--follow",
-            "--no-ignore",
-            "--no-ignore-vcs",
-            "--strip-cwd-prefix",
-          },
-        },
         live_grep = {
-          vimgrep_arguments = {
-            "rg",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-            "--hidden",
-            "--no-ignore",
-            "--no-ignore-global",
-            "--no-ignore-vcs",
-          },
+          additional_args = function()
+            return {
+              "--hidden",
+              "--no-ignore",
+              "--no-ignore-vcs",
+            }
+          end,
+        },
+
+        find_files = {
+          hidden = true,
+          no_ignore = true,
         },
       },
     })
 
     telescope.load_extension("fzf")
 
+    ------------------------------------------------------------------
     -- Keymaps
+    ------------------------------------------------------------------
     local keymap = vim.keymap.set
-    keymap("n", "<leader>ff", builtin.find_files, { desc = "Find files (ignore .gitignore)" })
-    keymap("n", "<leader>fs", builtin.live_grep, { desc = "Search text (ignore .gitignore)" })
-    keymap("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "Find TODOs" })
+
+    -- Project-wide text search → jumps to exact line
+    keymap("n", "<leader>fs", builtin.live_grep, {
+      desc = "Search text in project (jump to line)",
+    })
+
+    -- Filename search
+    keymap("n", "<leader>ff", builtin.find_files, {
+      desc = "Find files",
+    })
+
+    -- Word under cursor → exact jump
+    keymap("n", "<leader>fw", builtin.grep_string, {
+      desc = "Grep word under cursor",
+    })
+
+    -- TODOs
+    keymap("n", "<leader>ft", "<cmd>TodoTelescope<cr>", {
+      desc = "Find TODOs",
+    })
+
+    -- Resume last picker
+    keymap("n", "<leader>fr", builtin.resume, {
+      desc = "Resume last Telescope search",
+    })
   end,
 }
