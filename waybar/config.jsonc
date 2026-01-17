@@ -6,8 +6,6 @@
         "custom/timer",
         "custom/separator",
         "tray",
-        "custom/separator",
-        "custom/rule"
     ],
     "modules-center": [],
     "modules-right": [

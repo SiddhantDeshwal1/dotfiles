@@ -4,7 +4,7 @@
 
 # ---------- Font Settings ----------
 font_family        BlexMono Nerd Font
-font_size          15.5
+font_size          16.5
 
 # Automatically detect bold/italic variants
 bold_font          auto
@@ -54,6 +54,6 @@ enable_gpu yes
 # Using "spaceduck" theme
 # Make sure 'current-theme.conf' contains your theme colors
 # BEGIN_KITTY_THEME
-# VSCode_Dark
+# Gruvbox Dark Hard
 include current-theme.conf
 # END_KITTY_THEME

@@ -38,3 +38,4 @@ configuration {
 }
 
 @theme "~/.config/rofi/themes/custom.rasi"
+// @theme "/home/man37/.local/share/rofi/themes/myrofi.rasi"
