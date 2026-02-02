@@ -1,109 +1,145 @@
-/* Global defaults */
+/* ~/.config/wofi/style.css */
+
+/* Enhanced Gruvbox color definitions - incorporating more tones */
 * {
-  background-color: #000000; /* black bg */
-  color: #ffffff; /* white text */
-  font-family: "Monaspace Radon Frozen";
-  font-size: 17px;
+  font-family: "Jetbrains Nerd Font Mono", "Monaspace Radon Frozen";
+  font-size: 15px;
+  background-color: transparent;
+  color: #ebdbb2; /* fg */
 }
 
-window {
-  background-color: #000000;
+@define-color bg #282828; /* Standard Gruvbox dark bg for more authentic tone */
+@define-color bg0_h #1d2021; /* Hard bg, as bg-alt */
+@define-color bg1 #3f3f3f;
+@define-color bg2 #504945;
+@define-color bg3 #665c54;
+@define-color bg4 #7c6f64;
+@define-color fg #ebdbb2;
+@define-color fg1 #fbf1c7;
+@define-color grey #928374;
+@define-color gray #a89984;
+@define-color red #fb4934;
+@define-color red1 #cc241d;
+@define-color green #b8bb26;
+@define-color green1 #98971a;
+@define-color yellow #fabd2f;
+@define-color yellow1 #d79921;
+@define-color blue #83a598;
+@define-color blue1 #458588;
+@define-color purple #d3869b;
+@define-color purple1 #b16286;
+@define-color aqua #8ec07c;
+@define-color aqua1 #689d6a;
+@define-color orange #fe8019;
+@define-color orange1 #d65d0e;
+
+/* Window */
+#window {
+  background-color: @bg;
   border: 0;
   border-radius: 0;
-  padding: 17px;
-  width: 450px;
-  height: 500px;
-}
-
-mainbox {
-  padding: 0;
-  spacing: 0;
-}
-
-message {
-  background-color: #0a0a0a; /* slightly lighter for messages */
+  margin: 0;
   padding: 0;
 }
 
-inputbar {
-  background-color: #000000;
-  padding: 5px;
-  spacing: 10px;
-  border-radius: 0;
-}
-
-prompt {
-  color: #3a84ff; /* blue prompt */
-}
-
-textbox-prompt-colon {
-  color: #3a84ff;
-}
-
-entry {
-  color: #ffffff;
-  placeholder-color: #b0b0b0;
-}
-
-case-indicator {
-  color: #b0b0b0;
-}
-
-listview {
-  padding: 10px 0;
-  columns: 1;
-  lines: 8;
-  spacing: 5px;
-}
-
-element {
-  padding: 0px;
-  border-radius: 0;
+/* Outer box */
+#outer-box {
   background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
-element-icon {
-  size: 24px;
-  margin-right: 10px;
+/* Input bar */
+#input {
+  background-color: @bg1; /* Slightly lighter bg for input */
+  color: @fg;
+  border: 0;
+  border-radius: 0;
+  margin: 20px;
+  padding: 0;
 }
 
-element-text {
-  vertical-align: 0.5;
+#input entry {
+  color: @fg;
 }
 
-element.selected.normal {
-  background-color: #1a1a1a; /* dark grey selection */
-  color: #3a84ff; /* blue text */
+#input entry::placeholder {
+  color: @grey;
 }
 
-element.selected.active {
-  background-color: #3a84ff; /* blue when pressed */
-  color: #000000; /* black text on blue */
-}
-
-element.selected.urgent {
-  background-color: #ff4c4c; /* red urgent */
-  color: #000000;
-}
-
-mode-switcher {
-  background-color: #0a0a0a;
-  padding: 10px;
-  spacing: 10px;
-}
-
-button {
+/* List view */
+#scroll {
   background-color: transparent;
-  color: #b0b0b0;
+  margin: 0;
+  padding: 10px 0 10px 0;
 }
 
-button:selected {
-  background-color: #3a84ff;
-  color: #000000;
+/* Elements */
+#entry {
+  background-color: transparent;
+  color: @fg;
+  margin: 4px 20px;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 0;
+  min-height: 0;
 }
 
-error-message {
-  border: 2px solid #ff4c4c;
+#entry:hover {
+  background-color: @bg3; /* Hover effect with Gruvbox tone */
+}
+
+/* Selected */
+#entry:selected {
+  background-color: @bg0_h;
+  color: @yellow;
+  outline: none;
+}
+
+/* Alternate */
+#entry:nth-child(even) {
+  background-color: @bg4; /* Subtle striping with Gruvbox bg4 */
+  color: @fg1; /* Lighter fg for alternate */
+}
+
+/* Urgent */
+#entry.urgent {
+  background-color: @red;
+  color: @bg;
+}
+
+/* Active */
+#entry.active {
+  background-color: @bg2;
+  color: @blue;
+}
+
+#entry:selected.active {
+  background-color: @bg0_h;
+  color: @aqua;
+}
+
+/* Text */
+#text {
+  color: inherit;
+  margin: 0;
+}
+
+/* Hide scrollbar */
+scrollbar {
+  width: 0;
+}
+
+/* Error */
+#error {
+  background-color: @bg;
+  color: @grey;
   padding: 20px;
-  background-color: #000000;
+  margin: 0;
+}
+
+/* General optimizations: minimal shadows, no heavy effects */
+* {
+  box-shadow: none;
+  outline: none;
 }

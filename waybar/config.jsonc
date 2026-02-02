@@ -5,6 +5,8 @@
         "custom/separator1",
         "custom/timer",
         "custom/separator",
+        "custom/todo",
+        "custom/separator",
         "tray",
     ],
     "modules-center": [],
@@ -281,5 +283,13 @@
         "exec": "radeontop -l 1 -d - 2>/dev/null | sed -n 's/.*gpu \\([0-9]*\\)\\..*/\\1/p'",
         "interval": 2,
         "tooltip": false
+    },
+    "custom/todo": {
+        "format": "{} 󰌵 ",
+        "tooltip": true,
+        "tooltip-format": "Right Click to Open Todo List",
+        "interval": 5,
+        "exec": "wc -l < /home/man37/.todo_list 2>/dev/null || echo 0",
+        "on-click": "rofi -show todo -modes 'todo:/home/man37/.config/rofi/scripts/todo.sh' -theme-str 'window {width: 1000px;} listview {lines: 10; spacing: 15px;} element {padding: 10px; orientation: vertical;} element-text {font: \"Mono 14\"; vertical-align: 0.5;}'"
     }
 }

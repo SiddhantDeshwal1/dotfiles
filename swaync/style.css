@@ -3,26 +3,34 @@
    Clean, sharp, modern look
    ================================================================== */
 
-/* ── 1. Palette & Globals ───────────────────────────────────────── */
-@define-color theme_fg            rgba(248, 248, 252, 0.98);
-@define-color theme_fg_secondary  rgba(215, 220, 225, 0.78);
-@define-color theme_bg            rgba(0, 0, 0, 1);
-@define-color module_bg           rgba(0, 0, 0, 1);
-@define-color module_hover_bg     rgba(30, 30, 30, 1);
-@define-color button_bg           rgba(20, 20, 20, 1);
-@define-color button_hover_bg     rgba(40, 40, 40, 1);
-@define-color accent_color        rgba(10, 132, 255, 0.8);
-@define-color accent_color_hover  #198de5;
-@define-color border_light        rgba(255, 255, 255, 0.18);
-@define-color border_dark         rgba(0, 0, 0, 0.06);
-@define-color border_medium       alpha(@border_light, 0.5);
-@define-color icon_primary        @theme_fg;
-@define-color icon_secondary      rgba(215, 220, 225, 0.88);
-@define-color slider_trough_bg    rgba(50, 55, 65, 0.35);
-@define-color slider_thumb_bg     white;
-@define-color close_button_bg     rgba(110, 110, 115, 0.15);
-@define-color close_button_hover_bg rgba(130, 130, 135, 0.30);
-@define-color mpris_player_bg     rgba(0, 0, 0, 1);
+/* ── 1. Palette & Globals (Gruvbox Black) ───────────────────────── */
+@define-color theme_fg            #ebdbb2; /* fg */
+@define-color theme_fg_secondary  #d5c4a1; /* fg1 */
+
+@define-color theme_bg            #000000; /* pure black */
+@define-color module_bg           #000000;
+@define-color module_hover_bg     #1d2021; /* bg0 */
+
+@define-color button_bg           #282828; /* bg1 */
+@define-color button_hover_bg     #3c3836; /* bg2 */
+
+@define-color accent_color        #d79921; /* gruvbox yellow */
+@define-color accent_color_hover  #fabd2f;
+
+@define-color border_light        rgba(235, 219, 178, 0.20);
+@define-color border_dark         rgba(0, 0, 0, 0.7);
+@define-color border_medium       rgba(235, 219, 178, 0.12);
+
+@define-color icon_primary        #ebdbb2;
+@define-color icon_secondary      #a89984; /* fg4 */
+
+@define-color slider_trough_bg    #282828;
+@define-color slider_thumb_bg     #fbf1c7;
+
+@define-color close_button_bg     rgba(168, 153, 132, 0.18);
+@define-color close_button_hover_bg rgba(168, 153, 132, 0.35);
+
+@define-color mpris_player_bg     #000000;
 
 /* ── Base Reset ─────────────────────────────────────────────────── */
 * {

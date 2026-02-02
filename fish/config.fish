@@ -144,6 +144,8 @@ function y
     rm -f -- "$tmp"
 end
 
+# Allow cd to search inside /run/media/man37
+# set -Ux CDPATH $CDPATH /run/media/man37
 
 # ---------- (Optional) Tide Theme Git Status Colors ----------
 # Uncomment to customize Tide prompt git colors
@@ -174,6 +176,9 @@ end
 # ---------- (Optional) Starship Prompt ----------
 # set -x STARSHIP_CONFIG ~/.config/starship.toml
 # starship init fish | source
+
+# tide vim > char
+set -U tide_character_vi_icon_default ❯
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore-vcs'
