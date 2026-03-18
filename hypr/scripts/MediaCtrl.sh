@@ -52,7 +52,7 @@ toggle_play_pause() {
 
 stop_playback() {
     playerctl -p "$player" stop
-    notify-send -e -u low -i "$music_icon" "Playback Stopped"
+    notify-send -e -u low -i "$music_icon" "" "Playback Stopped"
 }
 
 show_music_notification() {

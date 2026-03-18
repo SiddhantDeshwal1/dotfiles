@@ -26,7 +26,6 @@ return {
                 "clangd",
                 "cssls",
                 "tailwindcss",
-                "jedi_language_server",
                 "svelte",
                 "lua_ls",
                 "graphql",

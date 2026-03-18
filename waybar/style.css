@@ -1,29 +1,19 @@
-/* =======================
-   GLOBAL
-   ======================= */
 * {
   border: none;
   border-radius: 0;
-
   font-family:
     "JetBrainsMonoNL Nerd Font Mono", "Monaspace Radon Frozen",
     "otf-font-awesome";
-
-  font-size: 22px;
+  font-size: 19px;
   min-height: 10px;
+  font-weight: bold;
 }
 
-/* =======================
-   WINDOW
-   ======================= */
 window#waybar {
   background: #000000;
   color: #ebdbb2;
 }
 
-/* =======================
-   WORKSPACES
-   ======================= */
 #workspaces {
   margin: 0 8px;
   padding: 4px 8px;
@@ -47,162 +37,78 @@ window#waybar {
   color: #ebdbb2;
 }
 
-/* =======================
-   TAGS
-   ======================= */
-#tags {
-  margin: 0 12px;
-  font-size: 16px;
-  background: transparent;
-}
-
-#tags button {
-  background: transparent;
-  color: #a89984;
-}
-
-#tags button.occupied {
-  color: #fabd2f;
-}
-
-#tags button.focused {
-  color: #ebdbb2;
-  border-top: 2px solid #fe8019;
-  border-bottom: 2px solid #fe8019;
-}
-
-#tags button:hover {
-  color: #ebdbb2;
-}
-
-/* =======================
-   NETWORK
-   ======================= */
-#network {
-  background: none;
-  color: #83a598;
-}
-
-/* =======================
-   POMODORO
-   ======================= */
-#custom-pomodoro {
-  color: #fe8019;
-}
-
-/* =======================
-   AUDIO
-   ======================= */
 #pulseaudio {
-  color: #8ec07c;
+  color: #d79921;
 }
 
 #pulseaudio.output.muted,
 #pulseaudio.mic.source-muted {
-  color: #928374;
+  color: #cc241d;
 }
 
-/* =======================
-   BATTERY
-   ======================= */
 #battery {
-  color: #ebdbb2;
-  transition: color 0.4s ease;
+  transition: color 0.3s ease;
 }
 
 #battery.critical:not(.charging) {
+  color: #cc241d;
+}
+
+#battery.warning:not(.charging),
+#battery.low:not(.charging) {
   color: #fb4934;
 }
 
-#battery.charging.low {
-  color: #fb4934; /* 0–39% */
-}
-
-#battery.charging.medium {
-  color: #fabd2f; /* 40–79% */
-}
-
-#battery.charging {
-  color: #b8bb26; /* 80–100% */
-}
-
-/* =======================
-   BACKLIGHT
-   ======================= */
-#backlight {
-  color: #fabd2f;
-}
-
-/* =======================
-   CLOCK
-   ======================= */
-#clock,
-#custom-clock,
-#custom-clock_utc {
-  color: #ebdbb2;
-}
-
-/* =======================
-   MEMORY & CPU
-   ======================= */
-#custom-memory {
-  color: #83a598;
-}
-
-#custom-cpu {
-  color: #83a598;
-}
-
-/* =======================
-   TRAY
-   ======================= */
-#tray {
-  color: #a89984;
-}
-#custom-todo {
-  color: #a89984;
-}
-/* =======================
-   LAUNCHER
-   ======================= */
-#custom-launcher {
-  font-size: 24px;
+#battery.medium:not(.charging) {
   color: #fe8019;
 }
 
-/* =======================
-   POWER
-   ======================= */
-#custom-power {
-  font-size: 20px;
-  color: #fb4934;
-}
-
-/* =======================
-   WALLPAPER
-   ======================= */
-#custom-wallpaper {
-  color: #8ec07c;
-}
-
-/* =======================
-   UPDATES
-   ======================= */
-#custom-updates {
+#battery.high:not(.charging) {
   color: #fabd2f;
 }
 
-/* =======================
-   MEDIA
-   ======================= */
-#custom-media {
-  color: #b8bb26;
+#battery.full:not(.charging) {
+  color: #d79921;
 }
 
-/* =======================
-   SEPARATOR
-   ======================= */
-#custom-separator {
-  color: #504945;
-  margin: 0 6px;
+#battery.charging.critical,
+#battery.charging.warning,
+#battery.charging.low {
+  color: #fb4934;
+}
+
+#battery.charging.medium {
+  color: #fe8019;
+}
+
+#battery.charging.high,
+#battery.charging.full {
+  color: #fabd2f;
+}
+
+#custom-gpu.module {
+  color: #83a598;
+}
+
+#clock,
+#custom-clock {
+  color: #ebdbb2;
+}
+
+#cpu.module,
+#memory.module,
+#custom-gpu.module {
+  color: #f5f5dc;
+}
+
+#custom-todo {
+  color: #a89984;
+}
+
+#tray {
+  color: #a89984;
+}
+
+#custom-timer {
+  color: #fe8019;
 }

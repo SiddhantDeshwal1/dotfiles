@@ -2,160 +2,56 @@
     "layer": "top",
     "modules-left": [
         "hyprland/workspaces",
-        "custom/separator1",
-        "custom/timer",
-        "custom/separator",
-        "custom/todo",
-        "custom/separator",
-        "tray",
+        "river/tags",
+        // "custom/timer",
+        // "custom/todo",
+        "tray"
     ],
     "modules-center": [],
     "modules-right": [
-        "custom/cpu",
-        "custom/separator",
+        "cpu",
+        "memory",
         "custom/gpu",
-        "custom/separator",
-        "custom/memory",
-        "custom/separator",
         "pulseaudio#output",
-        "custom/separator",
         "pulseaudio#mic",
-        "custom/separator",
-        "custom/clock",
-        "custom/separator",
+        "clock",
         "battery"
     ],
-    // Separators
-    "custom/rule": {
-        "exec": "echo 'WPAS_PCSR'",
+    // "hyprland/workspaces": {
+    //     "format": "{name}",
+    //     "format-icons": {
+    //         "active": "●",
+    //         "default": "●"
+    //     }
+    // },
+    "cpu": {
+        "format": "| C:{usage}%  ",
+        "interval": 2
     },
-    "custom/separator": {
-        "exec": "echo ' '",
-        "interval": 0,
-        "format": "{}",
+    "memory": {
+        "format": "M:{used:0.1f}G  ",
+        "interval": 2
+    },
+    "custom/gpu": {
+        "format": "G:{}% |",
+        "exec": "~/.config/waybar/scripts/gpu.sh",
+        "interval": 2,
         "tooltip": false
     },
-    "custom/separator1": {
-        "exec": "echo ' '",
-        "interval": 0,
-        "format": "{}",
-        "tooltip": false
-    },
-    "custom/separator2": {
-        "exec": "echo '  '",
-        "interval": 0,
-        "format": "{}",
-        "tooltip": false
-    },
-    // 🎵 Audio Output
     "pulseaudio#output": {
-        "format": "V:{volume}%",
-        "format-bluetooth": "{icon}  {volume}%",
-        "format-bluetooth-muted": " {icon} ",
-        "format-muted": "M",
-        "format-icons": {
-            "headphone": [
-                " ▯▯▯▯▯▯▯▯▯▯",
-                " ▮▯▯▯▯▯▯▯▯▯",
-                " ▮▮▯▯▯▯▯▯▯▯",
-                " ▮▮▮▯▯▯▯▯▯▯",
-                " ▮▮▮▮▯▯▯▯▯▯",
-                " ▮▮▮▮▮▯▯▯▯▯",
-                " ▮▮▮▮▮▮▯▯▯▯",
-                " ▮▮▮▮▮▮▮▯▯▯",
-                " ▮▮▮▮▮▮▮▮▯▯",
-                " ▮▮▮▮▮▮▮▮▮▯",
-                " ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "hands-free": [
-                "  ▯▯▯▯▯▯▯▯▯▯",
-                " ▮▯▯▯▯▯▯▯▯▯",
-                " ▮▮▯▯▯▯▯▯▯▯",
-                " ▮▮▮▯▯▯▯▯▯▯",
-                " ▮▮▮▮▯▯▯▯▯▯",
-                " ▮▮▮▮▮▯▯▯▯▯",
-                " ▮▮▮▮▮▮▯▯▯▯",
-                "  ▮▮▮▮▮▮▮▯▯▯",
-                " ▮▮▮▮▮▮▮▮▯▯",
-                " ▮▮▮▮▮▮▮▮▮▯",
-                " ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "headset": [
-                "🎧 ▯▯▯▯▯▯▯▯▯▯",
-                "🎧 ▮▯▯▯▯▯▯▯▯▯",
-                "🎧 ▮▮▯▯▯▯▯▯▯▯",
-                "🎧 ▮▮▮▯▯▯▯▯▯▯",
-                "🎧 ▮▮▮▮▯▯▯▯▯▯",
-                "🎧 ▮▮▮▮▮▯▯▯▯▯",
-                "🎧 ▮▮▮▮▮▮▯▯▯▯",
-                "🎧 ▮▮▮▮▮▮▮▯▯▯",
-                "🎧 ▮▮▮▮▮▮▮▮▯▯",
-                "🎧 ▮▮▮▮▮▮▮▮▮▯",
-                "🎧 ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "phone": [
-                " ▯▯▯▯▯▯▯▯▯▯",
-                " ▮▯▯▯▯▯▯▯▯▯",
-                " ▮▮▯▯▯▯▯▯▯▯",
-                " ▮▮▮▯▯▯▯▯▯▯",
-                " ▮▮▮▮▯▯▯▯▯▯",
-                " ▮▮▮▮▮▯▯▯▯▯",
-                " ▮▮▮▮▮▮▯▯▯▯",
-                " ▮▮▮▮▮▮▮▯▯▯",
-                " ▮▮▮▮▮▮▮▮▯▯",
-                " ▮▮▮▮▮▮▮▮▮▯",
-                " ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "portable": [
-                " ▯▯▯▯▯▯▯▯▯▯",
-                " ▮▯▯▯▯▯▯▯▯▯",
-                " ▮▮▯▯▯▯▯▯▯▯",
-                " ▮▮▮▯▯▯▯▯▯▯",
-                " ▮▮▮▮▯▯▯▯▯▯",
-                " ▮▮▮▮▮▯▯▯▯▯",
-                " ▮▮▮▮▮▮▯▯▯▯",
-                " ▮▮▮▮▮▮▮▯▯▯",
-                " ▮▮▮▮▮▮▮▮▯▯",
-                " ▮▮▮▮▮▮▮▮▮▯",
-                " ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "car": [
-                " ▯▯▯▯▯▯▯▯▯▯",
-                " ▮▯▯▯▯▯▯▯▯▯",
-                " ▮▮▯▯▯▯▯▯▯▯",
-                " ▮▮▮▯▯▯▯▯▯▯",
-                " ▮▮▮▮▯▯▯▯▯▯",
-                " ▮▮▮▮▮▯▯▯▯▯",
-                " ▮▮▮▮▮▮▯▯▯▯",
-                " ▮▮▮▮▮▮▮▯▯▯",
-                " ▮▮▮▮▮▮▮▮▯▯",
-                " ▮▮▮▮▮▮▮▮▮▯",
-                " ▮▮▮▮▮▮▮▮▮▮"
-            ],
-            "default": [
-                "  ▯▯▯▯▯▯▯▯▯▯",
-                "  ▮▯▯▯▯▯▯▯▯▯",
-                "  ▮▮▯▯▯▯▯▯▯▯",
-                "  ▮▮▮▯▯▯▯▯▯▯",
-                "  ▮▮▮▮▯▯▯▯▯▯",
-                "  ▮▮▮▮▮▯▯▯▯▯",
-                "  ▮▮▮▮▮▮▯▯▯▯",
-                "  ▮▮▮▮▮▮▮▯▯▯",
-                "  ▮▮▮▮▮▮▮▮▯▯",
-                "  ▮▮▮▮▮▮▮▮▮▯",
-                "  ▮▮▮▮▮▮▮▮▮▮"
-            ]
-        },
+        "format": "| V:{volume}%  ",
+        "format-bluetooth": "{icon}  {volume}%  ",
+        "format-bluetooth-muted": " {icon}   ",
+        "format-muted": "| M  ",
         "on-click": "pamixer --toggle-mute",
         "on-click-right": "pavucontrol -t 3",
         "tooltip": true,
-        "tooltip-format": "{icon} {desc} | {volume}%"
+        "tooltip-format": "{desc} | {volume}%"
     },
-    // 🎙️ Microphone
     "pulseaudio#mic": {
-        "format": "{format_source}",
+        "format": "{format_source} |",
         "format-source": "M:{volume}%",
-        "format-source-muted": "M",
+        "format-source-muted": " M",
         "on-click": "pamixer --default-source --toggle-mute",
         "on-click-right": "pavucontrol -t 4",
         "on-scroll-up": "pamixer --default-source -i 5",
@@ -163,64 +59,25 @@
         "scroll-step": 5,
         "tooltip-format": "{source_desc} | {source_volume}%"
     },
-    "custom/spotify": {
-        "format": "| {} |",
-        "interval": 5,
-        "on-click": "flatpak run com.spotify.Client",
-        "exec": "~/.config/waybar/scripts/spotify.sh"
-    },
-    //  CPU
-    "custom/cpu": {
-        "format": "C:{}%",
-        "exec": "top -bn1 | awk '/Cpu/ {printf \"%d\", 100-$8}'",
-        "interval": 1
-    },
-    //  Memory
-    "custom/memory": {
-        "format": "M:{}G",
-        "exec": "free -m | awk '/Mem:/ {printf \"%.1f\", $3/1024}'",
-        "interval": 1
-    },
-    //  Launcher
-    "custom/launcher": {
-        "format": " ",
-        "on-click": "rofi -show drun -theme ~/.config/rofi/launchers/type-3/style-3.rasi",
-        "on-click-right": "killall rofi"
-    },
-    // ⏻ Power
-    "custom/power": {
-        "format": "⏻   ",
-        "on-click": "wlogout"
-    },
-    // 🌐 Network
-    "network": {
-        "tooltip": false,
-        "format-wifi": " {essid}",
-        "format-ethernet": ""
-    },
-    // 🔆 Backlight
-    "backlight": {
-        "tooltip": false,
-        "format": " {}%",
+    "clock": {
+        "format": "| {:%a, %B %d %H:%M:%S} | ",
         "interval": 1,
-        "on-scroll-up": "light -A 5",
-        "on-scroll-down": "light -U 5"
+        "tooltip": false
     },
-    // 🔋 Battery
     "battery": {
         "interval": 5,
         "full-at": 100,
         "design-capacity": false,
         "states": {
-            "critical": 20, // Red when <20% (not charging)
-            "low": 30, // For charging low (red <40%)
-            "medium": 75 // Yellow <80%, green >=80%
+            "critical": 20,
+            "low": 30,
+            "medium": 75
         },
-        "format": "B:{capacity}%  ",
-        "format-charging": "C:{capacity}%  ",
-        "format-plugged": "PNC{capacity}%  ",
-        "format-alt": "TOE:{time}  ",
-        "format-full": "Full  ",
+        "format": "B:{capacity}% ",
+        "format-charging": "C:{capacity}% ",
+        "format-plugged": "PNC:{capacity}% ",
+        "format-full": "Full ",
+        "format-alt": "TOE:{time} ",
         "format-icons": [
             " ",
             " ",
@@ -229,67 +86,23 @@
             " "
         ]
     },
-    // 🧰 Tray
     "tray": {
         "icon-size": 20,
         "spacing": 10
     },
-    // ⏰ Clock (local + UTC)
-    "custom/clock": {
-        "exec": "echo \"$(date '+%a, %B %d %H:%M:%S')\"",
-        "interval": 1,
-        "format": "{}",
-        "tooltip": false
-    },
     "custom/timer": {
-        "format": "{}",
+        "format": "{}  ",
         "exec": "~/.config/waybar/scripts/timer.sh output",
         "interval": 1,
         "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
         "on-click": "~/.config/waybar/scripts/timer.sh menu"
     },
-    "cava": {
-        "cava_config": "/home/man37/.config/cava/config",
-        "framerate": 60,
-        "autosens": 1,
-        "bars": 14,
-        "lower_cutoff_freq": 50,
-        "higher_cutoff_freq": 10000,
-        "method": "pulse",
-        "source": "auto",
-        "stereo": true,
-        "reverse": false,
-        "bar_delimiter": 0,
-        "monstercat": false,
-        "waves": false,
-        "noise_reduction": 0.77,
-        "input_delay": 2,
-        "format-icons": [
-            "▁",
-            "▂",
-            "▃",
-            "▄",
-            "▅",
-            "▆",
-            "▇",
-            "█"
-        ],
-        "actions": {
-            "on-click-right": "mode"
-        }
-    },
-    "custom/gpu": {
-        "format": "G:{}%",
-        "exec": "radeontop -l 1 -d - 2>/dev/null | sed -n 's/.*gpu \\([0-9]*\\)\\..*/\\1/p'",
-        "interval": 2,
-        "tooltip": false
-    },
     "custom/todo": {
-        "format": "{} 󰌵 ",
+        "format": "{} 󰌵  ",
         "tooltip": true,
         "tooltip-format": "Right Click to Open Todo List",
-        "interval": 5,
+        "interval": 10,
         "exec": "wc -l < /home/man37/.todo_list 2>/dev/null || echo 0",
-        "on-click": "rofi -show todo -modes 'todo:/home/man37/.config/rofi/scripts/todo.sh' -theme-str 'window {width: 1000px;} listview {lines: 10; spacing: 15px;} element {padding: 10px; orientation: vertical;} element-text {font: \"Mono 14\"; vertical-align: 0.5;}'"
+        "on-click": "~/.config/waybar/scripts/todo-launcher.sh"
     }
 }

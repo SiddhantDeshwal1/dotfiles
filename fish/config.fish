@@ -70,7 +70,7 @@ function setup_dir_aliases
         alias check="$HOME/competitiveProgramming/contest/run.sh"
         alias submit="python $HOME/competitiveProgramming/contest/cf.py submit"
         alias runcpp="g++ -o workspace workspace.cpp && ./workspace"
-    else if test $PWD = $HOME/competitiveProgramming/editor
+    else if test $PWD = /run/media/man37/Alpha/competitiveProgramming/editor
         alias add="python $HOME/competitiveProgramming/editor/cf.py add"
         alias load="python $HOME/competitiveProgramming/editor/cf.py load"
         alias check="python $HOME/competitiveProgramming/editor/cf.py check"
@@ -182,3 +182,4 @@ set -U tide_character_vi_icon_default ❯
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore-vcs'
+direnv hook fish | source
