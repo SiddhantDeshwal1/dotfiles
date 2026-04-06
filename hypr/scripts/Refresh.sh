@@ -1,37 +1,14 @@
 #!/bin/bash
 
-SCRIPTSDIR=$HOME/.config/hypr/scripts
-UserScripts=$HOME/.config/hypr/UserScripts
+# Kill existing instances
+killall -q waybar mako
 
-# Define file_exists function
-file_exists() {
-    if [ -e "$1" ]; then
-        return 0  # File exists
-    else
-        return 1  # File does not exist
-    fi
-}
+# Wait until fully stopped
+while pgrep -x waybar >/dev/null; do sleep 0.1; done
+while pgrep -x mako >/dev/null; do sleep 0.1; done
 
-# Kill already running processes
-_ps=(waybar rofi swaync ags)
-for _prs in "${_ps[@]}"; do
-    if pidof "${_prs}" >/dev/null; then
-        pkill "${_prs}"
-    fi
-done
-
-# quit ags
-ags -q
-
-sleep 0.3
-#Restart waybar
-waybar &
-
-# relaunch swaync
-sleep 0.5
-swaync > /dev/null 2>&1 &
-
-# relaunch ags
-ags &
+# Launch services
+waybar >/dev/null 2>&1 &
+mako >/dev/null 2>&1 &
 
 exit 0

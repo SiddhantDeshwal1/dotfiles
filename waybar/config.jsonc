@@ -3,7 +3,7 @@
     "modules-left": [
         "hyprland/workspaces",
         "river/tags",
-        // "custom/timer",
+        "custom/timer",
         // "custom/todo",
         "tray"
     ],

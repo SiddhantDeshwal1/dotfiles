@@ -1,107 +1,107 @@
 return {
-  "nvim-tree/nvim-tree.lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+    "nvim-tree/nvim-tree.lua",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
 
-  config = function()
-    -- disable netrw (required)
-    vim.g.loaded_netrw = 1
-    vim.g.loaded_netrwPlugin = 1
+    config = function()
+        -- disable netrw (required)
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
 
-    require("nvim-tree").setup({
-      view = {
-        width = 35,
-      },
-
-      renderer = {
-        indent_markers = {
-          enable = true,
-        },
-
-        icons = {
-          show = {
-            modified = true, -- reused for focused arrow
-          },
-          glyphs = {
-            folder = {
-              arrow_closed = "",
-              arrow_open = "",
+        require("nvim-tree").setup({
+            view = {
+                width = 35,
             },
-            modified = "➜", -- arrow glyph
-          },
-        },
 
-        highlight_opened_files = "name",
-        highlight_modified = "icon",
-      },
+            renderer = {
+                indent_markers = {
+                    enable = true,
+                },
 
-      modified = {
-        enable = true,
-      },
+                icons = {
+                    show = {
+                        modified = true, -- reused for focused arrow
+                    },
+                    glyphs = {
+                        folder = {
+                            arrow_closed = "",
+                            arrow_open = "",
+                        },
+                        modified = "➜", -- arrow glyph
+                    },
+                },
 
-      git = {
-        ignore = false,
-      },
+                highlight_opened_files = "name",
+                highlight_modified = "icon",
+            },
 
-      filters = {
-        custom = { ".DS_Store" },
-      },
+            modified = {
+                enable = true,
+            },
 
-      actions = {
-        open_file = {
-          window_picker = { enable = false },
-        },
-      },
+            git = {
+                ignore = false,
+            },
 
-      update_focused_file = {
-        enable = true,
-        update_root = false,
-      },
-    })
+            filters = {
+                custom = { ".DS_Store" },
+            },
 
-    -- single source of truth for highlights
-    local function set_nvimtree_hl()
-      -- transparency
-      vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
-      vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", {
-        fg = "#444444",
-        bg = "none",
-      })
+            actions = {
+                open_file = {
+                    window_picker = { enable = false },
+                },
+            },
 
-      -- focused file (text + arrow)
-      vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
-        fg = "#ff0000", -- red
-        bold = true,
-      })
+            update_focused_file = {
+                enable = true,
+                update_root = false,
+            },
+        })
 
-      -- opened but not focused
-      vim.api.nvim_set_hl(0, "NvimTreeOpenedFile", {
-        fg = "#89b4fa", -- blue
-      })
+        -- single source of truth for highlights
+        local function set_nvimtree_hl()
+            -- transparency
+            vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NvimTreeWinSeparator", {
+                fg = "#444444",
+                bg = "none",
+            })
 
-      -- real modified (unsaved) file name
-      vim.api.nvim_set_hl(0, "NvimTreeModifiedFile", {
-        fg = "#f9e2af", -- yellow
-      })
+            -- focused file (text + arrow)
+            vim.api.nvim_set_hl(0, "NvimTreeCursorLine", {
+                fg = "#ff0000", -- red
+                bold = true,
+            })
 
-      -- hide arrow for real modified files
-      vim.api.nvim_set_hl(0, "NvimTreeModifiedIcon", {
-        fg = "none",
-      })
-    end
+            -- opened but not focused
+            vim.api.nvim_set_hl(0, "NvimTreeOpenedFile", {
+                fg = "#89b4fa", -- blue
+            })
 
-    set_nvimtree_hl()
+            -- real modified (unsaved) file name
+            vim.api.nvim_set_hl(0, "NvimTreeModifiedFile", {
+                fg = "#f9e2af", -- yellow
+            })
 
-    vim.api.nvim_create_autocmd("ColorScheme", {
-      callback = set_nvimtree_hl,
-    })
+            -- hide arrow for real modified files
+            vim.api.nvim_set_hl(0, "NvimTreeModifiedIcon", {
+                fg = "none",
+            })
+        end
 
-    -- keymaps
-    local map = vim.keymap.set
-    map("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle tree" })
-    map("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Find file" })
-    map("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse tree" })
-    map("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh tree" })
-  end,
+        set_nvimtree_hl()
+
+        vim.api.nvim_create_autocmd("ColorScheme", {
+            callback = set_nvimtree_hl,
+        })
+
+        -- keymaps
+        local map = vim.keymap.set
+        map("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle tree" })
+        map("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Find file" })
+        map("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse tree" })
+        map("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh tree" })
+    end,
 }
