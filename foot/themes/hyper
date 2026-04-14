@@ -1,0 +1,30 @@
+# -*- conf -*-
+# Hyper theme converted for foot
+
+[colors-dark]
+background=000000
+foreground=ffffff
+
+# cursor
+# cursor=ffffff
+# cursor-text=F81CE5
+
+# normal colors
+regular0=000000
+regular1=fe0100
+regular2=33ff00
+regular3=feff00
+regular4=0066ff
+regular5=cc00ff
+regular6=00ffff
+regular7=d0d0d0
+
+# bright colors
+bright0=808080
+bright1=fe0100
+bright2=33ff00
+bright3=feff00
+bright4=0066ff
+bright5=cc00ff
+bright6=00ffff
+bright7=ffffff
