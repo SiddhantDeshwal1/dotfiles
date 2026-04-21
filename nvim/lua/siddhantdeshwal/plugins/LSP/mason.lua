@@ -2,15 +2,11 @@ return {
     "williamboman/mason.nvim",
     dependencies = {
         "whoIsSethDaniel/mason-tool-installer.nvim",
-        "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-        local mason = require("mason")
-        local mason_lspconfig = require("mason-lspconfig")
-        local mason_tool_installer = require("mason-tool-installer")
-
-        mason.setup({
+        require("mason").setup({
             ui = {
+                border = "rounded",
                 icons = {
                     package_installed = "✓",
                     package_pending = "➜",
@@ -19,42 +15,16 @@ return {
             },
         })
 
-        mason_lspconfig.setup({
+        require("mason-tool-installer").setup({
             ensure_installed = {
-                -- "tsserver", -- FIXED: correct TypeScript server
-                "html",
-                "clangd",
-                "cssls",
-                "tailwindcss",
-                "svelte",
-                "lua_ls",
-                "graphql",
-                "emmet_ls",
-                "prismals",
-                "pyright",
-                "marksman",
-                "jdtls",
-            },
-        })
-
-        mason_tool_installer.setup({
-            ensure_installed = {
+                -- Formatters & Linters
                 "prettier",
-                "isort",
                 "black",
-                "ruff",
-                "flake8",
-                "eslint_d",
-                "pylint",
-                "shfmt",
-                "beautysh",
-                "shellcheck",
-                "jsonlint",
-                "yamllint",
-                "djlint",
-                "mypy",
+                "isort",
+                "clang-format",
                 "google-java-format",
-                "checkstyle",
+                "eslint_d",
+                "shfmt",
             },
         })
     end,

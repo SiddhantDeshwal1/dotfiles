@@ -172,6 +172,11 @@ end
 # set -g tide_pwd_bg_color 444444
 # ... other Tide color settings ...
 
+function runcpp
+    if test "$PWD" = "/run/media/apple/Alpha/competitiveProgramming/editor"
+        g++ -std=c++20 -O2 -Wall -Wextra workspace.cpp -o workspace && ./workspace
+    end
+end
 
 # ---------- (Optional) Starship Prompt ----------
 # set -x STARSHIP_CONFIG ~/.config/starship.toml
@@ -183,3 +188,11 @@ set -U tide_character_vi_icon_default ❯
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --no-ignore-vcs'
 direnv hook fish | source
+
+function runcpp
+    if string match -q "/run/media/apple/Alpha/competitiveProgramming*" "$PWD"
+        g++ -std=c++20 -O2 -Wall -Wextra workspace.cpp -o workspace && ./workspace
+    else
+        echo "❌ Restricted to /run/media/apple/Alpha/competitiveProgramming"
+    end
+end

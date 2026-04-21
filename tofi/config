@@ -1,0 +1,29 @@
+font = JetBrainsMono Nerd Font
+font-size = 18
+
+width = 400
+height = 300
+border-width = 1
+border-color = #333333
+outline-width = 0
+corner-radius = 0
+
+padding-top = 10
+padding-bottom = 10
+padding-left = 30
+padding-right = 30
+
+background-color = #000000
+text-color = #FFFFFF
+prompt-color = #FFFFFF
+input-color = #FFFFFF
+
+selection-color = #FFFFFF
+selection-background = #333333
+selection-background-padding = 1
+selection-match-color = #FFFFFF
+
+prompt-text = "~ "
+hide-cursor = true
+fuzzy-match = true
+num-results = 7

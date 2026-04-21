@@ -1,0 +1,18 @@
+background-color=#000000
+text-color=#ffffff
+border-color=#ffffff
+width=350
+height=1000
+margin=10
+padding=5
+border-size=1
+border-radius=0
+font=JetBrainsMono Nerd Font 14
+max-history=10
+default-timeout=3000
+anchor=top-right
+
+# The magic happens here:
+# %s is the summary (title), %b is the body (message)
+# We use <span size='...'> to override the global font size
+format=<span size='15pt' weight='bold'>%s</span>\n<span size='13pt'>%b</span>

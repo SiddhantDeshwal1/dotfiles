@@ -4,8 +4,8 @@
   font-family:
     "JetBrainsMono Nerd Font Propo", "Monaspace Radon Frozen",
     "otf-font-awesome";
-  font-size: 19px;
-  min-height: 10px;
+  font-size: 18px;
+  min-height: 0;
   font-weight: bold;
 }
 
@@ -15,13 +15,14 @@ window#waybar {
 }
 
 #workspaces {
-  margin: 0 8px;
-  padding: 4px 8px;
+  padding: 0;
 }
 
 #workspaces button {
   background: transparent;
   color: #928374;
+  padding: 4px 6px;
+  min-height: 0;
   transition: all 0.15s ease-in-out;
 }
 
@@ -53,20 +54,16 @@ window#waybar {
 #battery.critical:not(.charging) {
   color: #cc241d;
 }
-
 #battery.warning:not(.charging),
 #battery.low:not(.charging) {
   color: #fb4934;
 }
-
 #battery.medium:not(.charging) {
   color: #fe8019;
 }
-
 #battery.high:not(.charging) {
   color: #fabd2f;
 }
-
 #battery.full:not(.charging) {
   color: #d79921;
 }
@@ -76,18 +73,16 @@ window#waybar {
 #battery.charging.low {
   color: #fb4934;
 }
-
 #battery.charging.medium {
   color: #fe8019;
 }
-
 #battery.charging.high,
 #battery.charging.full {
   color: #fabd2f;
 }
 
-#custom-gpu.module {
-  color: #83a598;
+#custom-gpu {
+  color: #fb4934;
 }
 
 #clock,
@@ -95,20 +90,19 @@ window#waybar {
   color: #ebdbb2;
 }
 
-#cpu.module,
-#memory.module,
-#custom-gpu.module {
-  color: #f5f5dc;
+#cpu,
+#memory,
+#custom-gpu {
+  color: #fe8019;
 }
 
 #custom-todo {
   color: #a89984;
 }
-
 #tray {
   color: #a89984;
+  margin-left: 15px; /* Adjust this value for more or less space */
 }
-
 #custom-timer {
   color: #fe8019;
 }
