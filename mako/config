@@ -1,4 +1,4 @@
-background-color=#000000
+background-color=#000000D9
 text-color=#ffffff
 border-color=#ffffff
 width=350
@@ -10,6 +10,7 @@ border-radius=0
 font=JetBrainsMono Nerd Font 14
 max-history=10
 default-timeout=3000
+ignore-timeout=1
 anchor=top-right
 
 # The magic happens here:

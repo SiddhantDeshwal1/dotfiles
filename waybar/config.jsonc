@@ -2,7 +2,8 @@
     "layer": "top",
     "modules-left": [
         "hyprland/workspaces",
-        // "custom/todo",
+        "custom/timer",
+        "custom/todo",
         "tray"
     ],
     "modules-center": [],
@@ -36,6 +37,17 @@
         "format": "{}",
         "tooltip": false
     },
+    
+"custom/todo": {
+    "format": " {} |",
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/todo.sh",
+    "on-click": "~/.config/waybar/scripts/todo.sh --menu",
+    "interval": 3600,
+    "signal": 9,
+    "tooltip": true
+},
+
     "pulseaudio#output": {
         "format": "| V:{volume}%  ",
         "format-bluetooth": "{icon}  {volume}%  ",
@@ -89,18 +101,10 @@
         "spacing": 10
     },
     "custom/timer": {
-        "format": "{}  ",
+        "format": " | {} ",
         "exec": "~/.config/waybar/scripts/timer.sh output",
         "interval": 1,
         "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
         "on-click": "~/.config/waybar/scripts/timer.sh menu"
     },
-    "custom/todo": {
-        "format": "{} 󰌵  ",
-        "tooltip": true,
-        "tooltip-format": "Right Click to Open Todo List",
-        "interval": 10,
-        "exec": "wc -l < /home/man37/.todo_list 2>/dev/null || echo 0",
-        "on-click": "~/.config/waybar/scripts/todo-launcher.sh"
-    }
 }

@@ -2,16 +2,21 @@
   border: none;
   border-radius: 0;
   font-family:
+    "JetBrainsMono NFP Thin", "JetBrainsMono NFP Medium",
     "JetBrainsMono Nerd Font Propo", "Monaspace Radon Frozen",
     "otf-font-awesome";
-  font-size: 18px;
-  min-height: 0;
+  font-size: 17px;
+  /* min-height: 0; */
   font-weight: bold;
 }
 
 window#waybar {
-  background: #000000;
+  background: rgba(0, 0, 0, 1); /* 75% opacity — tweak to taste */
   color: #ebdbb2;
+}
+#custom-todo,
+#custom-todo label {
+  color: #fe8019;
 }
 
 #workspaces {
@@ -30,7 +35,7 @@ window#waybar {
   background: #ebdbb2;
   color: #282828;
   border-radius: 4px;
-  padding: 2px 10px;
+  /* padding: 0px 0px; */
 }
 
 #workspaces button:hover {
