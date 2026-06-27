@@ -1,4 +1,5 @@
-A|10|chair and table 
-D|10|Hello
-D|10|Pro profile photo
-D|10|Linkedin Profile Optimize
+A|10|chrome shortcuts
+A|10|obsidian theme 
+A|10|obsidian  plugin cleanup
+A|50|workday portal task
+D|10|workday portal tasks

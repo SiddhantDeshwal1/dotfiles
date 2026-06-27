@@ -16,7 +16,23 @@ window#waybar {
 }
 #custom-todo,
 #custom-todo label {
-  color: #fe8019;
+  transition: color 0.3s ease;
+}
+
+#custom-todo.todo-none {
+  color: #928374;
+}
+
+#custom-todo.todo-low {
+  color: #b8bb26;
+}
+
+#custom-todo.todo-medium {
+  color: #fabd2f;
+}
+
+#custom-todo.todo-high {
+  color: #fb4934;
 }
 
 #workspaces {
@@ -101,13 +117,28 @@ window#waybar {
   color: #fe8019;
 }
 
-#custom-todo {
-  color: #a89984;
-}
 #tray {
   color: #a89984;
   margin-left: 15px; /* Adjust this value for more or less space */
 }
 #custom-timer {
   color: #fe8019;
+}
+
+#custom-music {
+  color: #d79921;
+  padding: 0 10px;
+  transition: color 0.3s ease;
+}
+
+#custom-music.music-playing {
+  color: #d79921;
+}
+
+#custom-music.music-paused {
+  color: #928374;
+}
+
+#custom-music.music-unavailable {
+  opacity: 0;
 }

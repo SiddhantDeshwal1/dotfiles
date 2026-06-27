@@ -1,4 +1,3 @@
--- ~/.config/nvim/lua/siddhantdeshwal/plugins/lspconfig.lua
 return {
     "neovim/nvim-lspconfig",
     event = { "BufReadPre", "BufNewFile" },
@@ -67,17 +66,28 @@ return {
         -- 4. Tell Mason to install specific LSPs and define their handlers natively
         mason_lspconfig.setup({
             ensure_installed = {
-                "clangd",   -- C/C++
-                "pyright",  -- Python
-                "jdtls",    -- Java
-                "ts_ls",    -- JavaScript/TypeScript
-                "html",     -- HTML
-                "cssls",    -- CSS
-                "lua_ls",   -- Lua
-                "marksman", -- Markdown
+                -- Web Dev
+                "ts_ls", "html", "cssls", "tailwindcss", "emmet_ls",
+                
+                -- C/C++
+                "clangd",  
+                
+                -- Python
+                "pyright", "ruff", 
+                
+                -- Java
+                "jdtls",    
+                
+                -- DevOps
+                "dockerls", "docker_compose_language_service", "yamlls", "terraformls", "bashls",
+                
+                -- Database / APIs
+                "sqlls", "graphql",
+                
+                -- Neovim & Misc
+                "lua_ls", "marksman", 
             },
 
-            -- This replaces the broken 'setup_handlers' function
             handlers = {
                 -- Default handler applied to all servers
                 function(server_name)
@@ -95,7 +105,7 @@ return {
                         settings = {
                             Lua = {
                                 diagnostics = { globals = { "vim" } },
-                                workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+                                -- 'workspace' setup removed because lazydev.nvim handles it perfectly now
                                 telemetry = { enable = false },
                             },
                         },

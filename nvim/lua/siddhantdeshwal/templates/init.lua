@@ -16,6 +16,7 @@ end
 vim.api.nvim_create_user_command("Cpt", function()
     vim.keymap.set("n", "<leader>js", ":!node %<CR>", { noremap = true, silent = true })
     insert_template("cp")
+    vim.cmd("normal! zz")
 end, {})
 
 vim.api.nvim_create_user_command("Html", function()

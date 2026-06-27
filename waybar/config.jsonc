@@ -4,9 +4,12 @@
         "hyprland/workspaces",
         "custom/timer",
         "custom/todo",
-        "tray"
+        "tray",
+        "custom/music"
     ],
-    "modules-center": [],
+    // "modules-center": [
+    //     // "custom/music"
+    // ],
     "modules-right": [
         "cpu",
         "memory",
@@ -34,7 +37,7 @@
     "custom/gpu": {
         "exec": "~/.config/waybar/scripts/gpu.sh",
         "interval": 2,
-        "format": "{}",
+        "format": "{}|",
         "tooltip": false
     },
     
@@ -107,4 +110,15 @@
         "on-click-right": "~/.config/waybar/scripts/timer.sh toggle",
         "on-click": "~/.config/waybar/scripts/timer.sh menu"
     },
+    "custom/music": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/music.sh",
+        "exec-if": "playerctl status",
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "~/.config/waybar/scripts/music.sh previous",
+        "on-click-right": "~/.config/waybar/scripts/music.sh next",
+        "on-click-middle": "~/.config/waybar/scripts/music.sh toggle",
+        "tooltip": true
+    }
 }

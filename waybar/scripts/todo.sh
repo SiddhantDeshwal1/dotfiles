@@ -29,6 +29,20 @@ cleanup_tasks() {
     mv "${TASK_FILE}.tmp" "$TASK_FILE"
 }
 
+# Helper: Determine CSS class based on task count
+get_todo_class() {
+    local count=$1
+    if [[ "$count" -eq 0 ]]; then
+        echo "todo-none"
+    elif [[ "$count" -lt 3 ]]; then
+        echo "todo-low"
+    elif [[ "$count" -lt 5 ]]; then
+        echo "todo-medium"
+    else
+        echo "todo-high"
+    fi
+}
+
 # Helper: Safely generate JSON for Waybar
 print_waybar_status() {
     local count=0
@@ -56,7 +70,14 @@ print_waybar_status() {
         fi
     fi
 
-    jq -n -c --unbuffered --arg text " $count" --arg tooltip "$tooltip" '{"text": $text, "tooltip": $tooltip}'
+    local todo_class
+    todo_class=$(get_todo_class "$count")
+
+    jq -n -c --unbuffered \
+        --arg text " $count" \
+        --arg tooltip "$tooltip" \
+        --arg class "$todo_class" \
+        '{"text": $text, "tooltip": $tooltip, "class": $class}'
 }
 
 # Helper: Add a task

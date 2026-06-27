@@ -41,3 +41,20 @@ vim.g.loaded_ruby_provider = 0
 vim.opt.statuscolumn = "%s%=%l  "
 
 vim.cmd("filetype plugin indent on")
+
+-- Enable autoread (usually enabled by default in Neovim, but good to be safe)
+vim.opt.autoread = true
+
+-- Automatically check if the file changed on disk when you focus the window
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+    pattern = "*",
+    command = "if mode() != 'c' | checktime | endif",
+})
+
+-- Optional: Notify you when a file was changed outside of Neovim
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+    pattern = "*",
+    callback = function()
+        vim.notify("File changed on disk. Buffer reloaded.", vim.log.levels.WARN)
+    end,
+})

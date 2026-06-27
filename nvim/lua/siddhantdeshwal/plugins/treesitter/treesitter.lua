@@ -4,54 +4,28 @@ return {
     build = ":TSUpdate",
     dependencies = {
         "windwp/nvim-ts-autotag",
-        -- require('nvim-ts-autotag').setup()
     },
     config = function()
-        -- import nvim-treesitter plugin
-        local treesitter = require("nvim-treesitter.configs")
+        -- Safely import treesitter
+        local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+        if not status_ok then
+            return
+        end
 
-        -- configure treesitter
-        treesitter.setup({ -- enable syntax highlighting
+        -- Configure treesitter
+        treesitter.setup({
+            -- Enable syntax highlighting
             highlight = {
                 enable = true,
             },
-            -- enable indentation
-            indent = { enable = true, disable = { "cpp", "c" } },
+            
+            -- Enable indentation
+            indent = { 
+                enable = true, 
+                disable = { "cpp", "c" } 
+            },
 
-            -- BUG::
-            -- enable autotagging (w/ nvim-ts-autotag plugin)
-            -- autotag = {
-            --   enable = true,
-            -- },
-            -- ensure these language parsers are installed
-            require("nvim-treesitter.configs").setup({
-                -- sync_install = true,
-                ensure_installed = {
-                    "json",
-                    "cpp",
-                    "javascript",
-                    "typescript",
-                    "tsx",
-                    "python",
-                    "yaml",
-                    "html",
-                    "css",
-                    "prisma",
-                    "markdown",
-                    "markdown_inline",
-                    "svelte",
-                    "graphql",
-                    "bash",
-                    "lua",
-                    "vim",
-                    "dockerfile",
-                    "gitignore",
-                    "query",
-                    "vimdoc",
-                    "c",
-                },
-            }),
-
+            -- Enable incremental selection
             incremental_selection = {
                 enable = true,
                 keymaps = {
@@ -61,6 +35,33 @@ return {
                     node_decremental = "<bs>",
                 },
             },
+
+            -- Ensure these language parsers are installed
+            ensure_installed = {
+                -- Web Dev
+                "html", "css", "javascript", "typescript", "tsx", "json", "graphql", "svelte", "markdown", "markdown_inline",
+                
+                -- Java / Spring Boot
+                "java",
+                
+                -- C++
+                "c", "cpp",
+                
+                -- Python & Backend
+                "python", "sql", "prisma",
+                
+                -- DevOps
+                "bash", "yaml", "toml", "dockerfile", "gitignore", "terraform",
+                
+                -- Neovim core
+                "lua", "vim", "vimdoc", "query",
+            },
         })
+
+        -- Configure nvim-ts-autotag
+        local autotag_status_ok, autotag = pcall(require, "nvim-ts-autotag")
+        if autotag_status_ok then
+            autotag.setup()
+        end
     end,
 }
