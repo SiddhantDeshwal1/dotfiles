@@ -22,7 +22,9 @@ elif [[ "$1" == "--volume" ]]; then
     if [[ "$muteVolume" = true ]]; then
         exit 0
     fi
-    soundoption="audio-volume-change.*"
+    sound_file="$HOME/.config/hypr/scripts/media/audio/macos_volume_change.aiff"
+    pw-play "$sound_file" || pa-play "$sound_file"
+    exit 0
 elif [[ "$1" == "--error" ]]; then
     if [[ "$muteScreenshots" = true ]]; then
         exit 0

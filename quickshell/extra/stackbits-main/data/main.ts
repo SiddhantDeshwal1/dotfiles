@@ -1,0 +1,930 @@
+import { ReactNode } from 'react';
+
+// import { flicker, flickerPreview } from './frontend/Flicker';
+// import { installation } from './getting-started/installation';
+// import { introduction } from './getting-started/introduction';
+// import { storyAvatar, storyAvatarPreview } from './frontend/StoryAvatar';
+// import { flipBadge, flipBadgePreview } from './frontend/FlipBadge';
+import { encryptionDecryption } from './utilities/EncryptionDecryption';
+import { regexValidations } from './utilities/RegexValidations';
+import { debounce } from './utilities/Debounce';
+// import { lumeCard, lumeCardPreview } from './frontend/LumeCard';
+// // import { customScrollbar } from './frontend/CustomScrollbar';
+import { yupValidations } from './utilities/YupValidations';
+import { darkThemeLightTheme } from './utilities/DarkThemeLightTheme';
+// import { accordion, accordionPreview } from './frontend/Accordion';
+import { customLogger } from './utilities/CustomLogger';
+// import { barricadeTape, barricadeTapePreview } from './frontend/BarricadeTape';
+import { tradingCard, tradingCardPreview } from './frontend/TradingCard';
+import { SearchResult } from '@/components/support-plugin';
+import { expressServer } from './utilities/ExpressServer';
+import { axiosInterceptor } from './utilities/AxiosInterceptor';
+import { prismaticHaze, prismaticHazePreview } from './backgrounds/PrismaticHaze';
+// // import { colorCyclone, colorCyclonePreview } from './frontend/ColorCyclone';
+import { wavyBackgroundPreview, wavyBackground } from './backgrounds/WavyBackground';
+// // import { flipRevealCard, flipRevealCardPreview } from './frontend/FlipRevealCard';
+// import { movingBorderCard, movingBorderCardPreview } from './frontend/MovingBorderCard';
+import { iconWheel, iconWheelPreview } from './frontend/IconWheel';
+// import { waveNoiseBackground, waveNoiseBackgroundPreview } from './frontend/WaveNoiseBackground';
+// import { topographyBackground, topographyBackgroundPreview } from './frontend/TopographyBackground';
+// // import { textureBackground, textureBackgroundPreview } from './frontend/TextureBackground';
+// import { epicNameDrop, epicNameDropPreview } from './frontend/EpicNameDrop';
+import {
+  glowingDotsBackground,
+  glowingDotsBackgroundPreview
+} from './backgrounds/GlowingDotsBackground';
+// // import { footer, footerPreview } from './frontend/Footer';
+import { masonryGrid, masonryGridPreview } from './frontend/MasonryGrid';
+// import { fileStack, fileStackPreview } from './frontend/FileStack';
+import { glitchText, glitchTextPreview } from './text/GlitchText';
+import { rainbowText, rainbowTextPreview } from './text/RainbowText';
+// import { skewedText, skewedTextPreview } from './text/SkewedText';
+// import { countUp, countUpPreview } from './text/CountUp';
+import { wavyText, wavyTextPreview } from './text/WavyText';
+import { blurText, blurTextPreview } from './text/BlurText';
+import { dottedText, dottedTextPreview } from './text/DottedText';
+import { hiddenText, hiddenTextPreview } from './text/HiddenText';
+import { gooeyWords, gooeyWordsPreview } from './text/GooeyWords';
+import { skeumorphicMusicCard, skeumorphicMusicCardPreview } from './frontend/SkeumorphicMusicCard';
+import { imagePile, imagePilePreview } from './frontend/ImagePile';
+// import { gaugeChart, gaugeChartPreview } from './frontend/GaugeChart';
+// import { browserWindow, browserWindowPreview } from './frontend/BrowserWIndow';
+// import { playingCardsPreview } from './frontend/PlayingCards';
+// import { playingCards } from './frontend/PlayingCards';
+// import { spotlightGrid, spotlightGridPreview } from './frontend/SpotlightGrid';
+// import { projectsSection, projectsSectionPreview } from './frontend/ProjectsSection';
+// import { contactSection, contactSectionPreview } from './frontend/ContactSection';
+import { magnetTabs, magnetTabsPreview } from './frontend/MagnetTabs';
+import { jellyLoader, jellyLoaderPreview } from './frontend/JellyLoader';
+// import { proximityLiftGrid, proximityLiftGridPreview } from './frontend/ProximityLiftGrid';
+import { proximityBackground, proximityBackgroundPreview } from './backgrounds/ProximityBackground';
+import { maskCursorEffect, maskCursorEffectPreview } from './frontend/MaskCursorEffect';
+import { pixelatedCarousel, pixelatedCarouselPreview } from './frontend/PixelatedCarousel';
+import { pixelatedText, pixelatedTextPreview } from './text/PixelatedText';
+// import { glassGrid, glassGridPreview } from './frontend/GlassGrid';
+// import { spiderLoader, spiderLoaderPreview } from './frontend/SpiderLoader';
+import { sentenceFlip, sentenceFlipPreview } from './text/SentenceFlip';
+// import { expandableIconButton, expandableIconButtonPreview } from './buttons/ExpandableIconButton';
+import { copyButton, copyButtonPreview } from './buttons/CopyButton';
+import {
+  animatedGradientButton,
+  animatedGradientButtonPreview
+} from './buttons/AnimatedGradientButton';
+// import { glassButton, glassButtonPreview } from './buttons/GlassButton';
+import { toggleButton, toggleButtonPreview } from './buttons/ToggleButton';
+import { movingBorderButton, movingBorderButtonPreview } from './buttons/MovingBorderButton';
+import { navigationButton, navigationButtonPreview } from './buttons/NavigationButton';
+import { shineButton, shineButtonPreview } from './buttons/ShineButton';
+import { circleMenu, circleMenuPreview } from './frontend/CircleMenu';
+import { stackedInputForm, stackedInputFormPreview } from './frontend/StackedInputForm';
+// import { fadeInText, fadeInTextPreview } from './text/FadeInText';
+// import { navBarPreview, navBar } from './frontend/NavBar';
+import { interactiveFolder, interactiveFolderPreview } from './frontend/InteractiveFolder';
+import { otpInput, otpInputPreview } from './frontend/OTPInput';
+import { rubikCube, rubikCubePreview } from './frontend/RubikCube';
+import { interestPicker, interestPickerPreview } from './frontend/InterestPicker';
+import { interactiveCTA, interactiveCTAPreview } from './frontend/InteractiveCTA';
+import { photoGallery, photoGalleryPreview } from './frontend/PhotoGallery';
+import { holdButton, holdButtonPreview } from './buttons/HoldButton';
+import { dialogForm, dialogFormPreview } from './frontend/DialogForm';
+import { stackScroll, stackScrollPreview } from './list-scroll/StackScroll';
+import { horizontalScroll, horizontalScrollPreview } from './list-scroll/HorizontalScroll';
+import { flipScroll, flipScrollPreview } from './list-scroll/FlipScroll';
+import { sineWave, sineWavePreview } from './frontend/SineWave';
+import { sidebar, sidebarPreview } from './frontend/Sidebar';
+import { fileInput, fileInputPreview } from './frontend/FileInput';
+import { bounceInText, bounceInTextPreview } from './text/BounceInText';
+import { paginationButton, paginationButtonPreview } from './buttons/PaginationButton';
+import { randomButton, randomButtonPreview } from './buttons/RandomButton';
+import { eagleVision, eagleVisionPreview } from './frontend/EagleVision';
+import { spaceTravel, spaceTravelPreview } from './backgrounds/SpaceTravel';
+import { socialMediaCard, socialMediaCardPreview } from './frontend/SocialMediaCard';
+import { aiInput, aiInputPreview } from './frontend/AiInput';
+import { dominoesListScroll, dominoesListScrollPreview } from './list-scroll/DominoesScroll';
+import {
+  dominoesScrollIndicator,
+  dominoesScrollIndicatorPreview
+} from './scrolls/DominoesScrollIndicator';
+import {
+  rollingBallScrollIndicator,
+  rollingBallScrollIndicatorPreview
+} from './scrolls/RollingBallScrollIndicator';
+import {
+  glowingScrollIndicator,
+  glowingScrollIndicatorPreview
+} from './scrolls/GlowingScrollIndicator';
+import { leaveRating, leaveRatingPreview } from './frontend/LeaveRating';
+import { fogRevealText, fogRevealTextPreview } from './text/FogRevealText';
+import { appleSpotlight, appleSpotlightPreview } from './frontend/AppleSpotlight';
+import { flowScroll, flowScrollPreview } from './list-scroll/FlowScroll';
+
+export type SideBarSectionInDocument = {
+  group: string;
+  name: string;
+  order: number;
+};
+
+export type SectionInDocument = {
+  heading?: string;
+  content?: string | Array<{ id: number; heading: string; content: string }>;
+  sentence?: string;
+  code?: ReactNode | string;
+  preview?: ReactNode;
+  description?: string;
+  designer?: Array<{ name: string; link: string }>;
+  sectionType: string;
+};
+
+export type ContentInDocument = {
+  sections: Array<SectionInDocument>;
+};
+
+export type Document = {
+  sideBar: SideBarSectionInDocument;
+  content: ContentInDocument;
+};
+
+export const getSideBarTabs = () => {
+  return sideBarOptions;
+};
+
+const sideBarOptions: Array<{
+  title: string;
+  children: Array<{
+    name: string;
+    href: string;
+    content: Document;
+    isNew?: boolean;
+    preview?: ReactNode;
+  }>;
+}> = [
+  {
+    title: 'Buttons',
+    children: [
+      {
+        name: 'Animated Gradient Button',
+        href: '/docs/animatedGradientButton',
+        content: animatedGradientButton,
+        preview: animatedGradientButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Copy Button',
+        href: '/docs/copyButton',
+        content: copyButton,
+        preview: copyButtonPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Expandable Icon Button',
+      //   href: '/docs/expandableIconButton',
+      //   content: expandableIconButton,
+      //   preview: expandableIconButtonPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Glass Button',
+      //   href: '/docs/glassButton',
+      //   content: glassButton,
+      //   preview: glassButtonPreview,
+      //   isNew: false
+      // },
+      {
+        name: 'Hold Button',
+        href: '/docs/holdButton',
+        content: holdButton,
+        preview: holdButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Toggle Button',
+        href: '/docs/toggleButton',
+        content: toggleButton,
+        preview: toggleButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Moving Border Button',
+        href: '/docs/movingBorderButton',
+        content: movingBorderButton,
+        preview: movingBorderButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Navigation Button',
+        href: '/docs/navigationButton',
+        content: navigationButton,
+        preview: navigationButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Pagination Button',
+        href: '/docs/paginationButton',
+        content: paginationButton,
+        preview: paginationButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Random Button',
+        href: '/docs/randomButton',
+        content: randomButton,
+        preview: randomButtonPreview,
+        isNew: false
+      },
+      {
+        name: 'Shine Button',
+        href: '/docs/shineButton',
+        content: shineButton,
+        preview: shineButtonPreview,
+        isNew: false
+      }
+    ]
+  },
+  {
+    title: 'Backgrounds',
+    children: [
+      {
+        name: 'Glowing Dots Background',
+        href: '/docs/glowingDotsBackground',
+        content: glowingDotsBackground,
+        preview: glowingDotsBackgroundPreview,
+        isNew: false
+      },
+      {
+        name: 'Prismatic Haze Background',
+        href: '/docs/prismaticHazeBackground',
+        content: prismaticHaze,
+        preview: prismaticHazePreview,
+        isNew: false
+      },
+      {
+        name: 'Proximity Background',
+        href: '/docs/proximitybackground',
+        content: proximityBackground,
+        preview: proximityBackgroundPreview,
+        isNew: false
+      },
+      {
+        name: 'Space Travel',
+        href: '/docs/spacetravel',
+        content: spaceTravel,
+        preview: spaceTravelPreview,
+        isNew: false
+      },
+      {
+        name: 'Wavy Background',
+        href: '/docs/wavybackground',
+        content: wavyBackground,
+        preview: wavyBackgroundPreview,
+        isNew: false
+      }
+    ]
+  },
+  {
+    title: 'Components',
+    children: [
+      {
+        name: 'Apple Spotlight',
+        href: '/docs/appleSpotlight',
+        content: appleSpotlight,
+        preview: appleSpotlightPreview,
+        isNew: false
+      },
+      {
+        name: 'Circle Menu',
+        href: '/docs/circleMenu',
+        content: circleMenu,
+        preview: circleMenuPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Flip Reveal Card',
+      //   href: '/docs/fliprevealcard',
+      //   content: flipRevealCard,
+      //   preview: flipRevealCardPreview
+      // },
+      // {
+      //   name: 'Accordion',
+      //   href: '/docs/accordion',
+      //   content: accordion,
+      //   preview: accordionPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Color Cyclone',
+      //   href: '/docs/colorCyclone',
+      //   content: colorCyclone,
+      //   preview: colorCyclonePreview
+      // },
+      // {
+      //   name: 'Texture Background',
+      //   href: '/docs/textureBackground',
+      //   content: textureBackground,
+      //   preview: textureBackgroundPreview
+      // },
+      // {
+      //   name: 'Topography Background',
+      //   href: '/docs/topographyBackground',
+      //   content: topographyBackground,
+      //   preview: topographyBackgroundPreview
+      // },
+      // {
+      //   name: 'Wave Noise Background',
+      //   href: '/docs/waveNoiseBackground',
+      //   content: waveNoiseBackground,
+      //   preview: waveNoiseBackgroundPreview
+      // },
+      // {
+      //   name: 'Barricade Tape',
+      //   href: '/docs/barricadeTape',
+      //   content: barricadeTape,
+      //   preview: barricadeTapePreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Browser Window',
+      //   href: '/docs/browserwindow',
+      //   content: browserWindow,
+      //   preview: browserWindowPreview
+      // },
+      // {
+      //   name: 'Contact Section',
+      //   href: '/docs/contactsection',
+      //   content: contactSection,
+      //   preview: contactSectionPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Epic Name Drop',
+      //   href: '/docs/epicNameDrop',
+      //   content: epicNameDrop,
+      //   preview: epicNameDropPreview
+      // },
+      // {
+      //   name: 'File Stack',
+      //   href: '/docs/fileStack',
+      //   content: fileStack,
+      //   preview: fileStackPreview,
+      //   isNew: false
+      // },
+
+      // { name: 'CustomScrollbar', href: '/docs/customscrollbar', content: customScrollbar },
+      // { name: 'Flicker Box', href: '/docs/flickerbox', content: flicker, preview: flickerPreview },
+      // {
+      //   name: 'Flip Badge',
+      //   href: '/docs/flipbadge',
+      //   content: flipBadge,
+      //   preview: flipBadgePreview
+      // },
+      // {
+      //   name: 'Footer',
+      //   href: '/docs/footer',
+      //   content: footer,
+      //   preview: footerPreview
+      // },
+      // {
+      //   name: 'Gauge Chart',
+      //   href: '/docs/gaugechart',
+      //   content: gaugeChart,
+      //   preview: gaugeChartPreview
+      // },
+      // {
+      //   name: 'Glass Grid',
+      //   href: '/docs/glassGrid',
+      //   content: glassGrid,
+      //   preview: glassGridPreview,
+      //   isNew: false
+      // },
+
+      // {
+      //   name: 'Icon Wheel',
+      //   href: '/docs/iconwheel',
+      //   content: iconWheel,
+      //   preview: iconWheelPreview
+      // },
+      {
+        name: 'Dialog Form',
+        href: '/docs/dialogform',
+        content: dialogForm,
+        preview: dialogFormPreview,
+        isNew: false
+      },
+      {
+        name: 'Dominoes List Scroll',
+        href: '/docs/dominoeslistscroll',
+        content: dominoesListScroll,
+        preview: dominoesListScrollPreview,
+        isNew: false
+      },
+      {
+        name: 'Dominoes Scroll Indicator',
+        href: '/docs/dominoesscrollindicator',
+        content: dominoesScrollIndicator,
+        preview: dominoesScrollIndicatorPreview,
+        isNew: false
+      },
+      {
+        name: 'Eagle Vision',
+        href: '/docs/eagleVision',
+        content: eagleVision,
+        preview: eagleVisionPreview,
+        isNew: false
+      },
+      {
+        name: 'Electric AI Input',
+        href: '/docs/electricaiinput',
+        content: aiInput,
+        preview: aiInputPreview,
+        isNew: false
+      },
+      {
+        name: 'File Input',
+        href: '/docs/fileinput',
+        content: fileInput,
+        preview: fileInputPreview,
+        isNew: false
+      },
+      {
+        name: 'Flip Scroll',
+        href: '/docs/flipScroll',
+        content: flipScroll,
+        preview: flipScrollPreview,
+        isNew: false
+      },
+      {
+        name: 'Flow Scroll',
+        href: '/docs/flowScroll',
+        content: flowScroll,
+        preview: flowScrollPreview,
+        isNew: false
+      },
+      {
+        name: 'Glowing Scroll Indicator',
+        href: '/docs/glowingscrollindicator',
+        content: glowingScrollIndicator,
+        preview: glowingScrollIndicatorPreview,
+        isNew: false
+      },
+      {
+        name: 'Horizontal Scroll',
+        href: '/docs/horizontalscroll',
+        content: horizontalScroll,
+        preview: horizontalScrollPreview,
+        isNew: false
+      },
+      {
+        name: 'Icon Wheel',
+        href: '/docs/iconwheel',
+        content: iconWheel,
+        preview: iconWheelPreview,
+        isNew: false
+      },
+      {
+        name: 'Image Pile',
+        href: '/docs/imagepile',
+        content: imagePile,
+        preview: imagePilePreview,
+        isNew: false
+      },
+      {
+        name: 'Interactive CTA',
+        href: '/docs/interactivecta',
+        content: interactiveCTA,
+        preview: interactiveCTAPreview,
+        isNew: false
+      },
+      {
+        name: 'Interactive Folder',
+        href: '/docs/interactivefolder',
+        content: interactiveFolder,
+        preview: interactiveFolderPreview,
+        isNew: false
+      },
+      {
+        name: 'Interest Picker',
+        href: '/docs/interestpicker',
+        content: interestPicker,
+        preview: interestPickerPreview,
+        isNew: false
+      },
+      {
+        name: 'Jelly Loader',
+        href: '/docs/jellyloader',
+        content: jellyLoader,
+        preview: jellyLoaderPreview,
+        isNew: false
+      },
+      {
+        name: 'Leave Rating',
+        href: '/docs/leaverating',
+        content: leaveRating,
+        preview: leaveRatingPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Lume Card',
+      //   href: '/docs/lumecard',
+      //   content: lumeCard,
+      //   preview: lumeCardPreview
+      // },
+      {
+        name: 'Mask Cursor Effect',
+        href: '/docs/maskcursoreffect',
+        content: maskCursorEffect,
+        preview: maskCursorEffectPreview,
+        isNew: false
+      },
+      {
+        name: 'Magnet Tabs',
+        href: '/docs/magnettabs',
+        content: magnetTabs,
+        preview: magnetTabsPreview,
+        isNew: false
+      },
+
+      {
+        name: 'Masonry Grid',
+        href: '/docs/masonrygrid',
+        content: masonryGrid,
+        preview: masonryGridPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Moving Border Card',
+      //   href: '/docs/movingbordercard',
+      //   content: movingBorderCard,
+      //   preview: movingBorderCardPreview
+      // },
+      // {
+      //   name: 'NavBar',
+      //   href: '/docs/navbar',
+      //   content: navBar,
+      //   preview: navBarPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Playing Cards',
+      //   href: '/docs/playingcards',
+      //   content: playingCards,
+      //   preview: playingCardsPreview,
+      //   isNew: false
+      // },
+      {
+        name: 'OTP Input',
+        href: '/docs/otpinput',
+        content: otpInput,
+        preview: otpInputPreview,
+        isNew: false
+      },
+      {
+        name: 'Photo Gallery',
+        href: '/docs/photogallery',
+        content: photoGallery,
+        preview: photoGalleryPreview,
+        isNew: false
+      },
+      {
+        name: 'Pixelated Carousel',
+        href: '/docs/pixelatedcarousel',
+        content: pixelatedCarousel,
+        preview: pixelatedCarouselPreview,
+        isNew: false
+      },
+      {
+        name: 'Rolling Ball Scroll Indicator',
+        href: '/docs/rollingballscrollindicator',
+        content: rollingBallScrollIndicator,
+        preview: rollingBallScrollIndicatorPreview,
+        isNew: false
+      },
+      {
+        name: 'Rubik Cube',
+        href: '/docs/rubikcube',
+        content: rubikCube,
+        preview: rubikCubePreview,
+        isNew: false
+      },
+
+      // {
+      //   name: 'Projects Section',
+      //   href: '/docs/projectssection',
+      //   content: projectsSection,
+      //   preview: projectsSectionPreview,
+      //   isNew: false
+      // },
+
+      // {
+      //   name: 'Proximity Lift Grid',
+      //   href: '/docs/proximityliftgrid',
+      //   content: proximityLiftGrid,
+      //   preview: proximityLiftGridPreview,
+      //   isNew: false
+      // },
+      {
+        name: 'Sidebar',
+        href: '/docs/sidebar',
+        content: sidebar,
+        preview: sidebarPreview,
+        isNew: false
+      },
+      {
+        name: 'Sine Wave',
+        href: '/docs/sineWave',
+        content: sineWave,
+        preview: sineWavePreview,
+        isNew: false
+      },
+      {
+        name: 'Skeumorphic Music Card',
+        href: '/docs/skeumorphicMusicCard',
+        content: skeumorphicMusicCard,
+        preview: skeumorphicMusicCardPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Spider Loader',
+      //   href: '/docs/spiderloader',
+      //   content: spiderLoader,
+      //   preview: spiderLoaderPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Spotlight Grid',
+      //   href: '/docs/spotlightgrid',
+      //   content: spotlightGrid,
+      //   preview: spotlightGridPreview,
+      //   isNew: false
+      // },
+      {
+        name: 'Social Media Card',
+        href: '/docs/socialMediaCard',
+        content: socialMediaCard,
+        preview: socialMediaCardPreview,
+        isNew: false
+      },
+      {
+        name: 'Stacked Input Form',
+        href: '/docs/stackedInputForm',
+        content: stackedInputForm,
+        preview: stackedInputFormPreview,
+        isNew: false
+      },
+      {
+        name: 'Stack Scroll',
+        href: '/docs/stackScroll',
+        content: stackScroll,
+        preview: stackScrollPreview,
+        isNew: false
+      },
+      {
+        name: 'Trading Card',
+        href: '/docs/tradingCard',
+        content: tradingCard,
+        preview: tradingCardPreview,
+        isNew: false
+      }
+      // {
+      //   name: 'Story Avatar',
+      //   href: '/docs/storyavatar',
+      //   content: storyAvatar,
+      //   preview: storyAvatarPreview
+      // }
+    ]
+  },
+  {
+    title: 'Texts',
+    children: [
+      {
+        name: 'Blur Text',
+        href: '/docs/blurText',
+        content: blurText,
+        preview: blurTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Bounce In Text',
+        href: '/docs/bounceInText',
+        content: bounceInText,
+        preview: bounceInTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Dotted Text',
+        href: '/docs/dottedText',
+        content: dottedText,
+        preview: dottedTextPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Count Up',
+      //   href: '/docs/countUp',
+      //   content: countUp,
+      //   preview: countUpPreview,
+      //   isNew: false
+      // },
+      // {
+      //   name: 'Fade In Text',
+      //   href: '/docs/fadeInText',
+      //   content: fadeInText,
+      //   preview: fadeInTextPreview,
+      //   isNew: false
+      // },
+      {
+        name: 'Glitch Text',
+        href: '/docs/glitchText',
+        content: glitchText,
+        preview: glitchTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Gooey Words',
+        href: '/docs/gooeywords',
+        content: gooeyWords,
+        preview: gooeyWordsPreview,
+        isNew: false
+      },
+      {
+        name: 'Hidden Text',
+        href: '/docs/hiddenText',
+        content: hiddenText,
+        preview: hiddenTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Fog Reveal Text',
+        href: '/docs/fogRevealText',
+        content: fogRevealText,
+        preview: fogRevealTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Pixelated Text',
+        href: '/docs/pixelatedtext',
+        content: pixelatedText,
+        preview: pixelatedTextPreview,
+        isNew: false
+      },
+      {
+        name: 'Rainbow Text',
+        href: '/docs/rainbowText',
+        content: rainbowText,
+        preview: rainbowTextPreview,
+        isNew: false
+      },
+      // {
+      //   name: 'Skewed Text',
+      //   href: '/docs/skewedText',
+      //   content: skewedText,
+      //   preview: skewedTextPreview,
+      //   isNew: false
+      // },
+
+      {
+        name: 'Sentence Flip',
+        href: '/docs/sentenceflip',
+        content: sentenceFlip,
+        preview: sentenceFlipPreview,
+        isNew: false
+      },
+      {
+        name: 'Wavy Text',
+        href: '/docs/wavyText',
+        content: wavyText,
+        preview: wavyTextPreview,
+        isNew: false
+      }
+    ]
+  },
+  {
+    title: 'Utilities',
+    children: [
+      {
+        name: 'Axios Interceptor',
+        href: '/docs/axiosinterceptor',
+        content: axiosInterceptor
+      },
+      {
+        name: 'Custom Logger',
+        href: '/docs/customlogger',
+        content: customLogger
+      },
+      {
+        name: 'Dark & Light Theme',
+        href: '/docs/dark&lighttheme',
+        content: darkThemeLightTheme
+      },
+      {
+        name: 'Debounce',
+        href: '/docs/debounce',
+        content: debounce
+      },
+      {
+        name: 'Encryption Decryption',
+        href: '/docs/encryptiondecryption',
+        content: encryptionDecryption
+      },
+      {
+        name: 'Express Server',
+        href: '/docs/expressserver',
+        content: expressServer
+      },
+      {
+        name: 'Regex Validations',
+        href: '/docs/regexvalidations',
+        content: regexValidations
+      },
+      {
+        name: 'Yup Validations',
+        href: '/docs/yupvalidations',
+        content: yupValidations
+      }
+    ]
+  }
+];
+
+export const categories = ['components', 'buttons', 'texts', 'backgrounds'];
+
+export const getDocs = (docId: string) => {
+  const group = sideBarOptions.filter((tab) =>
+    tab.children.find((child) => {
+      return (
+        child.name.toLowerCase().replaceAll(' ', '') === decodeURIComponent(docId.toLowerCase())
+      );
+    })
+  );
+
+  return group[0]?.children.filter(
+    (child) =>
+      child.name.toLowerCase().replaceAll(' ', '') === decodeURIComponent(docId.toLowerCase())
+  )[0].content;
+};
+
+const extractSubstring = (A: string, B: string) => {
+  const index = B.toLowerCase().indexOf(A.toLowerCase());
+  if (index !== -1) {
+    return B.substring(index);
+  }
+  return '';
+};
+
+export const searchDocs = (q: string): Array<SearchResult> => {
+  const query = q.toLowerCase();
+  if (query === '' || query.length < 3) return [];
+
+  const results: Array<SearchResult> = [];
+
+  sideBarOptions.forEach((sideBarGroup) => {
+    const { children } = sideBarGroup;
+
+    children.forEach((doc) => {
+      const sections = doc.content.content.sections;
+
+      let takeIt: boolean = false;
+      let preview: string = '';
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const { sectionType, heading, content, sentence, code, description } = section;
+
+        if (sectionType === 'ordered-list') {
+          continue;
+        }
+
+        if (heading?.toLowerCase().includes(query)) {
+          takeIt = true;
+          preview = extractSubstring(query, heading);
+        } else if (typeof content === 'string' && content.toLowerCase().includes(query)) {
+          takeIt = true;
+          preview = extractSubstring(query, content);
+        } else if (sentence?.toLowerCase().includes(query)) {
+          takeIt = true;
+          preview = extractSubstring(query, sentence);
+        } else if (typeof code === 'string' && code?.toLowerCase().includes(query)) {
+          takeIt = true;
+          preview = extractSubstring(query, code);
+        } else if (description?.toLowerCase().includes(query)) {
+          takeIt = true;
+          preview = extractSubstring(query, description);
+        }
+      }
+
+      if (takeIt) {
+        results.push({
+          name: doc.name,
+          preview,
+          to: doc.href
+        });
+      }
+    });
+  });
+
+  return results.slice(0, 5);
+};
+
+export const getCategory = (docId: string) => {
+  const group = sideBarOptions.filter((tab) => {
+    return tab.title.toLowerCase().replaceAll(' ', '') === docId.toLowerCase();
+  });
+
+  return group;
+};

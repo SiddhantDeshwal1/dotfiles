@@ -8,7 +8,7 @@ set -g fish_greeting
 
 # Paths & Custom Drives
 fish_add_path /usr/lib/jvm/java-24-openjdk/bin
-set -Ua CDPATH /run/media/banana
+set -g CDPATH . /run/media/banana
 export PATH="$HOME/.local/bin:$PATH"
 
 # History
@@ -26,9 +26,9 @@ set -U tide_character_vi_icon_default ❯
 # ==============================================
 # File Management & Aliases
 # ==============================================
-function ls; eza -a --icons $argv; end
-function ll; eza -al --icons $argv; end
-function lt; eza -a --tree --level=1 --icons $argv; end
+function ls; eza -a --icons=auto $argv; end
+function ll; eza -al --icons=auto $argv; end
+function lt; eza -a --tree --level=1 --icons=auto $argv; end
 
 # ==============================================
 # FZF (Fuzzy Finder) Configuration
@@ -39,14 +39,14 @@ set -Ux FZF_ALT_C_COMMAND "fd --type=d --hidden --strip-cwd-prefix --exclude .gi
 
 function fzf-preview
     if test -d $argv
-        eza --tree --color=always $argv | head -200
+        eza --tree --color=always --icons=auto $argv | head -200
     else
         bat -n --color=always --line-range :500 $argv
     end
 end
 
 set -Ux FZF_CTRL_T_OPTS "--preview 'fzf-preview {}'"
-set -Ux FZF_ALT_C_OPTS "--preview 'eza --tree --color=always {} | head -200'"
+set -Ux FZF_ALT_C_OPTS "--preview 'eza --tree --color=always --icons=auto {} | head -200'"
 
 # Initialize FZF key bindings
 fzf --fish | source
@@ -89,3 +89,23 @@ function on_keypress --on-event fish_key_reader
         echo -e '\a'
     end
 end
+
+set -gx NVIDIA_API_KEY "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"
+set -gx OPENAI_API_KEY = "sk-proj-your-key-here"
+# # === OmniRoute Configuration for Claude Code CLI ===
+# set -gx CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY 1
+# set -gx CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT 1
+# # === End OmniRoute Configuration ===
+# set -gx OPENROUTER_API_KEY = "sk-or-your-key-here"
+
+# >>> grok installer >>>
+fish_add_path $HOME/.grok/bin
+# <<< grok installer <<<
+
+# kimi-code
+fish_add_path -g "/home/banana/.kimi-code/bin"
+
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/banana/.local/bin" $PATH

@@ -30,7 +30,7 @@ select_player() {
 player=$(select_player)
 
 if [ -z "$player" ]; then
-    notify-send -e -u low -i "$music_icon" "No Media Players Found"
+    # notify-send -e -u low -i "$music_icon" "No Media Players Found"
     exit 1
 fi
 
@@ -52,43 +52,43 @@ toggle_play_pause() {
 
 stop_playback() {
     playerctl -p "$player" stop
-    notify-send -e -u low -i "$music_icon" "" "Playback Stopped"
+    # notify-send -e -u low -i "$music_icon" "" "Playback Stopped"
 }
 
 show_music_notification() {
     status=$(playerctl -p "$player" status 2>/dev/null)
 
     case "$status" in
-        "Playing")
-            song_title=$(playerctl -p "$player" metadata title 2>/dev/null)
-            song_artist=$(playerctl -p "$player" metadata artist 2>/dev/null)
-            [ -z "$song_artist" ] && song_artist="Unknown Artist"
-            notify-send -e -u low -i "$music_icon" "Now Playing:" "$song_title\nby $song_artist"
-            ;;
-        "Paused")
-            notify-send -e -u low -i "$music_icon" "Playback Paused"
-            ;;
-        "Stopped"|"")
-            notify-send -e -u low -i "$music_icon" "No Media Playing"
-            ;;
+    "Playing")
+        song_title=$(playerctl -p "$player" metadata title 2>/dev/null)
+        song_artist=$(playerctl -p "$player" metadata artist 2>/dev/null)
+        [ -z "$song_artist" ] && song_artist="Unknown Artist"
+        # notify-send -e -u low -i "$music_icon" "Now Playing:" "$song_title\nby $song_artist"
+        ;;
+    "Paused")
+        # notify-send -e -u low -i "$music_icon" "Playback Paused"
+        ;;
+    "Stopped" | "")
+        # notify-send -e -u low -i "$music_icon" "No Media Playing"
+        ;;
     esac
 }
 
 case "$1" in
-    --nxt)
-        play_next
-        ;;
-    --prv)
-        play_previous
-        ;;
-    --pause)
-        toggle_play_pause
-        ;;
-    --stop)
-        stop_playback
-        ;;
-    *)
-        echo "Usage: $0 [--nxt|--prv|--pause|--stop]"
-        exit 1
-        ;;
+--nxt)
+    play_next
+    ;;
+--prv)
+    play_previous
+    ;;
+--pause)
+    toggle_play_pause
+    ;;
+--stop)
+    stop_playback
+    ;;
+*)
+    echo "Usage: $0 [--nxt|--prv|--pause|--stop]"
+    exit 1
+    ;;
 esac

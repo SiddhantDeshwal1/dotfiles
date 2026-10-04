@@ -1,0 +1,244 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --background: #ffffff; */
+  --background: #0a0a0a;
+  /* --foreground: #171717; */
+  --foreground: #ededed;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+
+  @apply scrollbar-hide;
+}
+
+@keyframes neon-flicker {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 10px #00ffa3, 0 0 30px #00ffa3;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 15px #00ffa3, 0 0 40px #00ffa3;
+  }
+}
+
+.flicker {
+  animation: neon-flicker 0.8s infinite alternate;
+}
+
+.moving-border-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(var(--angle), transparent, #d0d0d0, transparent);
+  animation: moveGradient 2s linear infinite;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* Hide scrollbar for Internet Explorer and Edge */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+}
+
+.moving-border-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(var(--angle), transparent 50%, #ffffff);
+  animation: moveGradient 4s linear infinite;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes moveGradient {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(-180deg); /* Back side becomes visible */
+  }
+  100% {
+    transform: rotateY(-360deg); /* Returns to front */
+  }
+}
+
+/* Apply animation to the entire container */
+.flip {
+  animation: flip 2.4s linear infinite;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/* Ensure back side is rotated initially */
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f2f2f2;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #66bb6a;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #4caf50;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes moveLight {
+  0% {
+    transform: translateX(-100px) translateY(0);
+  }
+  25% {
+    transform: translateX(calc(100vw + 100px)) translateY(100px);
+  }
+  50% {
+    transform: translateX(calc(100vw - 100px)) translateY(calc(100vh - 100px));
+  }
+  75% {
+    transform: translateX(-100px) translateY(calc(100vh - 200px));
+  }
+  100% {
+    transform: translateX(-100px) translateY(0);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.1;
+  }
+}
+
+@keyframes twinkle-bright {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+.animate-gradient-slow {
+  animation: gradient 15s ease infinite;
+}
+
+.animate-gradient-medium {
+  animation: gradient 12s ease infinite;
+}
+
+.animate-gradient-slower {
+  animation: gradient 20s ease infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 10s ease-in-out infinite;
+}
+
+.animate-pulse-medium {
+  animation: pulse 12s ease-in-out infinite;
+}
+
+.animate-pulse-slower {
+  animation: pulse 15s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle linear infinite;
+}
+
+.animate-twinkle-bright {
+  animation: twinkle-bright linear infinite;
+}
+
+.animate-move-light {
+  animation: moveLight 25s infinite linear;
+  top: 30%;
+  left: 0%;
+}

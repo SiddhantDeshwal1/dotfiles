@@ -1,0 +1,101 @@
+configuration {
+    font: "sans-serif 12";
+    show-icons: false;
+    display-run: "Run:";
+    display-drun: "App:";
+    display-calc: "Calc:";
+}
+
+* {
+    /* Color Palette */
+    bg:     #000000;
+    fg:     #ffffff;
+    accent: #d79921;
+    dim:    #333333;
+
+    /* Global properties */
+    background-color: transparent;
+    text-color:       @fg;
+    margin:           0;
+    padding:          0;
+    spacing:          0;
+}
+
+window {
+    width:            400px;
+    background-color: @bg;
+    border:           0px solid;
+    border-color:     @accent;
+    border-radius:    6px;
+}
+
+mainbox {
+    padding:          15px;
+    /* We added 'message' here so rofi-calc can show the live answer */
+    children:         [ inputbar, message, listview ];
+}
+
+inputbar {
+    padding:          0 0 10px 0;
+    border:           0 0 1px 0 solid;
+    border-color:     @dim;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color:       @accent;
+    padding:          0 10px 0 0;
+}
+
+entry {
+    placeholder:       "Type math here...";
+    placeholder-color: #555555;
+    text-color:        @fg;
+}
+
+/* --- Live Preview Styling --- */
+message {
+    padding:          12px 0;
+    border:           0 0 1px 0 solid;
+    border-color:     @dim;
+}
+
+textbox {
+    text-color:       @accent;
+    font:             "sans-serif bold 14";
+    horizontal-align: 0.5; /* Centers the live answer */
+}
+/* ---------------------------- */
+
+listview {
+    margin:           10px 0 0 0;
+    lines:            8;
+    scrollbar:        false;
+    border:           0px;
+}
+
+element {
+    padding:          8px;
+    border-radius:    4px;
+}
+
+element normal normal {
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+element alternate normal {
+    background-color: @bg;
+    text-color:       @fg;
+}
+
+element selected normal {
+    background-color: @accent;
+    text-color:       @bg;
+}
+
+element-text {
+    background-color: inherit;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}

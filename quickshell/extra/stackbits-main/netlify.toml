@@ -1,0 +1,5 @@
+[[redirects]]
+    from = "https://stackbits.netlify.app/*"
+    to = "https://stackbits.dev"
+    status = 301
+    force = true
