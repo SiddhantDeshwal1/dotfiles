@@ -29,3 +29,4 @@ SpotlightResults 1.0 SpotlightResults.qml
 SpotlightAppGrid 1.0 SpotlightAppGrid.qml
 SpotlightClipboard 1.0 SpotlightClipboard.qml
 ScreenshotWidget 1.0 ScreenshotWidget.qml
+NotificationGroupCard 1.0 NotificationGroupCard.qml

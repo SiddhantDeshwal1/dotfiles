@@ -34,14 +34,65 @@ PanelWindow {
     property bool panelOpen: false
     property var controlCenter: null
 
-    // History Model (Stores all received notifications)
-    ListModel {
-        id: historyModel
-    }
+    // Grouped History List (Stores clubbed notifications by application)
+    property var groupList: []
 
     // Transient Toast Model (Active popups)
     ListModel {
         id: toastModel
+    }
+
+    function addNotificationToHistory(notif) {
+        let groups = []
+        for (let i = 0; i < root.groupList.length; i++) {
+            groups.push(root.groupList[i])
+        }
+
+        let foundIdx = -1
+        for (let i = 0; i < groups.length; i++) {
+            if (groups[i].groupKey === notif.app) {
+                foundIdx = i
+                break
+            }
+        }
+
+        if (foundIdx >= 0) {
+            let grp = groups[foundIdx]
+            let oldItems = grp.items || []
+            let newItems = [notif]
+            for (let j = 0; j < oldItems.length; j++) {
+                if (j < 14) newItems.push(oldItems[j])
+            }
+            let iSrc = notif.iconSource || grp.iconSource || ""
+            let aIcn = notif.appIcon || grp.appIcon || "󰂞"
+            let iBg = notif.iconBg || grp.iconBg || "#2563eb"
+
+            groups.splice(foundIdx, 1)
+            groups.unshift({
+                groupKey:   notif.app,
+                app:        notif.app,
+                iconSource: iSrc,
+                appIcon:    aIcn,
+                iconBg:     iBg,
+                count:      newItems.length,
+                items:      newItems
+            })
+        } else {
+            groups.unshift({
+                groupKey:   notif.app,
+                app:        notif.app,
+                iconSource: notif.iconSource,
+                appIcon:    notif.appIcon,
+                iconBg:     notif.iconBg,
+                count:      1,
+                items:      [notif]
+            })
+        }
+
+        if (groups.length > 25) {
+            groups.pop()
+        }
+        root.groupList = groups
     }
 
     // Helper process runner
@@ -194,8 +245,8 @@ PanelWindow {
             // Resolve primary icon with app fallback
             const iconInfo = root.resolveNotificationIcon(notification, appName)
 
-            // 1. Store to History
-            historyModel.insert(0, {
+            // 1. Store to Grouped History
+            root.addNotificationToHistory({
                 notifId:    id,
                 title:      summary,
                 body:       bodyText,
@@ -206,11 +257,6 @@ PanelWindow {
                 iconBg:     iconInfo.iconBg,
                 timestamp:  now.getTime()
             })
-
-            // Limit history to 30 items
-            if (historyModel.count > 30) {
-                historyModel.remove(historyModel.count - 1)
-            }
 
             // 2. If DND is active or Panel is open, don't show floating popup toast
             if (root.dndActive || root.panelOpen) return
@@ -255,7 +301,7 @@ PanelWindow {
 
     Timer {
         id: hidePanelTimer
-        interval: 220
+        interval: (!root.groupList || root.groupList.length === 0) ? 440 : 180
         repeat: false
         onTriggered: {
             if (!root.panelOpen) {
@@ -265,29 +311,58 @@ PanelWindow {
     }
 
     function clearAll() {
-        if (historyModel.count === 0 || clearingAll) return
+        if (!root.groupList || root.groupList.length === 0 || clearingAll) return
         clearingAll = true
         clearAnimTimer.restart()
     }
 
     Timer {
         id: clearAnimTimer
-        interval: 220
+        interval: 330
         repeat: false
         onTriggered: {
-            historyModel.clear()
+            root.groupList = []
             root.clearingAll = false
             root.closePanel()
         }
     }
 
     function removeNotification(id) {
-        for (let i = 0; i < historyModel.count; i++) {
-            if (historyModel.get(i).notifId === id) {
-                historyModel.remove(i)
-                break
+        let groups = []
+        for (let i = 0; i < (root.groupList ? root.groupList.length : 0); i++) {
+            let grp = root.groupList[i]
+            let oldItems = grp.items || []
+            let found = false
+            let newItems = []
+            for (let j = 0; j < oldItems.length; j++) {
+                if (oldItems[j].notifId === id) {
+                    found = true
+                } else {
+                    newItems.push(oldItems[j])
+                }
+            }
+            if (found) {
+                if (newItems.length > 0) {
+                    groups.push({
+                        groupKey:   grp.groupKey,
+                        app:        grp.app,
+                        iconSource: grp.iconSource,
+                        appIcon:    grp.appIcon,
+                        iconBg:     grp.iconBg,
+                        count:      newItems.length,
+                        items:      newItems
+                    })
+                }
+            } else {
+                groups.push(grp)
             }
         }
+        root.groupList = groups
+    }
+
+    function removeGroup(groupKey) {
+        if (!root.groupList) return
+        root.groupList = root.groupList.filter(function(g) { return g.groupKey !== groupKey })
     }
 
     function removeToast(id) {
@@ -390,7 +465,9 @@ PanelWindow {
                 x: root.panelOpen ? 0 : 28
                 Behavior on x {
                     NumberAnimation {
-                        duration: root.panelOpen ? 320 : 200
+                        duration: (!root.groupList || root.groupList.length === 0)
+                            ? (root.panelOpen ? 600 : 400)
+                            : (root.panelOpen ? 225 : 140)
                         easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
                         easing.overshoot: 1.15
                     }
@@ -404,14 +481,18 @@ PanelWindow {
                 yScale: root.panelOpen ? 1.0 : 0.96
                 Behavior on xScale {
                     NumberAnimation {
-                        duration: root.panelOpen ? 320 : 200
+                        duration: (!root.groupList || root.groupList.length === 0)
+                            ? (root.panelOpen ? 600 : 400)
+                            : (root.panelOpen ? 225 : 140)
                         easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
                         easing.overshoot: 1.15
                     }
                 }
                 Behavior on yScale {
                     NumberAnimation {
-                        duration: root.panelOpen ? 320 : 200
+                        duration: (!root.groupList || root.groupList.length === 0)
+                            ? (root.panelOpen ? 600 : 400)
+                            : (root.panelOpen ? 225 : 140)
                         easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
                         easing.overshoot: 1.15
                     }
@@ -422,7 +503,9 @@ PanelWindow {
         opacity: root.panelOpen ? 1.0 : 0.0
         Behavior on opacity {
             NumberAnimation {
-                duration: root.panelOpen ? 240 : 180
+                duration: (!root.groupList || root.groupList.length === 0)
+                    ? (root.panelOpen ? 450 : 320)
+                    : (root.panelOpen ? 168 : 125)
                 easing.type: root.panelOpen ? Easing.OutCubic : Easing.InCubic
             }
         }
@@ -437,25 +520,36 @@ PanelWindow {
             // Floating Header: Only [ Clear All ] Button (No "Notifications" Title)
             RowLayout {
                 Layout.fillWidth: true
-                visible: historyModel.count > 0
+                visible: root.groupList && root.groupList.length > 0
 
                 Item { Layout.fillWidth: true }
 
                 // Clear All Pill Button
                 Rectangle {
-                    implicitWidth: clearText.implicitWidth + 28
-                    implicitHeight: 34
-                    radius: 17
+                    implicitWidth: clearText.implicitWidth + 30
+                    implicitHeight: 36
+                    radius: 18
                     color: clearMouse.containsMouse ? "#45ffffff" : "#22ffffff"
                     border.width: 1
                     border.color: clearMouse.containsMouse ? "#90ffffff" : "#40ffffff"
+
+                    scale: clearMouse.pressed ? 0.94 : (clearMouse.containsMouse ? 1.05 : 1.0)
+                    Behavior on scale {
+                        NumberAnimation {
+                            duration: 125
+                            easing.type: Easing.OutBack
+                            easing.overshoot: 1.15
+                        }
+                    }
+                    Behavior on color { ColorAnimation { duration: 105 } }
+                    Behavior on border.color { ColorAnimation { duration: 105 } }
 
                     Text {
                         id: clearText
                         anchors.centerIn: parent
                         text: "Clear All"
                         font.family: root.sfFontMedium
-                        font.pixelSize: 15
+                        font.pixelSize: 16
                         color: "#ffffff"
                         renderType: Text.NativeRendering
                     }
@@ -470,12 +564,64 @@ PanelWindow {
                 }
             }
 
-            // Empty State Card
+            // Empty State Card (With Smooth Opening and Closing Animations)
             LiquidGlassCard {
-                visible: historyModel.count === 0 && !root.clearingAll && root.panelOpen
+                id: emptyStateCard
+                visible: (!root.groupList || root.groupList.length === 0) && !root.clearingAll && root.isPanelVisible
                 Layout.fillWidth: true
-                implicitHeight: 78
+                implicitHeight: 82
                 cardRadius: 26
+
+                transform: [
+                    Translate {
+                        id: emptyTrans
+                        x: root.panelOpen ? 0 : 32
+                        y: root.panelOpen ? 0 : 12
+                        Behavior on x {
+                            NumberAnimation {
+                                duration: root.panelOpen ? 600 : 400
+                                easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
+                                easing.overshoot: 1.15
+                            }
+                        }
+                        Behavior on y {
+                            NumberAnimation {
+                                duration: root.panelOpen ? 600 : 400
+                                easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
+                                easing.overshoot: 1.15
+                            }
+                        }
+                    },
+                    Scale {
+                        id: emptyScale
+                        origin.x: emptyStateCard.width / 2
+                        origin.y: emptyStateCard.height / 2
+                        xScale: root.panelOpen ? 1.0 : 0.90
+                        yScale: root.panelOpen ? 1.0 : 0.90
+                        Behavior on xScale {
+                            NumberAnimation {
+                                duration: root.panelOpen ? 600 : 400
+                                easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
+                                easing.overshoot: 1.15
+                            }
+                        }
+                        Behavior on yScale {
+                            NumberAnimation {
+                                duration: root.panelOpen ? 600 : 400
+                                easing.type: root.panelOpen ? Easing.OutBack : Easing.InCubic
+                                easing.overshoot: 1.15
+                            }
+                        }
+                    }
+                ]
+
+                opacity: root.panelOpen ? 1.0 : 0.0
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: root.panelOpen ? 450 : 320
+                        easing.type: root.panelOpen ? Easing.OutCubic : Easing.InCubic
+                    }
+                }
 
                 RowLayout {
                     anchors.centerIn: parent
@@ -483,7 +629,7 @@ PanelWindow {
 
                     Text {
                         font.family: root.iconFont
-                        font.pixelSize: 24
+                        font.pixelSize: 26
                         color: "#64748b"
                         text: "󰂚"
                         renderType: Text.NativeRendering
@@ -492,203 +638,46 @@ PanelWindow {
                     Text {
                         text: "No Notifications"
                         font.family: root.sfFontMedium
-                        font.pixelSize: 17
+                        font.pixelSize: 18
                         color: "#94a3b8"
                         renderType: Text.NativeRendering
                     }
                 }
             }
 
-            // Scrollable History Cards List
+            // Scrollable History Cards List (Clubbed Group Stacks)
             ListView {
                 id: historyListView
                 Layout.fillWidth: true
                 implicitHeight: Math.min(contentHeight, Screen.height - 130)
                 Layout.preferredHeight: implicitHeight
                 clip: true
-                spacing: 10
-                model: historyModel
-                reuseItems: true
-                cacheBuffer: 300
+                spacing: 12
+                model: root.groupList
                 boundsBehavior: Flickable.StopAtBounds
 
-                delegate: Item {
-                    id: historyCardItem
+                delegate: NotificationGroupCard {
+                    id: groupDelegate
                     width: historyListView.width
-                    implicitHeight: hContentRow.implicitHeight + 24
-                    height: implicitHeight
+                    groupKey: modelData.groupKey || ""
+                    appName: modelData.app || "Notification"
+                    iconSource: modelData.iconSource || ""
+                    appIcon: modelData.appIcon || "󰂞"
+                    iconBg: modelData.iconBg || "#2563eb"
+                    notifs: modelData.items || []
+                    count: modelData.count || (modelData.items ? modelData.items.length : 0)
+                    isClearingAll: root.clearingAll
+                    sfFont: root.sfFont
+                    sfFontMedium: root.sfFontMedium
+                    sfFontSemibold: root.sfFontSemibold
+                    sfFontBold: root.sfFontBold
+                    iconFont: root.iconFont
 
-                    property int currentId: model.notifId
-                    property bool closing: false
-
-                    function dismiss() {
-                        if (!closing) {
-                            closing = true
-                            hExitAnim.restart()
-                        }
+                    onDismissNotification: function(notifId) {
+                        root.removeNotification(notifId)
                     }
-
-                    ParallelAnimation {
-                        id: hExitAnim
-                        NumberAnimation {
-                            target: historyCardRect
-                            property: "x"
-                            to: 80
-                            duration: 200
-                            easing.type: Easing.InQuad
-                        }
-                        NumberAnimation {
-                            target: historyCardRect
-                            property: "opacity"
-                            to: 0.0
-                            duration: 180
-                            easing.type: Easing.InQuad
-                        }
-                        onFinished: root.removeNotification(historyCardItem.currentId)
-                    }
-
-                    LiquidGlassCard {
-                        id: historyCardRect
-                        anchors.top: parent.top
-                        anchors.bottom: parent.bottom
-                        width: parent.width
-                        cardRadius: 26
-                        isHovered: hCardMouse.containsMouse
-
-                        opacity: root.clearingAll ? 0.0 : 1.0
-                        x: root.clearingAll ? 80 : 0
-
-                        Behavior on opacity { enabled: root.clearingAll; NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
-                        Behavior on x { enabled: root.clearingAll; NumberAnimation { duration: 200; easing.type: Easing.InQuad } }
-
-                        MouseArea {
-                            id: hCardMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: historyCardItem.dismiss()
-                        }
-
-                        RowLayout {
-                            id: hContentRow
-                            anchors.fill: parent
-                            anchors.margins: 12
-                            spacing: 12
-
-                            // Left App Squircle Badge (46x46) - Full Big Icon with 0 padding
-                            Rectangle {
-                                Layout.alignment: Qt.AlignTop
-                                Layout.preferredWidth: 46
-                                Layout.preferredHeight: 46
-                                radius: 12
-                                color: (hIconImg.status === Image.Ready && model.iconSource !== "")
-                                    ? "transparent"
-                                    : (model.iconBg || "#2563eb")
-                                clip: true
-
-                                IconImage {
-                                    id: hIconImg
-                                    anchors.fill: parent
-                                    anchors.margins: 0
-                                    source: model.iconSource || ""
-                                    visible: model.iconSource !== "" && status === Image.Ready
-                                }
-
-                                Text {
-                                    anchors.centerIn: parent
-                                    font.family: root.iconFont
-                                    font.pixelSize: 24
-                                    color: "#ffffff"
-                                    text: model.appIcon || "󰂞"
-                                    visible: !hIconImg.visible
-                                    renderType: Text.NativeRendering
-                                }
-                            }
-
-                            // Right Text Column
-                            ColumnLayout {
-                                Layout.fillWidth: true
-                                spacing: 3
-
-                                // Header: App Name + Time + Dismiss
-                                RowLayout {
-                                    Layout.fillWidth: true
-                                    spacing: 6
-
-                                    Text {
-                                        font.family: root.sfFontSemibold
-                                        font.pixelSize: 14
-                                        font.capitalization: Font.AllUppercase
-                                        color: "#93c5fd"
-                                        text: model.app !== "" ? model.app : "NOTIFICATION"
-                                        Layout.fillWidth: true
-                                        elide: Text.ElideRight
-                                        renderType: Text.NativeRendering
-                                    }
-
-                                    Text {
-                                        font.family: root.sfFontSemibold
-                                        font.pixelSize: 13
-                                        font.bold: true
-                                        color: "#e2e8f0"
-                                        text: model.timeStr || ""
-                                        renderType: Text.NativeRendering
-                                    }
-
-                                    Rectangle {
-                                        implicitWidth: 22
-                                        implicitHeight: 22
-                                        radius: 11
-                                        color: hCloseMouse.containsMouse ? "#33ffffff" : "transparent"
-
-                                        Text {
-                                            anchors.centerIn: parent
-                                            font.family: root.iconFont
-                                            font.pixelSize: 14
-                                            color: hCloseMouse.containsMouse ? "#f87171" : "#94a3b8"
-                                            text: "󰅖"
-                                            renderType: Text.NativeRendering
-                                        }
-
-                                        MouseArea {
-                                            id: hCloseMouse
-                                            anchors.fill: parent
-                                            hoverEnabled: true
-                                            cursorShape: Qt.PointingHandCursor
-                                            onClicked: historyCardItem.dismiss()
-                                        }
-                                    }
-                                }
-
-                                // Title
-                                Text {
-                                    Layout.fillWidth: true
-                                    font.family: root.sfFont
-                                    font.pixelSize: 18
-                                    color: "#ffffff"
-                                    text: model.title
-                                    wrapMode: Text.WordWrap
-                                    maximumLineCount: 2
-                                    elide: Text.ElideRight
-                                    visible: model.title !== ""
-                                    renderType: Text.NativeRendering
-                                }
-
-                                // Body
-                                Text {
-                                    Layout.fillWidth: true
-                                    font.family: root.sfFont
-                                    font.pixelSize: 15
-                                    color: "#cbd5e1"
-                                    text: model.body
-                                    wrapMode: Text.WordWrap
-                                    maximumLineCount: 3
-                                    elide: Text.ElideRight
-                                    visible: model.body !== ""
-                                    renderType: Text.NativeRendering
-                                }
-                            }
-                        }
+                    onDismissGroup: function(grpKey) {
+                        root.removeGroup(grpKey)
                     }
                 }
             }

@@ -30,14 +30,29 @@ PanelWindow {
     readonly property string sfFontSemibold: "SF Pro Rounded"
     readonly property string sfFontBold: "SF Pro Rounded"
     readonly property string iconFont: "JetBrainsMono NFP"
+    readonly property var springCurve: [0.25, 0.80, 0.35, 1.015, 0.55, 1.015, 0.70, 1.015, 0.80, 1.000, 1.00, 1.000]
+
+    Timer {
+        id: openRefreshTimer
+        interval: 350
+        repeat: false
+        onTriggered: {
+            if (root.open) {
+                root.refreshStatus()
+                root.refreshScreenTime()
+            }
+        }
+    }
 
     property bool open: false
     onOpenChanged: {
         if (open) {
-            refreshStatus()
-            refreshScreenTime()
+            openRefreshTimer.restart()
+        } else {
+            openRefreshTimer.stop()
         }
     }
+
     Component.onCompleted: {
         refreshStatus()
         refreshScreenTime()
@@ -154,9 +169,7 @@ PanelWindow {
     exclusiveZone: -1
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.namespace: "quickshell-control-center"
-    WlrLayershell.keyboardFocus: root.wifiPasswordPromptOpen 
-        ? WlrKeyboardFocus.Exclusive 
-        : (root.open ? WlrKeyboardFocus.OnDemand : WlrKeyboardFocus.None)
+    WlrLayershell.keyboardFocus: root.wifiPasswordPromptOpen ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
 
     color: "transparent"
     visible: open || panelWrapper.opacity > 0
@@ -183,10 +196,7 @@ PanelWindow {
     function openPanel() {
         open = true
         currentView = "main"
-        refreshStatus()
-        refreshScreenTime()
-        // Mutual exclusivity: close Notifications Center when opening CC
-        root.runShell("quickshell ipc call notifications close &")
+        openRefreshTimer.restart()
     }
 
     function close() {
@@ -434,16 +444,16 @@ PanelWindow {
 
             if (data.devices) {
                 const updated = data.devices.map(d => {
-                    const transient = root.btTransientStates[d.mac]
-                    if (transient) {
-                        if (transient === "connecting" && d.isConnected) {
+                    const tState = root.btTransientStates[d.mac]
+                    if (tState) {
+                        if (tState === "connecting" && d.isConnected) {
                             delete root.btTransientStates[d.mac]
-                        } else if (transient === "disconnecting" && !d.isConnected) {
+                        } else if (tState === "disconnecting" && !d.isConnected) {
                             delete root.btTransientStates[d.mac]
-                        } else if (transient === "pairing" && d.isPaired) {
+                        } else if (tState === "pairing" && d.isPaired) {
                             delete root.btTransientStates[d.mac]
                         } else {
-                            d.state = transient
+                            d.state = tState
                         }
                     }
                     return d
@@ -726,31 +736,113 @@ PanelWindow {
         }
         height: implicitHeight
 
+        transform: [
+            Scale {
+                origin.x: panelWrapper.width
+                origin.y: 0
+                xScale: root.open ? 1.0 : 0.95
+                yScale: root.open ? 1.0 : 0.95
+                Behavior on xScale { NumberAnimation { duration: root.open ? 260 : 800; easing.type: Easing.OutCubic } }
+                Behavior on yScale { NumberAnimation { duration: root.open ? 260 : 800; easing.type: Easing.OutCubic } }
+            },
+            Translate {
+                y: root.open ? 0 : -10
+                Behavior on y { NumberAnimation { duration: root.open ? 260 : 800; easing.type: Easing.OutCubic } }
+            }
+        ]
+
         opacity: root.open ? 1.0 : 0.0
-        y: root.open ? 0 : -14
-        visible: opacity > 0
+        visible: opacity > 0.001
 
-        Behavior on opacity { NumberAnimation { duration: 180; easing.type: Easing.OutQuad } }
-        Behavior on y { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
-        Behavior on height { NumberAnimation { duration: 200; easing.type: Easing.OutCubic } }
+        Behavior on opacity { NumberAnimation { duration: root.open ? 210 : 820; easing.type: Easing.OutQuad } }
 
-        // ══════════════════════════════════════════════════════════════
-        // VIEW 1: MAIN CONTROL CENTER GRID (Compact Padding)
-        // ══════════════════════════════════════════════════════════════
+
+        // Only spring-animate height when already open (view switching).
+        // On initial open, height snaps instantly — the scale/opacity
+        // reveal animation handles the visual impression of expansion.
+        Behavior on height {
+            enabled: root.open
+            NumberAnimation {
+                duration: 540
+                easing.type: Easing.BezierSpline
+                easing.bezierCurve: root.springCurve
+            }
+        }
+
+
         ColumnLayout {
             id: mainLayout
             width: 376
             spacing: 12
 
-            opacity: root.currentView === "main" ? 1.0 : 0.0
-            x: root.currentView === "main" ? 0 : -20
-            visible: opacity > 0
+            // Dynamic Island-style entrance/exit via state machine
+            property real contentScale: 1.0
+            property real contentTransY: 0.0
+            opacity: 1.0
+            visible: opacity > 0.001
 
-            Behavior on opacity { NumberAnimation { duration: 160; easing.type: Easing.OutQuad } }
-            Behavior on x { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            transform: [
+                Scale {
+                    origin.x: mainLayout.width / 2
+                    origin.y: 0
+                    xScale: mainLayout.contentScale
+                    yScale: mainLayout.contentScale
+                },
+                Translate { y: mainLayout.contentTransY }
+            ]
+
+            states: [
+                State {
+                    name: "visible"
+                    when: root.currentView === "main"
+                    PropertyChanges { target: mainLayout; opacity: 1.0; contentScale: 1.0; contentTransY: 0 }
+                },
+                State {
+                    name: "hidden"
+                    when: root.currentView !== "main"
+                    PropertyChanges { target: mainLayout; opacity: 0.0; contentScale: 0.92; contentTransY: -6 }
+                }
+            ]
+
+            transitions: [
+                // Returning to main — spring in from top (540ms)
+                Transition {
+                    from: "hidden"; to: "visible"
+                    SequentialAnimation {
+                        PauseAnimation { duration: 20 }
+                        ParallelAnimation {
+                            NumberAnimation {
+                                target: mainLayout; property: "opacity"
+                                duration: 70; easing.type: Easing.OutQuad
+                            }
+                            NumberAnimation {
+                                target: mainLayout; properties: "contentScale,contentTransY"
+                                duration: 540
+                                easing.type: Easing.BezierSpline
+                                easing.bezierCurve: root.springCurve
+                            }
+                        }
+                    }
+                },
+                // Leaving main — snap out fast (60ms)
+                Transition {
+                    from: "visible"; to: "hidden"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: mainLayout; property: "opacity"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: mainLayout; properties: "contentScale,contentTransY"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                    }
+                }
+            ]
 
             // 1. TOP 2x2 MODULAR GRID (70px Height, Compact Padding)
             GridLayout {
+
                 Layout.fillWidth: true
                 columns: 2
                 columnSpacing: 12
@@ -764,6 +856,71 @@ PanelWindow {
                     cardRadius: 35
                     isHovered: wifiCardMouse.containsMouse || wifiBadgeMouse.containsMouse
                     isPressed: wifiCardMouse.pressed || wifiBadgeMouse.pressed
+
+                    transform: [
+                        Scale {
+                            id: wifiScale
+                            origin.x: wifiCard.width / 2
+                            origin.y: wifiCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: wifiTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: wifiScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: wifiTrans; y: 0 }
+                            PropertyChanges { target: wifiCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: wifiScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: wifiTrans; y: -20 }
+                            PropertyChanges { target: wifiCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: wifiTrans; property: "y"; value: -20 }
+                                PropertyAction { target: wifiScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: wifiScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: wifiCard; property: "opacity"; value: 1.0 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: wifiTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: wifiScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: wifiScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 115 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: wifiTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: wifiScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: wifiScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: wifiCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: wifiTrans; property: "y"; value: -20 }
+                                PropertyAction { target: wifiScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: wifiScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                     RowLayout {
                         anchors.fill: parent
@@ -855,6 +1012,71 @@ PanelWindow {
                     cardRadius: 35
                     isHovered: btCardMouse.containsMouse || btBadgeMouse.containsMouse
                     isPressed: btCardMouse.pressed || btBadgeMouse.pressed
+
+                    transform: [
+                        Scale {
+                            id: btScale
+                            origin.x: btCard.width / 2
+                            origin.y: btCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: btTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: btScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: btTrans; y: 0 }
+                            PropertyChanges { target: btCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: btScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: btTrans; y: -20 }
+                            PropertyChanges { target: btCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: btTrans; property: "y"; value: -20 }
+                                PropertyAction { target: btScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: btScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: btCard; property: "opacity"; value: 1.0 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: btTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: btScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: btScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 115 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: btTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: btScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: btScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: btCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: btTrans; property: "y"; value: -20 }
+                                PropertyAction { target: btScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: btScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                     RowLayout {
                         anchors.fill: parent
@@ -948,6 +1170,71 @@ PanelWindow {
                     isPressed: darkMouse.pressed
                     isActive: true
                     activeColor: root.darkModeActive ? "#90111a24" : Qt.rgba(0.08, 0.40, 0.92, 0.85)
+
+                    transform: [
+                        Scale {
+                            id: darkScale
+                            origin.x: darkPill.width / 2
+                            origin.y: darkPill.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: darkTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: darkScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: darkTrans; y: 0 }
+                            PropertyChanges { target: darkPill; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: darkScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: darkTrans; y: -20 }
+                            PropertyChanges { target: darkPill; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: darkTrans; property: "y"; value: -20 }
+                                PropertyAction { target: darkScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: darkScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: darkPill; property: "opacity"; value: 1.0 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: darkTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: darkScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: darkScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 115 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: darkTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: darkScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: darkScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: darkPill; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: darkTrans; property: "y"; value: -20 }
+                                PropertyAction { target: darkScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: darkScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                     RowLayout {
                         anchors.fill: parent
@@ -1065,6 +1352,71 @@ PanelWindow {
                     isActive: root.dndActive
                     activeColor: Qt.rgba(0.55, 0.20, 0.85, 0.85)
 
+                    transform: [
+                        Scale {
+                            id: dndScale
+                            origin.x: dndCard.width / 2
+                            origin.y: dndCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: dndTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: dndScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: dndTrans; y: 0 }
+                            PropertyChanges { target: dndCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: dndScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: dndTrans; y: -20 }
+                            PropertyChanges { target: dndCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: dndTrans; property: "y"; value: -20 }
+                                PropertyAction { target: dndScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: dndScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: dndCard; property: "opacity"; value: 1.0 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: dndTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dndScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dndScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 115 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: dndTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dndScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dndScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: dndCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: dndTrans; property: "y"; value: -20 }
+                                PropertyAction { target: dndScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: dndScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
+
                     RowLayout {
                         anchors.fill: parent
                         anchors.leftMargin: 12
@@ -1142,8 +1494,75 @@ PanelWindow {
 
                 // 2.1 Left: 2x2 Connected Devices Battery Widget (182x156)
                 ConnectedDevicesWidget {
+                    id: devicesWidget
                     Layout.preferredWidth: 182
                     Layout.preferredHeight: 156
+
+                    transform: [
+                        Scale {
+                            id: devScale
+                            origin.x: devicesWidget.width / 2
+                            origin.y: devicesWidget.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: devTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: devScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: devTrans; y: 0 }
+                            PropertyChanges { target: devicesWidget; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: devScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: devTrans; y: -20 }
+                            PropertyChanges { target: devicesWidget; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: devTrans; property: "y"; value: -20 }
+                                PropertyAction { target: devScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: devScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: devicesWidget; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 40 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: devTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: devScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: devScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 75 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: devTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: devScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: devScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: devicesWidget; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: devTrans; property: "y"; value: -20 }
+                                PropertyAction { target: devScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: devScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
                 }
 
                 // 2.2 Right Column: Screen Time Widget (Top) + Lock & Camera (Bottom)
@@ -1154,9 +1573,76 @@ PanelWindow {
 
                     // 2.2.1 Screen On Time Capsule Widget (182x70)
                     ScreenTimeWidget {
+                        id: stCard
                         Layout.preferredWidth: 182
                         Layout.preferredHeight: 70
                         onClicked: root.openScreenTimeMenu()
+
+                        transform: [
+                        Scale {
+                            id: stScale
+                            origin.x: stCard.width / 2
+                            origin.y: stCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: stTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: stScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: stTrans; y: 0 }
+                            PropertyChanges { target: stCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: stScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: stTrans; y: -20 }
+                            PropertyChanges { target: stCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: stTrans; property: "y"; value: -20 }
+                                PropertyAction { target: stScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: stScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: stCard; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 40 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: stTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: stScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: stScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 75 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: stTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: stScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: stScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: stCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: stTrans; property: "y"; value: -20 }
+                                PropertyAction { target: stScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: stScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
                     }
 
                     // 2.2.2 Lower Row: Reverted to Older 1x1 Circle Action Icons (74x74)
@@ -1167,11 +1653,78 @@ PanelWindow {
 
                         // 1x1 Lock Screen Circular Button (74x74, radius 37)
                         LiquidGlassCard {
+                            id: lockCard
                             Layout.preferredWidth: 74
                             Layout.preferredHeight: 74
                             cardRadius: 37
                             isHovered: lockBtnMouse.containsMouse
                             isPressed: lockBtnMouse.pressed
+
+                            transform: [
+                        Scale {
+                            id: lockScale
+                            origin.x: lockCard.width / 2
+                            origin.y: lockCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: lockTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: lockScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: lockTrans; y: 0 }
+                            PropertyChanges { target: lockCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: lockScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: lockTrans; y: -20 }
+                            PropertyChanges { target: lockCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: lockTrans; property: "y"; value: -20 }
+                                PropertyAction { target: lockScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: lockScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: lockCard; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 40 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: lockTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: lockScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: lockScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 75 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: lockTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: lockScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: lockScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: lockCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: lockTrans; property: "y"; value: -20 }
+                                PropertyAction { target: lockScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: lockScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                             Text {
                                 anchors.centerIn: parent
@@ -1197,11 +1750,78 @@ PanelWindow {
 
                         // 1x1 Camera / Screenshot Circular Button (74x74, radius 37)
                         LiquidGlassCard {
+                            id: shotCard
                             Layout.preferredWidth: 74
                             Layout.preferredHeight: 74
                             cardRadius: 37
                             isHovered: shotBtnMouse.containsMouse
                             isPressed: shotBtnMouse.pressed
+
+                            transform: [
+                        Scale {
+                            id: shotScale
+                            origin.x: shotCard.width / 2
+                            origin.y: shotCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: shotTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: shotScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: shotTrans; y: 0 }
+                            PropertyChanges { target: shotCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: shotScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: shotTrans; y: -20 }
+                            PropertyChanges { target: shotCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: shotTrans; property: "y"; value: -20 }
+                                PropertyAction { target: shotScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: shotScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: shotCard; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 40 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: shotTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: shotScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: shotScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 75 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: shotTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: shotScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: shotScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: shotCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: shotTrans; property: "y"; value: -20 }
+                                PropertyAction { target: shotScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: shotScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                             Text {
                                 anchors.centerIn: parent
@@ -1238,6 +1858,72 @@ PanelWindow {
                 Layout.preferredHeight: 74
                 cardRadius: 24
                 isHovered: dispCardMouse.containsMouse || bSliderMouse.containsMouse
+
+                transform: [
+                        Scale {
+                            id: dispScale
+                            origin.x: dispCard.width / 2
+                            origin.y: dispCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: dispTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: dispScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: dispTrans; y: 0 }
+                            PropertyChanges { target: dispCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: dispScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: dispTrans; y: -20 }
+                            PropertyChanges { target: dispCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: dispTrans; property: "y"; value: -20 }
+                                PropertyAction { target: dispScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: dispScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: dispCard; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 75 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: dispTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dispScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dispScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                PauseAnimation { duration: 40 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: dispTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dispScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: dispScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: dispCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: dispTrans; property: "y"; value: -20 }
+                                PropertyAction { target: dispScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: dispScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                 MouseArea {
                     id: dispCardMouse
@@ -1384,6 +2070,71 @@ PanelWindow {
                 Layout.preferredHeight: 74
                 cardRadius: 24
                 isHovered: soundCardMouse.containsMouse || vSliderMouse.containsMouse || sinkMouse.containsMouse
+
+                transform: [
+                        Scale {
+                            id: soundScale
+                            origin.x: soundCard.width / 2
+                            origin.y: soundCard.height / 2
+                            xScale: 0.75
+                            yScale: 0.75
+                        },
+                        Translate {
+                            id: soundTrans
+                            y: -20
+                        }
+                    ]
+                    opacity: 0.0
+
+                    state: (root.open && root.currentView === "main") ? "open" : "closed"
+                    states: [
+                        State {
+                            name: "open"
+                            PropertyChanges { target: soundScale; xScale: 1.0; yScale: 1.0 }
+                            PropertyChanges { target: soundTrans; y: 0 }
+                            PropertyChanges { target: soundCard; opacity: 1.0 }
+                        },
+                        State {
+                            name: "closed"
+                            PropertyChanges { target: soundScale; xScale: 0.75; yScale: 0.75 }
+                            PropertyChanges { target: soundTrans; y: -20 }
+                            PropertyChanges { target: soundCard; opacity: 0.0 }
+                        }
+                    ]
+                    transitions: [
+                        Transition {
+                            from: "closed"; to: "open"
+                            SequentialAnimation {
+                                PropertyAction { target: soundTrans; property: "y"; value: -20 }
+                                PropertyAction { target: soundScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: soundScale; property: "yScale"; value: 0.75 }
+                                PropertyAction { target: soundCard; property: "opacity"; value: 1.0 }
+                                PauseAnimation { duration: 115 }
+                                ParallelAnimation {
+                                    NumberAnimation { target: soundTrans; property: "y"; to: 0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: soundScale; property: "xScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: soundScale; property: "yScale"; to: 1.0; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                }
+                            }
+                        },
+                        Transition {
+                            from: "open"; to: "closed"
+                            SequentialAnimation {
+                                ParallelAnimation {
+                                    NumberAnimation { target: soundTrans; property: "y"; to: -20; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: soundScale; property: "xScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    NumberAnimation { target: soundScale; property: "yScale"; to: 0.75; duration: 580; easing.type: Easing.BezierSpline; easing.bezierCurve: root.springCurve }
+                                    SequentialAnimation {
+                                        PauseAnimation { duration: 270 }
+                                        NumberAnimation { target: soundCard; property: "opacity"; to: 0.0; duration: 310; easing.type: Easing.OutQuad }
+                                    }
+                                }
+                                PropertyAction { target: soundTrans; property: "y"; value: -20 }
+                                PropertyAction { target: soundScale; property: "xScale"; value: 0.75 }
+                                PropertyAction { target: soundScale; property: "yScale"; value: 0.75 }
+                            }
+                        }
+                    ]
 
                 MouseArea {
                     id: soundCardMouse
@@ -1582,12 +2333,65 @@ PanelWindow {
             height: wifiCol.implicitHeight + 28
             cardRadius: 28
 
-            opacity: root.currentView === "wifi" ? 1.0 : 0.0
-            x: root.currentView === "wifi" ? 0 : 20
-            visible: opacity > 0
+            // Dynamic Island-style entrance/exit
+            property real contentScale: 0.88
+            property real contentTransY: -10
+            opacity: 0.0
+            visible: opacity > 0.001
 
-            Behavior on opacity { NumberAnimation { duration: 160; easing.type: Easing.OutQuad } }
-            Behavior on x { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            transform: [
+                Scale {
+                    origin.x: wifiMenuCard.width / 2
+                    origin.y: 0
+                    xScale: wifiMenuCard.contentScale
+                    yScale: wifiMenuCard.contentScale
+                },
+                Translate { y: wifiMenuCard.contentTransY }
+            ]
+
+            states: [
+                State {
+                    name: "open"
+                    when: root.currentView === "wifi"
+                    PropertyChanges { target: wifiMenuCard; opacity: 1.0; contentScale: 1.0; contentTransY: 0 }
+                },
+                State {
+                    name: "closed"
+                    when: root.currentView !== "wifi"
+                    PropertyChanges { target: wifiMenuCard; opacity: 0.0; contentScale: 0.88; contentTransY: -10 }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    from: "closed"; to: "open"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: wifiMenuCard; property: "opacity"
+                            duration: 70; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: wifiMenuCard; properties: "contentScale,contentTransY"
+                            duration: 540
+                            easing.type: Easing.BezierSpline
+                            easing.bezierCurve: root.springCurve
+                        }
+                    }
+                },
+                Transition {
+                    from: "open"; to: "closed"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: wifiMenuCard; property: "opacity"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: wifiMenuCard; properties: "contentScale,contentTransY"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                    }
+                }
+            ]
 
             ColumnLayout {
                 id: wifiCol
@@ -2041,12 +2845,65 @@ PanelWindow {
             height: btCol.implicitHeight + 28
             cardRadius: 28
 
-            opacity: root.currentView === "bluetooth" ? 1.0 : 0.0
-            x: root.currentView === "bluetooth" ? 0 : 20
-            visible: opacity > 0
+            // Dynamic Island-style entrance/exit
+            property real contentScale: 0.88
+            property real contentTransY: -10
+            opacity: 0.0
+            visible: opacity > 0.001
 
-            Behavior on opacity { NumberAnimation { duration: 160; easing.type: Easing.OutQuad } }
-            Behavior on x { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            transform: [
+                Scale {
+                    origin.x: btMenuCard.width / 2
+                    origin.y: 0
+                    xScale: btMenuCard.contentScale
+                    yScale: btMenuCard.contentScale
+                },
+                Translate { y: btMenuCard.contentTransY }
+            ]
+
+            states: [
+                State {
+                    name: "open"
+                    when: root.currentView === "bluetooth"
+                    PropertyChanges { target: btMenuCard; opacity: 1.0; contentScale: 1.0; contentTransY: 0 }
+                },
+                State {
+                    name: "closed"
+                    when: root.currentView !== "bluetooth"
+                    PropertyChanges { target: btMenuCard; opacity: 0.0; contentScale: 0.88; contentTransY: -10 }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    from: "closed"; to: "open"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: btMenuCard; property: "opacity"
+                            duration: 70; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: btMenuCard; properties: "contentScale,contentTransY"
+                            duration: 540
+                            easing.type: Easing.BezierSpline
+                            easing.bezierCurve: root.springCurve
+                        }
+                    }
+                },
+                Transition {
+                    from: "open"; to: "closed"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: btMenuCard; property: "opacity"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: btMenuCard; properties: "contentScale,contentTransY"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                    }
+                }
+            ]
 
             ColumnLayout {
                 id: btCol
@@ -2494,12 +3351,65 @@ PanelWindow {
             height: soundCol.implicitHeight + 28
             cardRadius: 28
 
-            opacity: root.currentView === "sound" ? 1.0 : 0.0
-            x: root.currentView === "sound" ? 0 : 20
-            visible: opacity > 0
+            // Dynamic Island-style entrance/exit
+            property real contentScale: 0.88
+            property real contentTransY: -10
+            opacity: 0.0
+            visible: opacity > 0.001
 
-            Behavior on opacity { NumberAnimation { duration: 160; easing.type: Easing.OutQuad } }
-            Behavior on x { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            transform: [
+                Scale {
+                    origin.x: soundMenuCard.width / 2
+                    origin.y: 0
+                    xScale: soundMenuCard.contentScale
+                    yScale: soundMenuCard.contentScale
+                },
+                Translate { y: soundMenuCard.contentTransY }
+            ]
+
+            states: [
+                State {
+                    name: "open"
+                    when: root.currentView === "sound"
+                    PropertyChanges { target: soundMenuCard; opacity: 1.0; contentScale: 1.0; contentTransY: 0 }
+                },
+                State {
+                    name: "closed"
+                    when: root.currentView !== "sound"
+                    PropertyChanges { target: soundMenuCard; opacity: 0.0; contentScale: 0.88; contentTransY: -10 }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    from: "closed"; to: "open"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: soundMenuCard; property: "opacity"
+                            duration: 70; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: soundMenuCard; properties: "contentScale,contentTransY"
+                            duration: 540
+                            easing.type: Easing.BezierSpline
+                            easing.bezierCurve: root.springCurve
+                        }
+                    }
+                },
+                Transition {
+                    from: "open"; to: "closed"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: soundMenuCard; property: "opacity"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: soundMenuCard; properties: "contentScale,contentTransY"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                    }
+                }
+            ]
 
             ColumnLayout {
                 id: soundCol
@@ -2782,12 +3692,67 @@ PanelWindow {
             height: screenTimeCol.implicitHeight + 28
             cardRadius: 28
 
-            opacity: root.currentView === "screentime" ? 1.0 : 0.0
-            x: root.currentView === "screentime" ? (parent.width - width) / 2 : 20
-            visible: opacity > 0
+            // Dynamic Island-style entrance/exit
+            // screenTimeMenuCard is centered (356px vs 376px panel)
+            x: (parent.width - width) / 2
+            property real contentScale: 0.88
+            property real contentTransY: -10
+            opacity: 0.0
+            visible: opacity > 0.001
 
-            Behavior on opacity { NumberAnimation { duration: 160; easing.type: Easing.OutQuad } }
-            Behavior on x { NumberAnimation { duration: 180; easing.type: Easing.OutCubic } }
+            transform: [
+                Scale {
+                    origin.x: screenTimeMenuCard.width / 2
+                    origin.y: 0
+                    xScale: screenTimeMenuCard.contentScale
+                    yScale: screenTimeMenuCard.contentScale
+                },
+                Translate { y: screenTimeMenuCard.contentTransY }
+            ]
+
+            states: [
+                State {
+                    name: "open"
+                    when: root.currentView === "screentime"
+                    PropertyChanges { target: screenTimeMenuCard; opacity: 1.0; contentScale: 1.0; contentTransY: 0 }
+                },
+                State {
+                    name: "closed"
+                    when: root.currentView !== "screentime"
+                    PropertyChanges { target: screenTimeMenuCard; opacity: 0.0; contentScale: 0.88; contentTransY: -10 }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    from: "closed"; to: "open"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: screenTimeMenuCard; property: "opacity"
+                            duration: 70; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: screenTimeMenuCard; properties: "contentScale,contentTransY"
+                            duration: 540
+                            easing.type: Easing.BezierSpline
+                            easing.bezierCurve: root.springCurve
+                        }
+                    }
+                },
+                Transition {
+                    from: "open"; to: "closed"
+                    ParallelAnimation {
+                        NumberAnimation {
+                            target: screenTimeMenuCard; property: "opacity"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                        NumberAnimation {
+                            target: screenTimeMenuCard; properties: "contentScale,contentTransY"
+                            duration: 60; easing.type: Easing.OutQuad
+                        }
+                    }
+                }
+            ]
 
             ColumnLayout {
                 id: screenTimeCol

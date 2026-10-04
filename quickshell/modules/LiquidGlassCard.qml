@@ -17,8 +17,9 @@ Item {
     scale: isPressed ? 0.965 : 1.0
     Behavior on scale {
         NumberAnimation {
-            duration: 160
-            easing.type: Easing.OutQuad
+            duration: root.isPressed ? 100 : 200
+            easing.type: root.isPressed ? Easing.InQuad : Easing.OutBack
+            easing.overshoot: 1.15
         }
     }
 

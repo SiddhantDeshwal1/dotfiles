@@ -147,6 +147,22 @@ LiquidGlassCard {
                 onBatteryPctChanged: arcCanvas.requestPaint()
                 onConnectedChanged: arcCanvas.requestPaint()
 
+                scale: cellMouse.containsMouse && cell.connected ? 1.05 : 1.0
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: 180
+                        easing.type: Easing.OutBack
+                        easing.overshoot: 1.15
+                    }
+                }
+
+                MouseArea {
+                    id: cellMouse
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    acceptedButtons: Qt.NoButton
+                }
+
                 // Horseshoe / Semi-Circle Progress Arc Canvas
                 Canvas {
                     id: arcCanvas

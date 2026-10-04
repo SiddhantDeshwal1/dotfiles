@@ -63,6 +63,7 @@ RowLayout {
 
         Image {
             id: iconImg
+            sourceSize: Qt.size(19, 19)
             anchors.fill: parent
             source: Qt.resolvedUrl("../media/images/control_center.png")
             fillMode: Image.PreserveAspectFit
